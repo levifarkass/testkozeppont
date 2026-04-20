@@ -825,7 +825,121 @@
         <p>&copy; 2026 Levi Fitness — Budapest, Magyarország</p>
     </footer>
 
+    <!-- THEME SWITCHER -->
+    <div id="theme-switcher" style="
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 200;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(16px);
+        border-radius: 16px;
+        padding: 14px 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: 'Inter', sans-serif;
+    ">
+        <span style="font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 1px;">Theme</span>
+        <button onclick="setTheme(0)" class="theme-dot" data-theme="0" title="#1 — Teal" style="
+            width: 32px; height: 32px; border-radius: 50%; border: 3px solid transparent;
+            background: linear-gradient(135deg, #1F6F5F, #6FCF97); cursor: pointer;
+            transition: all 0.2s; outline: none;
+        "></button>
+        <button onclick="setTheme(1)" class="theme-dot" data-theme="1" title="#2 — Warm Brown" style="
+            width: 32px; height: 32px; border-radius: 50%; border: 3px solid transparent;
+            background: linear-gradient(135deg, #4B2E2B, #C08552); cursor: pointer;
+            transition: all 0.2s; outline: none;
+        "></button>
+        <button onclick="setTheme(2)" class="theme-dot" data-theme="2" title="#3 — Sage" style="
+            width: 32px; height: 32px; border-radius: 50%; border: 3px solid transparent;
+            background: linear-gradient(135deg, #5D866C, #E6D8C3); cursor: pointer;
+            transition: all 0.2s; outline: none;
+        "></button>
+    </div>
+
     <script>
+        var themes = [
+            {
+                name: 'Teal',
+                bg: '#EEEEEE',
+                surface: '#E2E2E2',
+                surfaceHover: '#D6D6D6',
+                border: '#C8C8C8',
+                text: '#1a1a1a',
+                textMuted: '#5a5a5a',
+                accent: '#1F6F5F',
+                accentHover: '#185A4C',
+                accentGlow: 'rgba(31,111,95,0.12)',
+                green: '#2FA084',
+                navBg: 'rgba(238,238,238,0.9)',
+                gradientEnd: '#6FCF97',
+            },
+            {
+                name: 'Warm Brown',
+                bg: '#FFF8F0',
+                surface: '#F5EDE0',
+                surfaceHover: '#EBE0D0',
+                border: '#DBC8AB',
+                text: '#2A1F1A',
+                textMuted: '#7A6050',
+                accent: '#4B2E2B',
+                accentHover: '#3A2220',
+                accentGlow: 'rgba(75,46,43,0.12)',
+                green: '#8C5A3C',
+                navBg: 'rgba(255,248,240,0.9)',
+                gradientEnd: '#C08552',
+            },
+            {
+                name: 'Sage',
+                bg: '#F5F5F0',
+                surface: '#EAEAE2',
+                surfaceHover: '#E0DDD5',
+                border: '#D0C8B8',
+                text: '#2A2A25',
+                textMuted: '#7A7568',
+                accent: '#5D866C',
+                accentHover: '#4A6E58',
+                accentGlow: 'rgba(93,134,108,0.12)',
+                green: '#5D866C',
+                navBg: 'rgba(245,245,240,0.9)',
+                gradientEnd: '#C2A68C',
+            },
+        ];
+
+        function setTheme(idx) {
+            var t = themes[idx];
+            var r = document.documentElement.style;
+            r.setProperty('--bg', t.bg);
+            r.setProperty('--surface', t.surface);
+            r.setProperty('--surface-hover', t.surfaceHover);
+            r.setProperty('--border', t.border);
+            r.setProperty('--text', t.text);
+            r.setProperty('--text-muted', t.textMuted);
+            r.setProperty('--accent', t.accent);
+            r.setProperty('--accent-hover', t.accentHover);
+            r.setProperty('--accent-glow', t.accentGlow);
+            r.setProperty('--green', t.green);
+
+            document.querySelector('nav').style.background = t.navBg;
+
+            var hl = document.querySelector('h1 .highlight');
+            if (hl) {
+                hl.style.background = 'linear-gradient(135deg, ' + t.accent + ', ' + t.gradientEnd + ')';
+                hl.style.webkitBackgroundClip = 'text';
+                hl.style.webkitTextFillColor = 'transparent';
+                hl.style.backgroundClip = 'text';
+            }
+
+            document.querySelectorAll('.theme-dot').forEach(function(dot) {
+                dot.style.borderColor = dot.dataset.theme == idx ? '#111' : 'transparent';
+                dot.style.transform = dot.dataset.theme == idx ? 'scale(1.15)' : 'scale(1)';
+            });
+        }
+
+        setTheme(0);
+
         // Simple form submission mock
         document.getElementById('signup-form').addEventListener('submit', function(e) {
             e.preventDefault();
