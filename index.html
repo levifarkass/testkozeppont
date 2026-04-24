@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -588,6 +590,45 @@
         .footer-bottom a { color: var(--text-muted); text-decoration: none; }
         .footer-bottom a:hover { color: var(--text); }
 
+        /* CALENDLY */
+        #calendly-inline-wrap { margin-bottom: 1.75rem; }
+        #calendly-inline { display: none; min-width: 320px; height: 680px; border-radius: 4px; overflow: hidden; background: var(--surface); }
+        .calendly-placeholder {
+            border: 2px dashed var(--border);
+            background: var(--surface);
+            color: var(--text-muted);
+            border-radius: 4px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+        }
+        .calendly-placeholder i { font-size: 2rem; color: var(--accent-light); margin-bottom: 0.75rem; display: block; }
+        .calendly-placeholder h3 { color: var(--text); font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .calendly-placeholder p { font-size: 0.85rem; line-height: 1.6; font-weight: 300; }
+        .calendly-placeholder code {
+            background: var(--bg);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            color: var(--accent);
+        }
+        .form-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .form-divider::before, .form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
         /* RESPONSIVE */
         @media (max-width: 1024px) {
             .method-flow { grid-template-columns: repeat(2, 1fr); }
@@ -631,7 +672,7 @@
         <div class="nav-links">
             <a href="#modszer">A Módszer</a>
             <a href="#csomagok">Csomagok</a>
-            <a href="#konzultacio" class="nav-cta">Ingyenes Konzultáció</a>
+            <a href="#konzultacio" class="nav-cta" onclick="openCalendly(event)">Ingyenes Konzultáció</a>
         </div>
     </div>
 </nav>
@@ -645,11 +686,15 @@
                 <p style="font-family:'Playfair Display',Georgia,serif; font-size:1.7rem; font-weight:700; color:var(--text); margin-bottom:0;">Ezzel nem vagy egyedül.</p>
             </div>
             <div class="hero-actions">
-                <a href="#konzultacio" class="btn-primary">
+                <a href="#konzultacio" class="btn-primary" onclick="openCalendly(event)">
                     Ingyenes Konzultáció
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
-                <a href="#modszer" class="btn-secondary">A módszerről <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#konzultacio" class="btn-secondary">
+                    Foglalási naptár
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <a href="#modszer" class="btn-ghost">A módszerről <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
         <div class="hero-right">
@@ -964,7 +1009,18 @@
         </div>
         <div class="form-card">
             <div class="form-title">Konzultáció foglalása</div>
-            <div class="form-subtitle">Töltsd ki — 24 órán belül kereslek.</div>
+            <div class="form-subtitle">Foglalj időpontot a naptárban — vagy küldj üzenetet.</div>
+
+            <div id="calendly-inline-wrap">
+                <div id="calendly-inline" class="calendly-inline-widget"></div>
+                <div id="calendly-placeholder" class="calendly-placeholder">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <h3>Calendly embed goes here</h3>
+                    <p>Replace <code>CALENDLY_URL</code> in <code>index.html</code> (script block, near the bottom of the file) with Levi's Calendly event link.</p>
+                </div>
+            </div>
+            <div class="form-divider"><span>vagy küldj üzenetet</span></div>
+
             <form id="signup-form">
                 <div class="form-group">
                     <label>Név</label>
@@ -1083,6 +1139,34 @@
 </footer>
 
 <script>
+    // === CALENDLY CONFIG — Levi: replace 'PLACEHOLDER' with your real Calendly event-type URL ===
+    // Example: const CALENDLY_URL = 'https://calendly.com/levi-fitness/20min';
+    const CALENDLY_URL = 'PLACEHOLDER';
+    const CALENDLY_READY = CALENDLY_URL !== 'PLACEHOLDER';
+
+    function openCalendly(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        }
+        if (!CALENDLY_READY) {
+            alert('Calendly még nincs beállítva. Cseréld ki a CALENDLY_URL-t az index.html-ben.');
+            return;
+        }
+        if (typeof Calendly === 'undefined') return;
+        Calendly.initPopupWidget({ url: CALENDLY_URL });
+    }
+
+    if (CALENDLY_READY) {
+        var calInline = document.getElementById('calendly-inline');
+        var calPh = document.getElementById('calendly-placeholder');
+        if (calInline) {
+            calInline.setAttribute('data-url', CALENDLY_URL);
+            calInline.style.display = 'block';
+        }
+        if (calPh) calPh.style.display = 'none';
+    }
+
     // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(q => {
         q.addEventListener('click', () => {
