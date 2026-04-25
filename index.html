@@ -14,7 +14,7 @@
         :root {
             --bg: #F8F5F0;
             --white: #FFFFFF;
-            --surface: #F2EDE5;
+            --surface: #EDE5D8;
             --border: #E2D8CC;
             --text: #1C1410;
             --text-muted: #8C7B6E;
@@ -156,6 +156,7 @@
         }
         .hero-stats {
             display: flex; gap: 2.5rem;
+            margin-top: 2rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--border);
         }
@@ -216,14 +217,14 @@
         .why-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
         }
-        .why-list { list-style: none; margin-top: 2rem; }
+        .why-list { list-style: none; margin-top: 2.5rem; }
         .why-item {
-            display: flex; gap: 1rem; padding: 1.25rem 0;
+            display: flex; gap: 1rem; padding: 1.75rem 0;
             border-bottom: 1px solid var(--border);
         }
         .why-item:first-child { border-top: 1px solid var(--border); }
         .why-icon { color: var(--text-muted); font-size: 0.75rem; margin-top: 4px; flex-shrink: 0; width: 16px; }
-        .why-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+        .why-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
         .why-item strong { color: var(--text); font-weight: 600; }
         .why-right { padding-top: 1rem; }
         .why-insight {
@@ -262,12 +263,24 @@
         .method-flow {
             display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem; margin-top: 3.5rem; position: relative;
+            align-items: start;
         }
         .method-flow::before {
             content: '';
             position: absolute;
-            top: 22px; left: calc(12.5% + 0px); right: calc(12.5% + 0px);
-            height: 1px; background: var(--border); z-index: 0;
+            top: 22px; left: 22px; right: 22px;
+            height: 1px; background: var(--accent-light); z-index: 0;
+        }
+        .method-flow::after {
+            content: '';
+            position: absolute;
+            top: 22px; right: 14px;
+            transform: translateY(-50%);
+            width: 0; height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid var(--accent-light);
+            z-index: 1;
         }
         .method-step {
             padding: 0; position: relative; display: flex; flex-direction: column;
@@ -281,7 +294,7 @@
         }
         .method-step-body {
             background: var(--white); border: 1px solid var(--border);
-            border-radius: 12px; padding: 1.75rem; flex: 1;
+            border-radius: 12px; padding: 2.25rem; flex: 1;
         }
         .method-step h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.6rem; }
         .method-step p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
@@ -330,6 +343,7 @@
         }
         .testimonial-card {
             background: var(--white); border: 1px solid var(--border); padding: 2.5rem;
+            display: flex; flex-direction: column;
         }
         .testimonial-tag {
             display: inline-block;
@@ -343,6 +357,7 @@
         .testimonial-card blockquote {
             font-size: 0.92rem; color: var(--text); line-height: 1.8;
             font-style: italic; margin-bottom: 1.75rem; font-weight: 300;
+            flex: 1;
         }
         .testimonial-result {
             background: var(--bg); border: 1px solid var(--border);
@@ -370,6 +385,18 @@
         .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .testimonial-name { font-size: 0.82rem; font-weight: 600; }
         .testimonial-role { font-size: 0.72rem; color: var(--text-muted); }
+
+        .method-list {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-direction: column; gap: 0.6rem;
+        }
+        .method-list li {
+            font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; font-weight: 300;
+            padding-left: 1rem; position: relative;
+        }
+        .method-list li::before {
+            content: "—"; position: absolute; left: 0; color: var(--accent-light);
+        }
 
         /* PROGRAM STEPS */
         .program-section { background: var(--white); }
@@ -588,6 +615,24 @@
         .footer-bottom a { color: var(--text-muted); text-decoration: none; }
         .footer-bottom a:hover { color: var(--text); }
 
+        /* SECTION BACKGROUNDS */
+        .hero { background: #FFFFFF; }
+        /* #fajdalom inherits --bg (eggshell) */
+        /* .why-section already background: var(--white) */
+        /* #modszer inherits --bg (eggshell) */
+        .story-section { background: var(--accent); }
+        .story-section .story-right p { color: rgba(248,245,240,0.8); }
+        .story-section .story-right p:first-child { color: rgba(248,245,240,0.88); }
+        .story-section .story-right strong { color: rgba(248,245,240,0.97); }
+        .story-section .story-left h3 { color: rgba(248,245,240,0.92); }
+        .story-section .story-left p { color: rgba(248,245,240,0.5); }
+        .story-section .story-avatar { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.08); }
+        .story-section .story-highlight { background: rgba(255,255,255,0.06); border-left-color: var(--accent-light); }
+        .story-section .story-highlight p { color: rgba(248,245,240,0.88) !important; }
+        #eredmenyek { background: #FFFFFF; }
+        /* #csomagok inherits --bg (eggshell) */
+        /* .cta-section already dark brown */
+
         /* RESPONSIVE */
         @media (max-width: 1024px) {
             .method-flow { grid-template-columns: repeat(2, 1fr); }
@@ -742,19 +787,23 @@
                     </li>
                     <li class="why-item">
                         <i class="fa-solid fa-arrow-right why-icon"></i>
-                        <p><strong>Nyújtás és mobilizáció</strong> — javítja a mozgástartományt, de a mélystabilitást nem építi fel.</p>
+                        <p><strong>Nyújtás</strong> — javítja a mozgástartományt, de a mélystabilitást nem építi fel.</p>
                     </li>
                 </ul>
             </div>
             <div class="why-right">
                 <div class="why-insight">
-                    <p>"Ha derékfájást kapnak, a derekaddal foglalkoznak. Ha nyakfájást, a nyakaddal. De senki sem kérdezi meg: miért mozdult el az alap?"</p>
+                    <p>"A gyógytornász a derekadra fókuszál. A masszőr a feszes izmokat lazítja. A csontkovács beállítja a csigolyát. Mind ott próbálja megoldani a problémát, ahol fáj — de senki sem kérdezi meg: miért mozdult el az alap?"</p>
                     <cite>— Levi, TestKözéppont</cite>
                 </div>
                 <div style="padding-left: 2.5rem;">
-                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">A fájdalom szinte soha nem ott van, ahol a probléma.<br><br>A tested kompenzál — évekig, csendben.<br><br>A fájdalom az a pont, ahol már nem bírja tovább és feladja.</p>
+                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">A fájdalom szinte soha nem ott van, ahol a probléma forrása.</p>
                     <br>
-                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">A TestKözéppont Módszer nem azt kérdezi, hol fáj.<br>Azt kérdezi, <strong style="color:#7A4F2D;">miért fáj</strong> — és visszavezeti a problémát a forráshoz.</p>
+                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">A test mindig a legkisebb ellenállás felé törekszik. Alkalmazkodik, kompenzál, megkerüli a hibát — és elvégzi a mindennapi feladatokat. Egy bizonyos pont után azonban ezek az alkalmazkodások elváltozásokhoz vezetnek. A fájdalom ezeknek a jele.</p>
+                    <br>
+                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">Nem elnyomni kell. <strong style="color:#7A4F2D;">Helyreállítani a rendszer optimális működését.</strong></p>
+                    <br>
+                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">A TestKözéppont Módszer pontosan ezt végzi el — rendszerszintű újrakalibrálással, a problémák forrásának megszüntetésével.</p>
                 </div>
             </div>
         </div>
@@ -773,28 +822,38 @@
             <div class="method-step-num">01</div>
             <div class="method-step-body">
                 <h3>Hol tartasz most</h3>
-                <p>Részletes biomechanikai felmérés: megvizsgáljuk a medencéd elmozdulásait, a csípők magasságkülönbségét, a gerinc görbületét. Nem tüneteket kérdezünk — a testet olvassuk.</p>
+                <p>Részletes biomechanikai felmérés:</p>
+                <ul class="method-list">
+                    <li>Megvizsgáljuk a medencéd elmozdulásait.</li>
+                    <li>Elemezzük a tartásod és az aszimmetriát.</li>
+                    <li>Felmérjük az izomegyensúlyt.</li>
+                    <li>Rendszerszintű diagnózist állítunk fel.</li>
+                </ul>
             </div>
         </div>
         <div class="method-step">
             <div class="method-step-num">02</div>
             <div class="method-step-body">
                 <h3>Miért alakult így</h3>
-                <p>Az elmozdult medencéből logikusan következik minden más. Megmutatjuk az összefüggéseket: miért fáj ott, ahol fáj, és mi indította el az egészet. Megérted — nem csak hallod.</p>
+                <p>A medence, mint testközéppont — ha nem optimális helyzetben áll, felborul az egész izomlánc. Ebből logikusan következik, hogy miért ott fáj, ahol fáj, és mi áll a jelenlegi problémák mögött.</p>
             </div>
         </div>
         <div class="method-step">
             <div class="method-step-num">03</div>
             <div class="method-step-body">
                 <h3>Hogyan állítjuk helyre</h3>
-                <p>Először a gyengébb oldalt hozzuk fel — szimmetrikus edzéssel nincs értelme kezdeni. A mélyizmok épülnek, nem a felszínesek. Nem intenzitás, hanem precizitás.</p>
+                <ul class="method-list">
+                    <li>Levesszük a terhelést a túlműködő oldalról.</li>
+                    <li>Mélyizomtornával helyreállítjuk az izomegyensúlyt, optimalizáljuk a medence helyzetét, és stabilizáljuk a törzset.</li>
+                    <li>Újraírjuk a mozgásmintákat.</li>
+                </ul>
             </div>
         </div>
         <div class="method-step">
             <div class="method-step-num">04</div>
             <div class="method-step-body">
                 <h3>Hogyan tartod meg</h3>
-                <p>Minden fázishoz videós anyag készül rólad. Otthon, önállóan, bármikor elvégezhető. Ahogy ismétled a mozdulatokat, újraírod a régi mintákat — és ez megmarad.</p>
+                <p>Minden fázishoz videós anyag készül rólad — otthon, önállóan, bármikor elvégezhető. Ahogy ismétled a mozdulatokat, újraírod a régi mozgásmintákat. Ezáltal sokkal tudatosabban fogsz kivitelezni minden mozdulatot.</p>
             </div>
         </div>
     </div>
@@ -810,7 +869,7 @@
                 <img src="levi.JPG" alt="Levi">
             </div>
             <h3>Levi</h3>
-            <p>Személyi edző, Budapest<br>Fitness instructor képzés<br>TestKözéppont Módszer</p>
+            <p>Mozgásterapeuta, Budapest<br>TestKözéppont Módszer</p>
         </div>
         <div class="story-right">
             <p>Egész életemben a testemnek éltem.</p>
@@ -834,7 +893,7 @@
     <div class="section-header">
         <div class="section-eyebrow">Valódi Eredmények</div>
         <h2 class="section-heading">Olyanok, mint te — fájdalommentesen</h2>
-        <p class="section-sub">Nem általánosságok. Valódi emberek, valódi problémákkal, valódi változással.</p>
+        <p class="section-sub">Nem általánosságok.<br>Valódi emberek, valódi problémákkal, valódi változással.</p>
     </div>
     <div class="testimonials-grid">
 
@@ -876,6 +935,44 @@
             </div>
         </div>
 
+        <div class="testimonial-card">
+            <div class="testimonial-tag">Tartásproblémák · Testtudatosság · Személyre szabott</div>
+            <div class="testimonial-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <blockquote>"Tartásproblémám volt — de nem annyira zavaró, hogy aktívan csináljak valamit ellene. Két héttel az edzésterv után már éreztem, hogy addig ismeretlen izmok kezdtek el dolgozni. Teljesen személyre szabott volt az egész: nem általános edzés, hanem pontosan rólam szóló program. Egyszerű és mégis nagyon látványos. Könnyen megértettem mi a probléma, és pontosan éreztem mi változik."</blockquote>
+            <div class="testimonial-result">
+                <div class="testimonial-result-label">Eredmény</div>
+                <p>Erősebb hátizom, fejlettebb bal oldal. Aktiválódott egy izomcsoport, amelynek a létezéséről fogalmam sem volt. Testtudatosabb lettem — nem csak kívülről látom a változásokat, hanem sokkal jobban érzem is a saját testemet.</p>
+            </div>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">Ba</div>
+                <div>
+                    <div class="testimonial-name">Barbara</div>
+                    <div class="testimonial-role">Cukrász</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-tag">Derékfájás · Álló munka · Tartásproblémák</div>
+            <div class="testimonial-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <blockquote>"Fogorvosként egész nap állva dolgozom — több mint egy éve fájt a derekam. Próbáltam súlyzós edzéssel, nyújtással megoldani a problémáimat, de nem hoztak tartós megoldást. Levivel az első perctől pontosan érthettem, mi történik az én testemben. Nem általánosságokat mondott — megmutatta, honnan erednek a fájdalmak, miért alakultak ki, és mi tartja fenn őket. 3–4 hétre a kezdéstől már éreztem az első valódi változásokat."</blockquote>
+            <div class="testimonial-result">
+                <div class="testimonial-result-label">Eredmény</div>
+                <p>Súlyzós guggolásnál nincs derékfájdalom. Napközben tudatosan figyelek a tartásomra — kevésbé görnyedek be. A legnagyobb nyereség: sokkal szebb tartásom van, és tudom, hogyan tartsam meg.</p>
+            </div>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">BZs</div>
+                <div>
+                    <div class="testimonial-name">B. Zs.</div>
+                    <div class="testimonial-role">Fogorvos</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -884,7 +981,7 @@
     <div class="section-header">
         <div class="section-eyebrow">A Programok</div>
         <h2 class="section-heading">Válaszd ki a hozzád illő utat</h2>
-        <p class="section-sub">Mindhárom csomag ugyanarra a módszerre épül. A különbség az, mennyi személyes kísérést szeretnél a 90 nap alatt.</p>
+        <p class="section-sub">Mindhárom csomag ugyanarra a módszerre épül.<br>A különbség az, mennyi személyes kísérést szeretnél a 90 nap alatt.</p>
     </div>
     <div class="pricing-grid">
 
@@ -1075,7 +1172,7 @@
     </div>
     <div class="about-text">
         <h3>Levi — TestKözéppont, Budapest</h3>
-        <p>Személyi edző és mozgásoktató, aki a TestKözéppont Módszerrel segít irodai dolgozóknak tartósan megszabadulni a krónikus fájdalomtól. Nem tünetet kezelek — rendszert állítok helyre.</p>
+        <p>Mozgásterapeuta, aki a TestKözéppont Módszerrel segíti az irodai dolgozókat tartósan megszabadítani a krónikus fájdalomtól. Nem tüneteket kezel, rendszert állít helyre.</p>
     </div>
 </div>
 <footer class="footer-bottom">
