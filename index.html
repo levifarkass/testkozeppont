@@ -260,45 +260,22 @@
         }
 
         /* METHOD */
-        .method-flow {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem; margin-top: 3.5rem; position: relative;
-            align-items: start;
-        }
-        .method-flow::before {
-            content: '';
-            position: absolute;
-            top: 22px; left: 22px; right: 22px;
-            height: 1px; background: var(--accent-light); z-index: 0;
-        }
-        .method-flow::after {
-            content: '';
-            position: absolute;
-            top: 22px; right: 14px;
-            transform: translateY(-50%);
-            width: 0; height: 0;
-            border-top: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            border-left: 8px solid var(--accent-light);
-            z-index: 1;
-        }
-        .method-step {
-            padding: 0; position: relative; display: flex; flex-direction: column;
-        }
-        .method-step-num {
+        .method-rows { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 3.5rem; }
+        .method-row { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: center; }
+        .method-row:nth-child(even) { grid-template-columns: 1fr 280px; }
+        .method-row:nth-child(even) .method-row-image { order: 2; }
+        .method-row:nth-child(even) .method-row-content { order: 1; }
+        .method-row-image { border-radius: 12px; overflow: hidden; aspect-ratio: 2/3; }
+        .method-row-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .method-row-num {
             width: 44px; height: 44px; border-radius: 50%;
             background: var(--accent); border: 1px solid var(--accent);
             display: flex; align-items: center; justify-content: center;
             font-size: 0.72rem; font-weight: 600; letter-spacing: 1px;
-            color: var(--bg); margin-bottom: 1.5rem; position: relative; z-index: 1;
+            color: var(--bg); margin-bottom: 1.5rem;
         }
-        .method-step-body {
-            background: var(--white); border: 1px solid var(--border);
-            border-radius: 12px; padding: 2.25rem; flex: 1;
-        }
-        .method-step h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.6rem; }
-        .method-step p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
-        .method-arrow { display: none; }
+        .method-row h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; }
+        .method-row p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
 
         /* LEVI STORY */
         .story-section { background: var(--surface); }
@@ -614,6 +591,7 @@
         }
         .footer-bottom a { color: var(--text-muted); text-decoration: none; }
         .footer-bottom a:hover { color: var(--text); }
+        .footer-links { margin-top: 0.6rem; display: flex; justify-content: center; align-items: center; gap: 0.75rem; font-size: 0.75rem; color: var(--text-muted); }
 
         /* SECTION BACKGROUNDS */
         .hero { background: #FFFFFF; }
@@ -635,8 +613,7 @@
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .method-flow { grid-template-columns: repeat(2, 1fr); }
-            .method-flow::before { display: none; }
+            .method-row { gap: 3rem; }
         }
         @media (max-width: 900px) {
             .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -663,7 +640,10 @@
             .form-card { padding: 2rem 1.5rem; }
             .about-strip { flex-direction: column; gap: 1.5rem; text-align: center; padding: 3rem 1.25rem; }
             .hero-actions { flex-direction: column; }
-            .method-flow { grid-template-columns: 1fr; }
+            .method-row { grid-template-columns: 1fr; gap: 2rem; }
+            .method-row:nth-child(even) .method-row-image { order: 0; }
+            .method-row:nth-child(even) .method-row-content { order: 1; }
+            .method-row-image { aspect-ratio: 4/3; }
         }
     </style>
 </head>
@@ -817,10 +797,13 @@
         <h2 class="section-heading">A TestKözép<span style="color:var(--accent-light);">pont</span> Módszer</h2>
         <p class="section-sub">A test statikai rendszer. Ha az alap — a medence — elmozdul, az egész szerkezet kompenzál. A módszer nem a tünetet kezeli, hanem rendszerszintű megoldást ad.</p>
     </div>
-    <div class="method-flow">
-        <div class="method-step">
-            <div class="method-step-num">01</div>
-            <div class="method-step-body">
+    <div class="method-rows">
+        <div class="method-row">
+            <div class="method-row-image">
+                <img src="images/felmeres/IMG_6014.jpg" alt="Biomechanikai felmérés" style="object-position: center top;">
+            </div>
+            <div class="method-row-content">
+                <div class="method-row-num">01</div>
                 <h3>Hol tartasz most</h3>
                 <p>Részletes biomechanikai felmérés:</p>
                 <ul class="method-list">
@@ -831,16 +814,22 @@
                 </ul>
             </div>
         </div>
-        <div class="method-step">
-            <div class="method-step-num">02</div>
-            <div class="method-step-body">
+        <div class="method-row">
+            <div class="method-row-image">
+                <img src="images/felmeres/IMG_6017.jpg" alt="Miért alakult így">
+            </div>
+            <div class="method-row-content">
+                <div class="method-row-num">02</div>
                 <h3>Miért alakult így</h3>
                 <p>A medence, mint testközéppont — ha nem optimális helyzetben áll, felborul az egész izomlánc. Ebből logikusan következik, hogy miért ott fáj, ahol fáj, és mi áll a jelenlegi problémák mögött.</p>
             </div>
         </div>
-        <div class="method-step">
-            <div class="method-step-num">03</div>
-            <div class="method-step-body">
+        <div class="method-row">
+            <div class="method-row-image">
+                <img src="images/felmeres/IMG_6019.jpg" alt="Helyreállítás">
+            </div>
+            <div class="method-row-content">
+                <div class="method-row-num">03</div>
                 <h3>Hogyan állítjuk helyre</h3>
                 <ul class="method-list">
                     <li>Levesszük a terhelést a túlműködő oldalról.</li>
@@ -849,9 +838,12 @@
                 </ul>
             </div>
         </div>
-        <div class="method-step">
-            <div class="method-step-num">04</div>
-            <div class="method-step-body">
+        <div class="method-row">
+            <div class="method-row-image">
+                <img src="images/felmeres/IMG_6023.jpg" alt="Mozgásminta újraírás" style="object-position: center 30%;">
+            </div>
+            <div class="method-row-content">
+                <div class="method-row-num">04</div>
                 <h3>Hogyan tartod meg</h3>
                 <p>Minden fázishoz videós anyag készül rólad — otthon, önállóan, bármikor elvégezhető. Ahogy ismétled a mozdulatokat, újraírod a régi mozgásmintákat. Ezáltal sokkal tudatosabban fogsz kivitelezni minden mozdulatot.</p>
             </div>
@@ -1126,7 +1118,26 @@
 </div>
 <footer class="footer-bottom">
     <p>&copy; 2026 TestKözéppont — Budapest, Magyarország</p>
+    <div class="footer-links">
+        <a href="https://www.instagram.com/testkozeppont/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <span>·</span>
+        <a href="#" id="gdpr-open">Adatkezelési tájékoztató</a>
+    </div>
 </footer>
+
+<!-- GDPR MODAL -->
+<div id="gdpr-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9999; overflow-y:auto;">
+    <div style="background:#fff; max-width:600px; margin:4rem auto; padding:3rem 2.5rem; border-radius:8px; position:relative;">
+        <button id="gdpr-close" style="position:absolute; top:1.25rem; right:1.5rem; background:none; border:none; font-size:1.4rem; cursor:pointer; color:#999;">&times;</button>
+        <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1.4rem; margin-bottom:1.75rem;">Adatkezelési tájékoztató</h2>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Adatkezelő:</strong> Farkas Levente (TestKözéppont), Budapest</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Milyen adatokat gyűjtünk?</strong><br>Az ingyenes konzultáció foglalása során a Calendly platformon keresztül a következő adatokat adod meg: név, email cím, valamint a foglalási kérdésekre adott válaszok.</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mire használjuk?</strong><br>Kizárólag a konzultáció megszervezésére és lebonyolítására.</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Ki kezeli az adatokat?</strong><br>A foglalási folyamatot a Calendly (calendly.com) kezeli saját adatkezelési szabályzata szerint. A konzultáció a Google Meet platformon zajlik.</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mennyi ideig tároljuk?</strong><br>Az adatokat a konzultáció lezárultát követő 1 évig tároljuk, majd töröljük.</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555;"><strong>Kapcsolat:</strong> a konzultáció foglaláson keresztül, vagy Instagram DM-ben: <a href="https://www.instagram.com/testkozeppont/" target="_blank" rel="noopener" style="color:inherit;">@testkozeppont</a></p>
+    </div>
+</div>
 
 <script>
     // FAQ accordion
@@ -1137,6 +1148,18 @@
             document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
             if (!isOpen) item.classList.add('open');
         });
+    });
+
+    // GDPR modal
+    document.getElementById('gdpr-open').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('gdpr-modal').style.display = 'block';
+    });
+    document.getElementById('gdpr-close').addEventListener('click', function() {
+        document.getElementById('gdpr-modal').style.display = 'none';
+    });
+    document.getElementById('gdpr-modal').addEventListener('click', function(e) {
+        if (e.target === this) this.style.display = 'none';
     });
 
     // Smooth scroll
