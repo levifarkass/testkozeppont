@@ -173,19 +173,19 @@
             color: var(--accent-light); margin-bottom: 1.5rem;
         }
         .hero-card-p1 {
-            font-size: 1.15rem; line-height: 1.85;
+            font-size: 1.1rem; line-height: 1.85;
             color: var(--text); font-weight: 300;
             margin-bottom: 1.5rem;
         }
         .hero-card-divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
-        .hero-card-p2 { font-size: 1.05rem; line-height: 1.8; color: var(--text); font-weight: 300; margin-bottom: 1.5rem; }
+        .hero-card-p2 { font-size: 1.1rem; line-height: 1.8; color: var(--text); font-weight: 300; margin-bottom: 1.5rem; }
         .hero-card-p2 em {
             font-family: 'Playfair Display', Georgia, serif;
             font-style: italic; font-size: 1.1rem;
             color: var(--text); font-weight: 400;
         }
         .hero-card-p3 {
-            font-size: 1rem; line-height: 1.8;
+            font-size: 1.1rem; line-height: 1.8;
             color: var(--text); font-weight: 400;
             padding-top: 1.25rem;
             border-top: 1px solid var(--border);
@@ -213,7 +213,21 @@
 
         /* WHY SECTION */
         .why-section { background: var(--white); }
-        .why-inner { max-width: 1200px; margin: 0 auto; padding: 7rem 2rem; }
+        .why-inner { max-width: 780px; margin: 0 auto; padding: 7rem 2rem; }
+        .why-core {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.2rem; font-weight: 700; line-height: 1.4;
+            color: var(--text); text-align: center;
+            margin: 2.5rem 0 3.5rem;
+        }
+        .why-body { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2.5rem; }
+        .why-body p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.95; font-weight: 300; }
+        .why-callout {
+            border-left: 3px solid var(--accent-light);
+            padding: 1.5rem 2rem; margin: 1rem 0 1rem;
+        }
+        .why-callout p { font-size: 1.1rem; color: var(--text); line-height: 1.9; font-weight: 400; }
+        .why-callout strong { color: var(--accent-light); }
         .why-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
         }
@@ -260,7 +274,7 @@
         }
 
         /* METHOD */
-        .method-rows { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 3.5rem; }
+        .method-rows { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
         .method-row { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: center; }
         .method-row:nth-child(even) { grid-template-columns: 1fr 280px; }
         .method-row:nth-child(even) .method-row-image { order: 2; }
@@ -274,8 +288,8 @@
             font-size: 0.72rem; font-weight: 600; letter-spacing: 1px;
             color: var(--bg); margin-bottom: 1.5rem;
         }
-        .method-row h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; }
-        .method-row p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+        .method-row h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
+        .method-row p { font-size: 1rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
 
         /* LEVI STORY */
         .story-section { background: var(--surface); }
@@ -291,7 +305,7 @@
             overflow: hidden; font-size: 2rem; color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
-        .story-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transform: scale(1.18); transform-origin: top left; }
+        .story-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
         .story-left h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
         .story-left p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
         .story-right p {
@@ -368,7 +382,7 @@
             display: flex; flex-direction: column; gap: 0.6rem;
         }
         .method-list li {
-            font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; font-weight: 300;
+            font-size: 1rem; color: var(--text-muted); line-height: 1.8; font-weight: 300;
             padding-left: 1rem; position: relative;
         }
         .method-list li::before {
@@ -582,7 +596,7 @@
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0; overflow: hidden; font-size: 1.5rem; color: var(--text-muted);
         }
-        .about-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .about-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
         .about-text h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; }
         .about-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; max-width: 600px; }
         .footer-bottom {
@@ -680,7 +694,7 @@
         <div class="hero-right">
             <div>
                 <p class="hero-card-p1">
-                    Voltál már gyógytornásznál. Masszőrnél. Talán csontkovácsnál is.<br>
+                    Voltál már gyógytornásznál. Masszőrnél.<br>Talán csontkovácsnál is.<br>
                     Mindenki segített egy kicsit — aztán visszajött a fájdalom.<br>
                     Mindig visszajön.
                 </p>
@@ -688,7 +702,7 @@
                     Nem azért, mert rossz kezelést kaptál.<br>
                     <em>Hanem mert mindenki azt kezelte, ami fájt — nem azt, ami miatt fájt.</em>
                 </p>
-                <p class="hero-card-p3">A tested egységként működik. Mi egységként is vizsgáljuk — összefüggő rendszerként, nem izolált tünetekként. A cél nem az enyhítés, hanem a hosszan tartó, fájdalommentes élet.</p>
+                <p class="hero-card-p3">Nem az a kérdés, hol fáj — hanem hogy honnan ered.</p>
             </div>
             <div class="hero-stats">
                 <div class="stat">
@@ -748,44 +762,20 @@
 <!-- WHY IT DOESN'T HEAL -->
 <div class="why-section">
     <div class="why-inner">
-        <div class="why-grid">
-            <div class="why-left">
-                <h2 class="section-heading">Miért nem múlt el eddig?</h2>
-                <p class="section-sub">A legtöbb kezelés nem rossz — csak hiányos. Mind ugyanazt csinálja.</p>
-                <ul class="why-list">
-                    <li class="why-item">
-                        <i class="fa-solid fa-arrow-right why-icon"></i>
-                        <p><strong>Gyógytorna</strong> — általános protokoll, nem az egyéni elváltozásokra szabva. "Futószalag" élmény.</p>
-                    </li>
-                    <li class="why-item">
-                        <i class="fa-solid fa-arrow-right why-icon"></i>
-                        <p><strong>Masszázs</strong> — felszabadítja a feszültséget, de az ok marad. Napok múlva visszajön minden.</p>
-                    </li>
-                    <li class="why-item">
-                        <i class="fa-solid fa-arrow-right why-icon"></i>
-                        <p><strong>Csontkovács</strong> — visszahelyezi a csontozatot, de ha az izomegyensúly nem változik, visszamozdul.</p>
-                    </li>
-                    <li class="why-item">
-                        <i class="fa-solid fa-arrow-right why-icon"></i>
-                        <p><strong>Nyújtás</strong> — javítja a mozgástartományt, de a mélystabilitást nem építi fel.</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="why-right">
-                <div class="why-insight">
-                    <p>"A gyógytornász a derekadra fókuszál. A masszőr a feszes izmokat lazítja. A csontkovács beállítja a csigolyát. Mind ott próbálja megoldani a problémát, ahol fáj — de senki sem kérdezi meg: miért mozdult el az alap?"</p>
-                    <cite>— Levi, TestKözéppont</cite>
-                </div>
-                <div style="padding-left: 2.5rem;">
-                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">A fájdalom szinte soha nem ott van, ahol a probléma forrása.</p>
-                    <br>
-                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">A test mindig a legkisebb ellenállás felé törekszik. Alkalmazkodik, kompenzál, megkerüli a hibát — és elvégzi a mindennapi feladatokat. Egy bizonyos pont után azonban ezek az alkalmazkodások elváltozásokhoz vezetnek. A fájdalom ezeknek a jele.</p>
-                    <br>
-                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">Nem elnyomni kell. <strong style="color:#7A4F2D;">Helyreállítani a rendszer optimális működését.</strong></p>
-                    <br>
-                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; font-weight:300;">A TestKözéppont Módszer pontosan ezt végzi el — rendszerszintű újrakalibrálással, a problémák forrásának megszüntetésével.</p>
-                </div>
-            </div>
+        <div class="section-eyebrow" style="text-align:center;">Miért nem múlt el eddig?</div>
+        <p class="why-core">A fájdalom szinte soha nem ott van,<br>ahol a probléma forrása.</p>
+        <div class="why-body">
+            <p>A test mindig a legkisebb ellenállás felé törekszik.</p>
+            <p>Alkalmazkodik, kompenzál, megkerüli a hibát&nbsp;— és elvégzi a mindennapi feladatokat.</p>
+            <p>Egy bizonyos pont után azonban ezek az alkalmazkodások elváltozásokhoz vezetnek.</p>
+            <p>A fájdalom ezeknek a jele.</p>
+        </div>
+        <div class="why-callout">
+            <p>Nem elnyomni kell.</p>
+            <p><strong>Helyreállítani a rendszer optimális működését.</strong></p>
+        </div>
+        <div class="why-body">
+            <p>A TestKözéppont Módszer pontosan ezt végzi el&nbsp;— rendszerszintű újrakalibrálással,<br>a problémák forrásának megszüntetésével.</p>
         </div>
     </div>
 </div>
@@ -821,7 +811,8 @@
             <div class="method-row-content">
                 <div class="method-row-num">02</div>
                 <h3>Miért alakult így</h3>
-                <p>A medence, mint testközéppont — ha nem optimális helyzetben áll, felborul az egész izomlánc. Ebből logikusan következik, hogy miért ott fáj, ahol fáj, és mi áll a jelenlegi problémák mögött.</p>
+                <p>A medence, mint testközéppont — ha nem optimális helyzetben áll, felborul az egész izomlánc.</p>
+                <p>Ebből logikusan következik, hogy miért ott fáj, ahol fáj, és mi áll a jelenlegi problémák mögött.</p>
             </div>
         </div>
         <div class="method-row">
@@ -833,7 +824,7 @@
                 <h3>Hogyan állítjuk helyre</h3>
                 <ul class="method-list">
                     <li>Levesszük a terhelést a túlműködő oldalról.</li>
-                    <li>Mélyizomtornával helyreállítjuk az izomegyensúlyt, optimalizáljuk a medence helyzetét, és stabilizáljuk a törzset.</li>
+                    <li>Mélyizomtornával helyreállítjuk az izomegyensúlyt,<br>optimalizáljuk a medence helyzetét, és stabilizáljuk a törzset.</li>
                     <li>Újraírjuk a mozgásmintákat.</li>
                 </ul>
             </div>
@@ -845,7 +836,9 @@
             <div class="method-row-content">
                 <div class="method-row-num">04</div>
                 <h3>Hogyan tartod meg</h3>
-                <p>Minden fázishoz videós anyag készül rólad — otthon, önállóan, bármikor elvégezhető. Ahogy ismétled a mozdulatokat, újraírod a régi mozgásmintákat. Ezáltal sokkal tudatosabban fogsz kivitelezni minden mozdulatot.</p>
+                <p>Minden fázishoz videós anyag készül rólad — otthon, önállóan, bármikor elvégezhető.</p>
+                <p>Ahogy ismétled a mozdulatokat, újraírod a régi mozgásmintákat.</p>
+                <p>Ezáltal sokkal tudatosabban fogsz kivitelezni minden mozdulatot.</p>
             </div>
         </div>
     </div>
@@ -858,7 +851,7 @@
     <div class="story-inner">
         <div class="story-left">
             <div class="story-avatar">
-                <img src="levi.JPG" alt="Levi">
+                <img src="profil.PNG" alt="Levi">
             </div>
             <h3>Levi</h3>
             <p>Mozgásterapeuta, Budapest<br>TestKözéppont Módszer</p>
@@ -1109,7 +1102,7 @@
 <!-- FOOTER -->
 <div class="about-strip">
     <div class="about-avatar">
-        <img src="levi.JPG" alt="Levi">
+        <img src="profil.PNG" alt="Levi">
     </div>
     <div class="about-text">
         <h3>Levi — TestKözéppont, Budapest</h3>
