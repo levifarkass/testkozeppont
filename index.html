@@ -1054,65 +1054,14 @@
             </div>
             <div class="cta-guarantees">
                 <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Teljesen ingyenes, elköteleződés nélkül</div>
-                <div class="cta-guarantee"><i class="fa-solid fa-check"></i>24 órán belül visszajelzés</div>
-                <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Budapest belváros, rugalmas időpontok</div>
+                <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Azonnali visszaigazolás emailben</div>
+                <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Online, Google Meet-en — bárhonnan elérhető</div>
                 <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Ha nem vagyok a megfelelő ember, megmondom</div>
             </div>
         </div>
-        <div class="form-card">
-            <div class="form-title">Konzultáció foglalása</div>
-            <div class="form-subtitle">Töltsd ki — 24 órán belül kereslek.</div>
-            <form id="signup-form">
-                <div class="form-group">
-                    <label>Név</label>
-                    <input type="text" placeholder="Teljes neved" required>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="pelda@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Telefon (WhatsApp előnyben)</label>
-                    <input type="tel" placeholder="+36 ...">
-                </div>
-                <div class="form-group">
-                    <label>Hány éve áll fenn a panasz?</label>
-                    <select required>
-                        <option value="" disabled selected>Válassz...</option>
-                        <option>Kevesebb mint 1 éve</option>
-                        <option>1–3 éve</option>
-                        <option>3–5 éve</option>
-                        <option>5 évnél régebben</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Mi a fő panaszod?</label>
-                    <select required>
-                        <option value="" disabled selected>Válassz...</option>
-                        <option>Derékfájás</option>
-                        <option>Nyak- és vállfájás / becsípődés</option>
-                        <option>Gerincferdülés / tartásproblémák</option>
-                        <option>Térdfájás</option>
-                        <option>Váll mobilitás / instabilitás</option>
-                        <option>Általános ülőmunkás panaszok</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Milyen kezeléseket próbáltál eddig?</label>
-                    <input type="text" placeholder="pl. gyógytorna, masszázs, csontkovács...">
-                </div>
-                <div class="form-group">
-                    <label>Mi akadályoz most leginkább a hétköznapokban?</label>
-                    <textarea placeholder="Pl. nem tudok hosszan állni, reggel merev vagyok, edzés után fáj..."></textarea>
-                </div>
-                <button type="submit" class="form-submit">Konzultáció Foglalása</button>
-                <p class="form-note">Ingyenes. Nincs elköteleződés. 24 órán belül válaszolok.</p>
-            </form>
-            <div class="form-success" id="form-success">
-                <div class="success-icon"><i class="fa-solid fa-check"></i></div>
-                <h3>Megkaptam!</h3>
-                <p>24 órán belül kereslek az egyeztetéshez. Addig nézd meg az e-mailjeidet.</p>
-            </div>
+        <div class="form-card" style="padding:0; overflow:hidden;">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/testkozeppont/konzultacio?hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
         </div>
     </div>
 </section>
@@ -1188,13 +1137,6 @@
             document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
             if (!isOpen) item.classList.add('open');
         });
-    });
-
-    // Form submit
-    document.getElementById('signup-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        this.style.display = 'none';
-        document.getElementById('form-success').classList.add('show');
     });
 
     // Smooth scroll
