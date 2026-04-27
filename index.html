@@ -632,6 +632,8 @@
 
         /* RESPONSIVE */
         html, body { overflow-x: hidden; }
+        .mobile-br { display: none; }
+        @media (max-width: 640px) { .mobile-br { display: block; } }
 
         @media (max-width: 1024px) {
             .method-row { gap: 3rem; }
@@ -654,13 +656,16 @@
             .nav-inner { padding: 1rem 1.25rem; }
             .nav-links { gap: 1rem; }
             .nav-links a:not(.nav-cta) { display: none; }
+            .nav-cta { display: none; }
 
             /* HERO */
-            .hero { padding: 5rem 1.25rem 3rem; min-height: auto; }
+            .hero { padding: 6.5rem 1.25rem 3rem; min-height: auto; }
             .hero h1 { font-size: 2.2rem; }
             .hero-card-p1, .hero-card-p2, .hero-card-p3 { font-size: 0.95rem; }
-            .hero-stats { gap: 1.5rem; flex-wrap: wrap; justify-content: flex-start; }
-            .hero-actions { flex-direction: column; align-items: stretch; }
+            .hero-stats { gap: 1.25rem; flex-wrap: nowrap; justify-content: flex-start; }
+            .stat-num { font-size: 1.4rem; }
+            .stat-label { font-size: 0.65rem; }
+            .hero-actions { flex-direction: column; align-items: stretch; margin-top: 2.5rem; }
             .hero-actions a { text-align: center; justify-content: center; }
 
             /* SECTIONS */
@@ -671,17 +676,41 @@
             .section-heading { font-size: 1.75rem; }
             .why-core { font-size: 1.5rem; }
 
+            /* PAIN ACCORDION */
+            .pain-grid { grid-template-columns: 1fr; grid-auto-rows: auto; gap: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+            .pain-card { border-radius: 0; border: none; border-bottom: 1px solid var(--border); border-top: none; padding: 1.1rem 1.25rem; cursor: pointer; }
+            .pain-card:last-child { border-bottom: none; }
+            .pain-card h3 { display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; margin-bottom: 0; }
+            .pain-card h3::after { content: '+'; font-size: 1.1rem; font-weight: 300; color: var(--accent-light); flex-shrink: 0; margin-left: 0.75rem; }
+            .pain-card.active h3::after { content: '−'; }
+            .pain-card p { display: none; margin-top: 0.75rem; margin-bottom: 0; }
+            .pain-card.active p { display: block; }
+
             /* STORY */
-            .story-avatar { width: 100%; height: 240px; }
-            .story-left { flex-direction: row; align-items: center; gap: 1.25rem; }
-            .story-avatar { width: 80px; height: 80px; flex-shrink: 0; }
+            .story-left { display: flex; flex-direction: row; align-items: flex-end; gap: 1rem; }
+            .story-avatar { width: 48%; aspect-ratio: 2/3; height: auto; flex-shrink: 0; border-radius: 8px; }
+            .story-left-info { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
+            .story-info-spacer { flex: 1; }
+            .story-left-info p { line-height: 1.3 !important; }
+            .story-info-name { font-size: 0.9rem; }
+            .story-info-title { font-size: 0.75rem; }
+            .story-info-bold { font-size: 0.85rem; }
+            .story-inner { gap: 1.5rem; }
+            .story-right { margin-top: 0; }
 
             /* METHOD */
-            .method-row { grid-template-columns: 1fr; gap: 1.5rem; }
-            .method-row:nth-child(even) .method-row-image { order: 0; }
+            .method-row { grid-template-columns: 45% 1fr; gap: 1rem; }
+            .method-row:nth-child(even) { grid-template-columns: 1fr 45%; }
+            .method-row:nth-child(even) .method-row-image { order: 2; }
             .method-row:nth-child(even) .method-row-content { order: 1; }
-            .method-row-image { aspect-ratio: 3/2; }
-            .method-rows { gap: 3rem; }
+            .method-row-image { aspect-ratio: 2/3; }
+            .method-rows { gap: 2rem; }
+            .method-row h3 { font-size: 1rem; }
+            .method-row p, .method-list li { font-size: 0.85rem; }
+            .method-row-num { width: 34px; height: 34px; font-size: 0.65rem; margin-bottom: 0.75rem; }
+
+            /* CALENDLY */
+            .calendly-inline-widget { height: 520px !important; }
 
             /* TESTIMONIALS */
             .testimonials-grid { grid-template-columns: 1fr; }
@@ -689,6 +718,36 @@
             /* FOOTER */
             .about-strip { flex-direction: column; gap: 1.5rem; text-align: center; padding: 3rem 1.25rem; }
             .form-card { padding: 2rem 1.5rem; }
+        }
+
+        /* HAMBURGER */
+        .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.25s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            background: rgba(248, 245, 240, 0.98); backdrop-filter: blur(20px);
+            position: fixed; left: 0; right: 0;
+            z-index: 99; border-bottom: 1px solid var(--border);
+        }
+        .mobile-menu.open { display: block; }
+        .mobile-menu a {
+            display: block !important;
+            height: 64px !important; line-height: 64px !important;
+            padding: 0 1.5rem !important; margin: 0 !important;
+            box-sizing: border-box !important;
+            font-size: 1rem !important; font-weight: 500 !important;
+            color: var(--text) !important; text-decoration: none !important;
+            border-bottom: 1px solid var(--border) !important;
+            white-space: nowrap; overflow: hidden;
+        }
+        .mobile-menu a:last-child { border-bottom: none !important; }
+
+        @media (max-width: 640px) {
+            .hamburger { display: flex; }
         }
     </style>
 </head>
@@ -703,8 +762,16 @@
             <a href="#csomagok">Csomagok</a>
             <a href="#konzultacio" class="nav-cta">Ingyenes Konzultáció</a>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Menü">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+    <a href="#modszer">A Módszer</a>
+    <a href="#csomagok">Csomagok</a>
+    <a href="#konzultacio">Ingyenes Konzultáció</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -880,25 +947,31 @@
 <!-- LEVI STORY -->
 <div class="story-section">
     <div class="story-inner">
-        <div class="story-left">
+        <div class="story-left" style="display:flex; flex-direction:row; align-items:stretch; gap:1rem;">
             <div class="story-avatar">
                 <img src="levi.JPG" alt="Levi">
             </div>
-            <h3>Levi</h3>
-            <p>Mozgásterapeuta, Budapest<br>TestKözéppont Módszer</p>
+            <div style="flex:1; display:flex; flex-direction:column; gap:0.2rem;">
+                <div style="flex:1;"></div>
+                <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">Farkas Levente</p>
+                <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">mozgásterapeuta</p>
+                <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">Budapest</p>
+                <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">TestKözéppont módszer</p>
+                <div style="height:1.1rem;"></div>
+            </div>
         </div>
         <div class="story-right">
             <p>Egész életemben a testemnek éltem.</p>
             <p>Mozgás volt az identitásom. Ez adott energiát, tiszta fejet, egyensúlyt. Ehhez nem volt szükségem senki jóváhagyására.</p>
-            <p>Mégis ott volt mindig a fájdalom. <strong>2-3 hetente becsípődött a nyakam</strong> — olyan erősen, hogy napokra kiestem. Szakembertől szakemberig jártam. Csináltam mindent, amit mondtak. Hittem nekik.</p>
-            <p>Évekkel később jöttem rá, hogy amit csináltam, az súlyosbította a problémát.</p>
+            <p>Mégis ott volt mindig a fájdalom. <strong>2-3 hetente becsípődött a nyakam</strong> — olyan erősen, hogy napokra kiestem. Szakembertől szakemberig jártam. Csináltam mindent, amit mondtak.<br class="mobile-br"> Hittem nekik.</p>
+            <p>Évekkel később jöttem rá, hogy amit csináltam,<br class="mobile-br"> az súlyosbította a problémát.</p>
             <div class="story-highlight">
                 <p>"Hiába voltam szálkás, hiába tudtam bármit megcsinálni a testemmel — ami ez alatt volt, az végtelenül gyenge és diszfunkcionális volt. A felszín rendben volt. A rendszer összeomlott."</p>
             </div>
-            <p>2 éve találtam meg a mentoromat. Az első embert, aki nem ott kereste a hibát, ahol fájt. Megtanultam, hogy a test statikai rendszer — és ha az alap elmozdul, az egész szerkezet kompenzál. Évekig. Csendben. Aztán egyszer csak nem bírja tovább.</p>
-            <p>Pár hónap alatt megszüntettem a fájdalmat. <strong>Azóta egyszer sem csípődött be a nyakam.</strong></p>
-            <p>Ezeket a gyakorlatokat ma is minden nap végzem. Nem kötelességből — mert ez az, ami a testemet működőképesen tartja. Amit átadok másoknak, azt én magam is élem.</p>
-            <p>Ma már tudom: nem volt semmi baj velem. Csak senki sem vizsgálta a teljes képet.</p>
+            <p>2 éve találtam meg a mentoromat. Az első embert, aki nem ott kereste a hibát, ahol fájt. Megtanultam, hogy a test statikai rendszer — és ha az alap elmozdul, az egész szerkezet kompenzál. Évekig. Csendben.<br class="mobile-br"> Aztán egyszer csak nem bírja tovább.</p>
+            <p>Pár hónap alatt megszüntettem a fájdalmat.<br class="mobile-br"> <strong>Azóta egyszer sem csípődött be a nyakam.</strong></p>
+            <p>Ezeket a gyakorlatokat ma is minden nap végzem. Nem kötelességből, hanem mert ez az, ami a testemet működőképesen tartja. Amit átadok másoknak, azt én magam is élem.</p>
+            <p>Ma már tudom: nem volt semmi baj velem.<br class="mobile-br"> Csak senki sem vizsgálta a teljes képet.</p>
             <p><strong>Ezt csinálom most másoknak.</strong></p>
         </div>
     </div>
@@ -909,7 +982,7 @@
     <div class="section-header">
         <div class="section-eyebrow">Valódi Eredmények</div>
         <h2 class="section-heading">Olyanok, mint te — fájdalommentesen</h2>
-        <p class="section-sub">Nem általánosságok.<br>Valódi emberek, valódi problémákkal, valódi változással.</p>
+        <p class="section-sub">Nem általánosságok.<br>Valódi emberek, valódi problémákkal,<br class="mobile-br"> valódi változással.</p>
     </div>
     <div class="testimonials-grid">
 
@@ -1164,6 +1237,31 @@
 </div>
 
 <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function() {
+        const navHeight = document.querySelector('nav').offsetHeight;
+        mobileMenu.style.top = navHeight + 'px';
+        this.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+        });
+    });
+
+    // Pain accordion (mobile only)
+    document.querySelectorAll('.pain-card').forEach(card => {
+        card.addEventListener('click', function() {
+            if (window.innerWidth <= 640) {
+                this.classList.toggle('active');
+            }
+        });
+    });
+
     // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(q => {
         q.addEventListener('click', () => {
