@@ -9,6 +9,13 @@
     <meta property="og:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente mozgásterapeuta medence-centrikus módszere, Budapesten.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://testkozeppont.hu">
+    <meta property="og:image" content="https://testkozeppont.hu/levi.JPG">
+    <meta property="og:locale" content="hu_HU">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TestKözéppont — 90 napos derékfájás megoldás | Budapest">
+    <meta name="twitter:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente mozgásterapeuta medence-centrikus módszere, Budapesten.">
+    <meta name="twitter:image" content="https://testkozeppont.hu/levi.JPG">
+    <link rel="canonical" href="https://testkozeppont.hu">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -185,13 +192,12 @@
         .hero-card-divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
         .hero-card-p2 { font-size: 1.1rem; line-height: 1.8; color: var(--text); font-weight: 300; margin-bottom: 1.5rem; }
         .hero-card-p2 em {
-            font-family: 'Playfair Display', Georgia, serif;
             font-style: italic; font-size: 1.1rem;
             color: var(--text); font-weight: 400;
         }
         .hero-card-p3 {
             font-size: 1.1rem; line-height: 1.8;
-            color: var(--text); font-weight: 400;
+            color: var(--text); font-weight: 300;
             padding-top: 1.25rem;
             border-top: 1px solid var(--border);
         }
@@ -200,6 +206,12 @@
             font-size: 2.2rem; font-weight: 700; color: var(--accent-light);
         }
         .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+        /* HERO RIGHT COLUMNS */
+        .hero-right-photo { display: none; }
+        .hero-right-texts { display: flex; flex-direction: column; }
+        .hero-right-footer { border-top: 1px solid var(--border); padding-top: 1.25rem; }
+        .hero-right-footer .hero-card-p3 { border-top: none; padding-top: 0; margin-bottom: 0; }
 
         /* PAIN GRID */
         .pain-grid {
@@ -225,11 +237,11 @@
             color: var(--text); text-align: center;
             margin: 2.5rem 0 3.5rem;
         }
-        .why-body { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2.5rem; }
+        .why-body { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1rem; }
         .why-body p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.95; font-weight: 300; }
         .why-callout {
             border-left: 3px solid var(--accent-light);
-            padding: 1.5rem 2rem; margin: 1rem 0 1rem;
+            padding: 1.5rem 2rem; margin: 0 0 1rem;
         }
         .why-callout p { font-size: 1.1rem; color: var(--text); line-height: 1.9; font-weight: 400; }
         .why-callout strong { color: var(--accent-light); }
@@ -658,15 +670,28 @@
             .nav-links a:not(.nav-cta) { display: none; }
             .nav-cta { display: none; }
 
-            /* HERO */
-            .hero { padding: 6.5rem 1.25rem 3rem; min-height: auto; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero-card-p1, .hero-card-p2, .hero-card-p3 { font-size: 0.95rem; }
-            .hero-stats { gap: 1.25rem; flex-wrap: nowrap; justify-content: flex-start; }
-            .stat-num { font-size: 1.4rem; }
-            .stat-label { font-size: 0.65rem; }
-            .hero-actions { flex-direction: column; align-items: stretch; margin-top: 2.5rem; }
+            /* HERO — teljes képernyő, letisztult */
+            .hero { padding: 8rem 1.25rem 2.5rem; min-height: 100svh; align-items: flex-start; }
+            .hero-inner { gap: 3rem; }
+            .hero-left { display: flex; flex-direction: column; align-items: flex-start; text-align: left; justify-content: flex-start; width: 100%; }
+            .hero h1 { font-size: 3.2rem; line-height: 1.2; margin-bottom: 1.75rem; letter-spacing: -0.5px; }
+            .hero-tagline { font-size: 1.5rem !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+            .hero-actions { margin-top: 4rem; flex-direction: column; align-items: stretch; width: 100%; gap: 0; }
             .hero-actions a { text-align: center; justify-content: center; }
+            .hero-actions .btn-secondary { display: none; }
+
+            /* HERO RIGHT — fotó + szöveg 2 oszlop */
+            .hero-right { display: grid; grid-template-columns: 42% 1fr; grid-template-rows: auto auto; column-gap: 1.5rem; row-gap: 1rem; align-items: stretch; }
+            .hero-right-photo { display: block; grid-column: 1; grid-row: 1; aspect-ratio: 2/3; border-radius: 8px; overflow: hidden; }
+            .hero-right-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+            .hero-right-texts { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+            .hero-right-footer { grid-column: 1 / -1; grid-row: 2; padding-top: 0.75rem; }
+            .hero-right .hero-card-p1 { font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; }
+            .hero-right-footer .hero-card-p3 { font-size: 0.95rem; line-height: 1.8; border-top: none; padding-top: 0; }
+            .hero-right .hero-card-p1 br { display: none; }
+            .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+            .hero-stats .stat-num { font-size: 1.5rem; }
+            .hero-stats .stat-label { font-size: 0.7rem; line-height: 1.45; margin-top: 0.2rem; }
 
             /* SECTIONS */
             .section { padding: 4rem 1.25rem; }
@@ -706,17 +731,33 @@
             .method-row-image { aspect-ratio: 2/3; }
             .method-rows { gap: 2rem; }
             .method-row h3 { font-size: 1rem; }
-            .method-row p, .method-list li { font-size: 0.85rem; }
+            .method-row p, .method-list li { font-size: 0.88rem; }
             .method-row-num { width: 34px; height: 34px; font-size: 0.65rem; margin-bottom: 0.75rem; }
 
             /* CALENDLY */
-            .calendly-inline-widget { height: 520px !important; }
+            .calendly-inline-widget { height: 630px !important; }
 
             /* TESTIMONIALS */
             .testimonials-grid { grid-template-columns: 1fr; }
 
+            /* SECTION HEADER */
+            .section-header { margin-bottom: 2.5rem; }
+
+            /* PRICING */
+            .pricing-card { padding: 2rem 1.5rem; }
+            .pricing-price { font-size: 1.9rem; }
+
+            .testimonial-card { padding: 2rem 1.5rem; }
+
+            /* FAQ */
+            .faq-question { padding: 1.25rem 0; }
+
+            /* WHY CALLOUT */
+            .why-callout { padding: 1.25rem 1.5rem; }
+
             /* FOOTER */
             .about-strip { flex-direction: column; gap: 1.5rem; text-align: center; padding: 3rem 1.25rem; }
+            .footer-links { flex-wrap: wrap; gap: 0.5rem; }
             .form-card { padding: 2rem 1.5rem; }
         }
 
@@ -779,7 +820,7 @@
         <div class="hero-left">
             <div>
                 <h1>Fáj a hátad.<br><em>Próbáltál már mindent.</em></h1>
-                <p style="font-family:'Playfair Display',Georgia,serif; font-size:1.7rem; font-weight:700; color:var(--text); margin-bottom:0;">Ezzel nem vagy egyedül.</p>
+                <p class="hero-tagline" style="font-family:'Playfair Display',Georgia,serif; font-size:1.7rem; font-weight:700; color:var(--text); margin-bottom:0;">Ezzel nem vagy egyedül.</p>
             </div>
             <div class="hero-actions">
                 <a href="#konzultacio" class="btn-primary">
@@ -790,30 +831,33 @@
             </div>
         </div>
         <div class="hero-right">
-            <div>
+            <div class="hero-right-photo">
+                <img src="levi.JPG" alt="Levi">
+            </div>
+            <div class="hero-right-texts">
                 <p class="hero-card-p1">
                     Voltál már gyógytornásznál. Masszőrnél.<br>Talán csontkovácsnál is.<br>
                     Mindenki segített egy kicsit — aztán visszajött a fájdalom.<br>
                     Mindig visszajön.
                 </p>
-                <p class="hero-card-p2">
-                    Nem azért, mert rossz kezelést kaptál.<br>
-                    <em>Hanem mert mindenki azt kezelte, ami fájt — nem azt, ami miatt fájt.</em>
-                </p>
-                <p class="hero-card-p3">Nem az a kérdés, hol fáj — hanem hogy honnan ered.</p>
+                <p class="hero-card-p1">Nem azért, mert rossz kezelést kaptál.</p>
+                <p class="hero-card-p1">Hanem mert mindenki azt kezelte, ami fájt — nem azt, ami miatt fájt.</p>
             </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-num">90</div>
-                    <div class="stat-label">napos személyre szabott program</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-num">1:1</div>
-                    <div class="stat-label">csak személyes edzés, nincs csoport</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-num">Bp.</div>
-                    <div class="stat-label">Budapest, rugalmas időpontok</div>
+            <div class="hero-right-footer">
+                <p class="hero-card-p3">Nem az a kérdés, hol fáj — hanem hogy honnan ered.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-num">90</div>
+                        <div class="stat-label">napos személyre szabott program</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">1:1</div>
+                        <div class="stat-label">személyes edzés,<br>nincs csoport</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">Bp.</div>
+                        <div class="stat-label">Budapest, rugalmas időpontok</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -951,13 +995,11 @@
             <div class="story-avatar">
                 <img src="levi.JPG" alt="Levi">
             </div>
-            <div style="flex:1; display:flex; flex-direction:column; gap:0.2rem;">
-                <div style="flex:1;"></div>
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:0.3rem;">
                 <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">Farkas Levente</p>
                 <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">mozgásterapeuta</p>
                 <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">Budapest</p>
                 <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">TestKözéppont módszer</p>
-                <div style="height:1.1rem;"></div>
             </div>
         </div>
         <div class="story-right">
@@ -1019,7 +1061,7 @@
                 <div class="testimonial-avatar">KAR</div>
                 <div>
                     <div class="testimonial-name">K.A.R.</div>
-                    <div class="testimonial-role">Gyógymassőr</div>
+                    <div class="testimonial-role">Gyógymasszőr</div>
                 </div>
             </div>
         </div>
@@ -1210,7 +1252,7 @@
     </div>
     <div class="about-text">
         <h3>Levi — TestKözéppont, Budapest</h3>
-        <p>Mozgásterapeuta, aki a TestKözéppont Módszerrel segíti az irodai dolgozókat tartósan megszabadítani a krónikus fájdalomtól. Nem tüneteket kezel, rendszert állít helyre.</p>
+        <p>Mozgásterapeuta, aki a TestKözéppont Módszerrel segíti az ülőmunkát végzőket tartósan megszabadítani a krónikus fájdalomtól. Nem tüneteket kezel, rendszert állít helyre.</p>
     </div>
 </div>
 <footer class="footer-bottom">
