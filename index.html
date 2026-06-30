@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TestKözéppont — 90 napos derékfájás megoldás | Budapest</title>
-    <meta name="description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente mozgásterapeuta medence-centrikus módszere, Budapesten.">
+    <meta name="description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente, a TestKözéppont módszer megalkotójának medence-centrikus programja, Budapesten.">
     <meta property="og:title" content="TestKözéppont — 90 napos derékfájás megoldás | Budapest">
-    <meta property="og:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente mozgásterapeuta medence-centrikus módszere, Budapesten.">
+    <meta property="og:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente, a TestKözéppont módszer megalkotójának medence-centrikus programja, Budapesten.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://testkozeppont.hu">
     <meta property="og:image" content="https://testkozeppont.hu/og-image.png">
     <meta property="og:locale" content="hu_HU">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="TestKözéppont — 90 napos derékfájás megoldás | Budapest">
-    <meta name="twitter:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente mozgásterapeuta medence-centrikus módszere, Budapesten.">
+    <meta name="twitter:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente, a TestKözéppont módszer megalkotójának medence-centrikus programja, Budapesten.">
     <meta name="twitter:image" content="https://testkozeppont.hu/og-image.png">
     <link rel="canonical" href="https://testkozeppont.hu">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -790,6 +790,90 @@
         @media (max-width: 640px) {
             .hamburger { display: flex; }
         }
+
+        /* VIDEO TESTIMONIALS */
+        .video-section-header { text-align: center; margin-bottom: 3rem; }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.25rem;
+        }
+        .video-card {
+            cursor: pointer;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 9/16;
+            background: var(--surface);
+        }
+        .video-thumb { width: 100%; height: 100%; position: relative; }
+        .video-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.4s ease;
+        }
+        .video-card:hover .video-thumb img { transform: scale(1.04); }
+        .video-play-btn {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 52px; height: 52px;
+            background: rgba(46, 35, 25, 0.82);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--bg);
+            font-size: 1rem;
+            padding-left: 3px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .video-card:hover .video-play-btn {
+            background: var(--accent-light);
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        /* LIGHTBOX */
+        .video-lightbox {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.94);
+            z-index: 999;
+            align-items: center; justify-content: center;
+        }
+        .video-lightbox.active { display: flex; }
+        .video-lightbox-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            max-width: 90vw;
+        }
+        .video-lightbox-inner video {
+            height: 90vh;
+            width: auto;
+            max-width: 90vw;
+            border-radius: 4px;
+            background: #000;
+            display: block;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -2.75rem; right: 0;
+            background: none; border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.6rem; cursor: pointer;
+            line-height: 1; padding: 0.25rem;
+            transition: color 0.15s;
+        }
+        .lightbox-close:hover { color: #fff; }
+
+        @media (max-width: 1024px) {
+            .video-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+        }
+        @media (max-width: 600px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .video-lightbox-inner video { height: 80vh; max-width: 95vw; }
+        }
     </style>
 </head>
 <body>
@@ -997,7 +1081,7 @@
             </div>
             <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:0.3rem;">
                 <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">Farkas Levente</p>
-                <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">mozgásterapeuta</p>
+                <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">a TestKözéppont módszer megalkotója</p>
                 <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">Budapest</p>
                 <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">TestKözéppont módszer</p>
             </div>
@@ -1106,6 +1190,61 @@
 
     </div>
 </section>
+
+<!-- VIDEO TESTIMONIALS -->
+<section style="background: var(--bg);" id="video-visszajelzesek">
+    <div class="section" style="padding-top: 5rem; padding-bottom: 5rem;">
+        <div class="video-section-header">
+            <div class="section-eyebrow" style="font-size: 1.4rem;">Videós visszajelzések</div>
+        </div>
+        <div class="video-grid">
+            <div class="video-card" onclick="openVideo('video/adi_allapotfelmeres.mp4')">
+                <div class="video-thumb">
+                    <img src="video/adi_allapotfelmeres.png" alt="">
+                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+            </div>
+            <div class="video-card" onclick="openVideo('video/allapotfelmeres.mp4')">
+                <div class="video-thumb">
+                    <img src="video/allapotfelmeres.png" alt="">
+                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+            </div>
+            <div class="video-card" onclick="openVideo('video/nehezmegnyilni.mp4')">
+                <div class="video-thumb">
+                    <img src="video/nehezmegnyilni.png" alt="">
+                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+            </div>
+            <div class="video-card" onclick="openVideo('video/gorcsok.mp4')">
+                <div class="video-thumb">
+                    <img src="video/gorcsok.png" alt="">
+                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+            </div>
+            <div class="video-card" onclick="openVideo('video/csontkovacs.mp4')">
+                <div class="video-thumb">
+                    <img src="video/csontkovacs.png" alt="">
+                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+            </div>
+            <div class="video-card" onclick="openVideo('video/alegfontosabb.mp4')">
+                <div class="video-thumb">
+                    <img src="video/alegfontosabb.png" alt="">
+                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="video-lightbox" class="video-lightbox" onclick="closeLightbox(event)">
+    <div class="video-lightbox-inner">
+        <button class="lightbox-close" onclick="closeVideo()">✕</button>
+        <video id="lightbox-video" controls playsinline></video>
+    </div>
+</div>
 
 <!-- PACKAGES -->
 <section class="section" id="csomagok">
@@ -1240,6 +1379,15 @@
                 <p>Kb. 90-120 percet vesz igénybe. Először részletesen megbeszéljük a panaszaidat és az előzményeket. Ezután következik a biomechanikai felmérés — megnézzük a medence elmozdulásait, az aszimmetriát, a mozgásmintákat. Megérted, mi a gond és miért. Majd betanítjuk az első 4 hétre szóló gyakorlatokat, és felvesszük a videóanyagot.</p>
             </div>
         </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Miért bízz meg bennem?</h3>
+                <i class="fa-solid fa-plus faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Két évig minden második héten becsípődött a nyakam — gyógytornász, masszőr, csontkovács után is. Azóta egyszer sem fordult elő. Nem papírom van rá, hanem tapasztalatom. Az ügyfeleim között van gyógymasszőr, fogorvos, vállalkozó.</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1252,7 +1400,7 @@
     </div>
     <div class="about-text">
         <h3>Levi — TestKözéppont, Budapest</h3>
-        <p>Mozgásterapeuta, aki a TestKözéppont Módszerrel segíti az ülőmunkát végzőket tartósan megszabadítani a krónikus fájdalomtól. Nem tüneteket kezel, rendszert állít helyre.</p>
+        <p>A TestKözéppont módszer megalkotója — segíti az ülőmunkát végzőket tartósan megszabadítani a krónikus fájdalomtól. Nem tüneteket kezel, rendszert állít helyre.</p>
     </div>
 </div>
 <footer class="footer-bottom">
@@ -1279,6 +1427,30 @@
 </div>
 
 <script>
+    // Video lightbox
+    function openVideo(src) {
+        const lightbox = document.getElementById('video-lightbox');
+        const video = document.getElementById('lightbox-video');
+        video.src = src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        video.play().catch(() => {});
+    }
+    function closeVideo() {
+        const lightbox = document.getElementById('video-lightbox');
+        const video = document.getElementById('lightbox-video');
+        video.pause();
+        video.src = '';
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    function closeLightbox(e) {
+        if (e.target === document.getElementById('video-lightbox')) closeVideo();
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeVideo();
+    });
+
     // Hamburger menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
