@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>TestKözéppont — ELLE Yoga Weekend — Kivetítő</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:     #F8F5F0;
+    --surface:#EDE5D8;
+    --border: #E2D8CC;
+    --text:   #1C1410;
+    --muted:  #8C7B6E;
+    --accent: #2E2319;
+    --gold:   #C4956A;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    display: grid;
+    grid-template-columns: 1fr 480px;
+    overflow: hidden;
+  }
+
+  .left {
+    padding: 4rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.75rem;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .logo span { color: var(--gold); }
+
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    max-width: 620px;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+
+  .sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  .right {
+    background: var(--accent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .qr-box {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  }
+  .qr-box img {
+    width: 300px;
+    height: 300px;
+    display: block;
+  }
+
+  .scan-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bg);
+    text-align: center;
+  }
+  .scan-sub {
+    font-size: 0.9rem;
+    color: rgba(248,245,240,0.6);
+    font-weight: 300;
+    text-align: center;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="left">
+    <div class="logo">TestKözép<span>pont</span></div>
+    <div class="eyebrow">ELLE Yoga Weekend · 2026.10.04</div>
+    <h1>Vidd haza a mai <em>gyakorlatokat</em></h1>
+    <p class="sub">Scanneld be a kódot, és küldöm a mozgássort, amit ma megtanultunk — hogy otthon is folytathasd.</p>
+  </div>
+  <div class="right">
+    <div class="qr-box">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAJYAQMAAACEqAqfAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACIElEQVR4nO3ZwW6sMAwF0Eh8GL/OhyHxpFdIHE+ma6MeL0YNtk92vWXamlJ/sfYr1dkbZ+webYsjyzUWi8ViVbae5SicvZGE6aa0xmKxWKzq1r6YvmeuOzaOfrzCdfMai8Visd5lrY43OFQWi8Vivd5qfeWu7e42FovFYr3aGjVmjiB81mqNxWKxWKWtVGcHf//4XGOxWCxWYWtd2z1xhDx5pvdf9lgsFotV1YohMGXC+N4/+s9I/NdAn2OxWCxWXav1c/p7f1/QH5XzhMVisVilrfQwvhxs0TratPH51sBisVisqtZ+TRVXnm5MlsEsNlgsFotV3jrj8tWfpRRJARIvYbFYLFZtq/X2fyb9NGqfE2NcN7osFovFKmzde1/Aq8dG2htrOYdYLBaLVde6Qrvdy8lP6t4/RviwWCwWq7DVwsoKHDX54xiyg8VisVh1rfH7//phpnZKlisf5xRhsVgsVnErraSIuC8Ztc3qczGLxWKxqlur2mc67k1WeKdgsVgsVnnrOY/lYwavn0aLxyt0TxaLxWKVtla1ypMkfH3GYrFYrJpWPD8PY2JMydLmt4Y4km0Wi8ViVbOmnNjDcnp/aB/LY/jJDhaLxWKVtsbM3j9iYrR4vIfHxnMTi8Visd5ptV8awx8qi8VisV5rjeljKVxTl8VisVjFrVGr7DjCXP8eKHQ3FovFYr3BSvU1SlKKzK8JLBaLxSpuKfX36h8e9UiTVASh/AAAAABJRU5ErkJggg==">
+    </div>
+    <div class="scan-label">Scanneld be a telefonoddal</div>
+    <div class="scan-sub">Vagy keress fel személyesen az ebédszünetben<br>— ott is szívesen segítek.</div>
+  </div>
+</div>
+
+</body>
+</html>
