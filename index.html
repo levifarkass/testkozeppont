@@ -316,13 +316,12 @@
         }
         .story-left { position: sticky; top: 8rem; }
         .story-avatar {
-            width: 280px; height: 280px; border-radius: 12px;
+            width: 320px; border-radius: 12px;
             background: var(--border); border: 2px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
             overflow: hidden; font-size: 2rem; color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
-        .story-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+        .story-avatar img { width: 100%; height: auto; display: block; }
         .story-left h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
         .story-left p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
         .story-right p {
@@ -1063,8 +1062,8 @@
                 <div class="method-row-num">04</div>
                 <h3>Hogyan tartod meg</h3>
                 <p>Minden fázishoz videós anyag készül rólad — otthon, önállóan, bármikor elvégezhető.</p>
-                <p>Ahogy ismétled a mozdulatokat, újraírod a régi mozgásmintákat.</p>
-                <p>Ezáltal sokkal tudatosabban fogsz kivitelezni minden mozdulatot.</p>
+                <p style="margin-top:1.25rem;">Ahogy ismétled a mozdulatokat, <strong>újraírod</strong> a régi <strong>mozgásmintákat</strong>.</p>
+                <p><strong>Ezáltal sokkal tudatosabban fogsz kivitelezni minden mozdulatot.</strong></p>
             </div>
         </div>
     </div>
@@ -1075,15 +1074,15 @@
 <!-- LEVI STORY -->
 <div class="story-section">
     <div class="story-inner">
-        <div class="story-left" style="display:flex; flex-direction:row; align-items:stretch; gap:1rem;">
-            <div class="story-avatar">
-                <img src="profilkep.JPG" alt="Levi">
+        <div class="story-left" style="display:flex; flex-direction:column; align-items:center; gap:1rem;">
+            <div class="story-avatar" style="width:100%; height:auto; margin-bottom:0;">
+                <img src="specialist.JPG" alt="Levi">
             </div>
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:0.3rem;">
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:0.3rem;">
                 <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">Farkas Levente</p>
-                <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">a TestKözéppont módszer megalkotója</p>
-                <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">Budapest</p>
+                <div style="width:24px; height:1px; background:rgba(248,245,240,0.3); margin:0.15rem 0;"></div>
                 <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">TestKözéppont módszer</p>
+                <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">Budapest</p>
             </div>
         </div>
         <div class="story-right">
@@ -1098,7 +1097,7 @@
             <p>Pár hónap alatt megszüntettem a fájdalmat.<br class="mobile-br"> <strong>Azóta egyszer sem csípődött be a nyakam.</strong></p>
             <p>Ezeket a gyakorlatokat ma is minden nap végzem. Nem kötelességből, hanem mert ez az, ami a testemet működőképesen tartja. Amit átadok másoknak, azt én magam is élem.</p>
             <p>Ma már tudom: nem volt semmi baj velem.<br class="mobile-br"> Csak senki sem vizsgálta a teljes képet.</p>
-            <p><strong>Ezt csinálom most másoknak.</strong></p>
+            <p><strong>Ebben segítek most másoknak.</strong></p>
         </div>
     </div>
 </div>
@@ -1198,37 +1197,37 @@
             <div class="section-eyebrow" style="font-size: 1.4rem;">Videós visszajelzések</div>
         </div>
         <div class="video-grid">
-            <div class="video-card" onclick="openVideo('video/adi_allapotfelmeres.mp4')">
+            <div class="video-card" onclick="openVideo('video/adi_allapotfelmeres_compressed.mp4')">
                 <div class="video-thumb">
                     <img src="video/adi_allapotfelmeres.png" alt="">
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                 </div>
             </div>
-            <div class="video-card" onclick="openVideo('video/allapotfelmeres.mp4')">
+            <div class="video-card" onclick="openVideo('video/allapotfelmeres_compressed.mp4')">
                 <div class="video-thumb">
                     <img src="video/allapotfelmeres.png" alt="">
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                 </div>
             </div>
-            <div class="video-card" onclick="openVideo('video/nehezmegnyilni.mp4')">
+            <div class="video-card" onclick="openVideo('video/nehezmegnyilni_compressed.mp4')">
                 <div class="video-thumb">
                     <img src="video/nehezmegnyilni.png" alt="">
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                 </div>
             </div>
-            <div class="video-card" onclick="openVideo('video/gorcsok.mp4')">
+            <div class="video-card" onclick="openVideo('video/gorcsok_compressed.mp4')">
                 <div class="video-thumb">
                     <img src="video/gorcsok.png" alt="">
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                 </div>
             </div>
-            <div class="video-card" onclick="openVideo('video/csontkovacs.mp4')">
+            <div class="video-card" onclick="openVideo('video/csontkovacs_compressed.mp4')">
                 <div class="video-thumb">
                     <img src="video/csontkovacs.png" alt="">
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                 </div>
             </div>
-            <div class="video-card" onclick="openVideo('video/alegfontosabb.mp4')">
+            <div class="video-card" onclick="openVideo('video/alegfontosabb_compressed.mp4')">
                 <div class="video-thumb">
                     <img src="video/alegfontosabb.png" alt="">
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
@@ -1251,7 +1250,7 @@
     <div class="section-header">
         <div class="section-eyebrow">A Programok</div>
         <h2 class="section-heading">Válaszd ki a hozzád illő utat</h2>
-        <p class="section-sub">Mindhárom csomag ugyanarra a módszerre épül.<br>A különbség az, mennyi személyes kísérést szeretnél a 90 nap alatt.</p>
+        <p class="section-sub">Mindhárom csomag ugyanarra a módszerre épül.<br>A különbség az, mennyi személyes kísérést szeretnél a 90 nap alatt.<br>Sajnos a tapasztalat az, hogy a legtöbben elvesztik a motivációjukat a korai tüneti enyhülések következtében — ezért a legtöbb esetben a heti kísérést (Guided Reset) ajánlom.</p>
     </div>
     <div class="pricing-grid">
 
@@ -1313,7 +1312,7 @@
         <div class="cta-left">
             <div class="section-eyebrow">Ingyenes Konzultáció</div>
             <h2 class="section-heading">Kezdjük el együtt.</h2>
-            <p class="section-sub">Egy ingyenes 20 perces konzultáció — megismerjük egymást, felmérjük a helyzeted, és kiderül, tud-e segíteni a módszer.</p>
+            <p class="section-sub">Egy ingyenes 30 perces konzultáció — megismerjük egymást, felmérjük a helyzeted, és kiderül, tud-e segíteni a módszer.</p>
             <div style="margin-bottom:2rem;">
                 <p style="font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--accent-light); margin-bottom:0.75rem;">Ez neked való, ha</p>
                 <div style="display:flex; flex-direction:column; gap:0.5rem;">
@@ -1322,6 +1321,7 @@
                     <div style="display:flex; gap:0.75rem; align-items:flex-start; font-size:0.85rem; color:rgba(248,245,240,0.7); font-weight:300; line-height:1.5;"><i class="fa-solid fa-check" style="color:var(--accent-light); font-size:0.7rem; margin-top:4px; flex-shrink:0;"></i>Az egészségedet befektetésnek látod, nem kiadásnak</div>
                 </div>
             </div>
+            <p style="font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--accent-light); margin-bottom:0.75rem;">Konzultáció részletei</p>
             <div class="cta-guarantees">
                 <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Teljesen ingyenes, elköteleződés nélkül</div>
                 <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Azonnali visszaigazolás emailben</div>
