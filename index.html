@@ -16,6 +16,19 @@
     <meta name="twitter:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente, a TestKözéppont módszer megalkotójának medence-centrikus programja, Budapesten.">
     <meta name="twitter:image" content="https://testkozeppont.hu/og-image.png">
     <link rel="canonical" href="https://testkozeppont.hu">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/logo-square.png" sizes="512x512">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "TestKözéppont",
+        "url": "https://testkozeppont.hu",
+        "logo": "https://testkozeppont.hu/logo-square.png"
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -196,8 +209,8 @@
             color: var(--text); font-weight: 400;
         }
         .hero-card-p3 {
-            font-size: 1.1rem; line-height: 1.8;
-            color: var(--text); font-weight: 300;
+            font-size: 1.35rem; line-height: 1.5;
+            color: var(--accent); font-weight: 700;
             padding-top: 1.25rem;
             border-top: 1px solid var(--border);
         }
@@ -334,13 +347,14 @@
         }
         .story-right strong { font-weight: 600; color: var(--text); }
         .story-highlight {
-            border-left: 3px solid var(--accent-light);
-            padding: 1.25rem 1.5rem; margin: 2rem 0;
-            background: rgba(196, 149, 106, 0.06);
+            border-left: 4px solid var(--accent-light);
+            padding: 1.5rem 1.75rem; margin: 2.25rem 0;
+            background: rgba(196, 149, 106, 0.09);
         }
         .story-highlight p {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.15rem !important; font-style: italic;
+            font-size: 1.35rem !important; font-weight: 600; font-style: italic;
+            line-height: 1.5 !important;
             margin-bottom: 0 !important; color: var(--text) !important;
         }
 
@@ -686,7 +700,7 @@
             .hero-right-texts { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; min-width: 0; }
             .hero-right-footer { grid-column: 1 / -1; grid-row: 2; padding-top: 0.75rem; }
             .hero-right .hero-card-p1 { font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; }
-            .hero-right-footer .hero-card-p3 { font-size: 0.95rem; line-height: 1.8; border-top: none; padding-top: 0; }
+            .hero-right-footer .hero-card-p3 { font-size: 1.15rem; line-height: 1.5; border-top: none; padding-top: 0; }
             .hero-right .hero-card-p1 br { display: none; }
             .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
             .hero-stats .stat-num { font-size: 1.5rem; }
@@ -923,8 +937,7 @@
                     Mindenki segített egy kicsit — aztán visszajött a fájdalom.<br>
                     Mindig visszajön.
                 </p>
-                <p class="hero-card-p1">Nem azért, mert rossz kezelést kaptál.</p>
-                <p class="hero-card-p1">Hanem mert mindenki azt kezelte, ami fájt — nem azt, ami miatt fájt.</p>
+                <p class="hero-card-p1">A fájdalom helyét kezelték. Nem az okát.</p>
             </div>
             <div class="hero-right-footer">
                 <p class="hero-card-p3">Nem az a kérdés, hol fáj — hanem hogy honnan ered.</p>
@@ -1086,18 +1099,20 @@
             </div>
         </div>
         <div class="story-right">
-            <p>Egész életemben a testemnek éltem.</p>
-            <p>Mozgás volt az identitásom. Ez adott energiát, tiszta fejet, egyensúlyt. Ehhez nem volt szükségem senki jóváhagyására.</p>
-            <p>Mégis ott volt mindig a fájdalom. <strong>2-3 hetente becsípődött a nyakam</strong> — olyan erősen, hogy napokra kiestem. Szakembertől szakemberig jártam. Csináltam mindent, amit mondtak.<br class="mobile-br"> Hittem nekik.</p>
+            <p>Mozgás az identitásom.</p>
+            <p>Ez ad energiát, tiszta fejet, egyensúlyt. Ehhez nincs szükségem senki jóváhagyására.</p>
+            <p>Mégis ott volt mindig a fájdalom. <strong>Nyolc éven át</strong> — 2-3 hetente becsípődött a nyakam, olyan erősen, hogy napokra kiestem. Szakembertől szakemberig jártam. Csináltam mindent, amit mondtak.<br class="mobile-br"> Hittem nekik.</p>
             <p>Évekkel később jöttem rá, hogy amit csináltam,<br class="mobile-br"> az súlyosbította a problémát.</p>
             <div class="story-highlight">
                 <p>"Hiába voltam szálkás, hiába tudtam bármit megcsinálni a testemmel — ami ez alatt volt, az végtelenül gyenge és diszfunkcionális volt. A felszín rendben volt. A rendszer összeomlott."</p>
             </div>
-            <p>2 éve találtam meg a mentoromat. Az első embert, aki nem ott kereste a hibát, ahol fájt. Megtanultam, hogy a test statikai rendszer —<br class="mobile-br"> és ha az alap elmozdul, az egész szerkezet kompenzál. Évekig. Csendben.<br class="mobile-br"> Aztán egyszer csak nem bírja tovább.</p>
-            <p>Pár hónap alatt megszüntettem a fájdalmat.<br class="mobile-br"> <strong>Azóta egyszer sem csípődött be a nyakam.</strong></p>
-            <p>Ezeket a gyakorlatokat ma is minden nap végzem. Nem kötelességből, hanem mert ez az, ami a testemet működőképesen tartja. Amit átadok másoknak, azt én magam is élem.</p>
-            <p>Ma már tudom: nem volt semmi baj velem.<br class="mobile-br"> Csak senki sem vizsgálta a teljes képet.</p>
-            <p><strong>Ebben segítek most másoknak.</strong></p>
+            <p>2 éve találtam meg a mentoromat. Az első embert, aki nem ott kereste a hibát, ahol fájt. Mellette értettem meg először, hogy nem a fájdalmat kell kezelni,<br class="mobile-br"> hanem azt kell megtalálni, ami miatt a test folyamatosan kompenzál.</p>
+            <p>Pár hónappal később a fájdalom eltűnt.<br class="mobile-br"> <strong>Azóta egyszer sem csípődött be a nyakam.</strong></p>
+            <p>A gyakorlatokat ma is minden nap elvégzem. Nem azért, mert muszáj, hanem mert tudom, hogy ezek tartják hosszú távon egyensúlyban a testemet. Amit másoknak tanítok, azt én magam is élem.</p>
+            <p>Ma már tudom, hogy nem volt velem semmi baj.<br class="mobile-br"> Egyszerűen senki sem vizsgálta a teljes képet.</p>
+            <p>Azért meséltem el ezt a történetet, mert sokáig azt hittem, egyedül vagyok ezzel. Ma már látom, hogy rengetegen élnek együtt visszatérő fájdalmakkal vagy feszülésekkel anélkül, hogy értenék, mi áll a háttérben.</p>
+            <p><strong>Ezért végzem ezt a munkát.</strong></p>
+            <p>Nem azért, hogy gyors megoldásokat adjak, hanem hogy segítsek megérteni a tested működését, megtalálni a probléma valódi okát, és olyan változást elérni, ami hosszú távon is megmarad.</p>
         </div>
     </div>
 </div>
@@ -1197,6 +1212,12 @@
             <div class="section-eyebrow" style="font-size: 1.4rem;">Videós visszajelzések</div>
         </div>
         <div class="video-grid">
+            <div class="video-card" onclick="openVideo('video/anna_allapotfelmeres_compressed.mp4')">
+                <div class="video-thumb">
+                    <img src="video/anna_allapotfelmeres.png" alt="">
+                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                </div>
+            </div>
             <div class="video-card" onclick="openVideo('video/adi_allapotfelmeres_compressed.mp4')">
                 <div class="video-thumb">
                     <img src="video/adi_allapotfelmeres.png" alt="">
@@ -1385,7 +1406,7 @@
                 <i class="fa-solid fa-plus faq-icon"></i>
             </div>
             <div class="faq-answer">
-                <p>Két évig minden második héten becsípődött a nyakam — gyógytornász, masszőr, csontkovács után is. Azóta egyszer sem fordult elő. Nem papírom van rá, hanem tapasztalatom. Az ügyfeleim között van gyógymasszőr, fogorvos, vállalkozó.</p>
+                <p>Nyolc éven át küzdöttem krónikus derékfájással és visszatérő nyaki becsípődésekkel. A megoldást nem egy újabb kezelés hozta, hanem annak megértése, hogyan működik a test egészként. Építészként tanultam meg, hogy egy épület stabilitását az alapjai határozzák meg — rájöttem, hogy a test ugyanígy működik: ha a központja, a medence kibillen, az egész rendszer megsínyli. Egy gyógytornász mentorálása mellett ebből született meg a TestKözéppont Módszer, ami anatómiai és biomechanikai alapokra épül, és nem a tüneteket fedi el, hanem a működést állítja helyre.</p>
             </div>
         </div>
     </div>
