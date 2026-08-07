@@ -806,11 +806,36 @@
 
         /* VIDEO TESTIMONIALS */
         .video-section-header { text-align: center; margin-bottom: 3rem; }
+        .video-carousel { position: relative; }
         .video-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            display: flex;
+            overflow-x: auto;
             gap: 1.25rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
+        .video-grid::-webkit-scrollbar { display: none; }
+        .video-next-btn, .video-prev-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px; height: 44px;
+            border: none; border-radius: 50%;
+            background: rgba(46, 35, 25, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, opacity 0.2s;
+            z-index: 2;
+        }
+        .video-next-btn { right: 0.75rem; }
+        .video-prev-btn { left: 0.75rem; }
+        .video-next-btn:hover, .video-prev-btn:hover { background: rgba(46, 35, 25, 0.7); }
+        .video-next-btn.is-hidden, .video-prev-btn.is-hidden { opacity: 0; pointer-events: none; }
         .video-card {
             cursor: pointer;
             border-radius: 6px;
@@ -818,6 +843,9 @@
             position: relative;
             aspect-ratio: 9/16;
             background: var(--surface);
+            flex: 0 0 auto;
+            width: 220px;
+            scroll-snap-align: start;
         }
         .video-thumb { width: 100%; height: 100%; position: relative; }
         .video-thumb img {
@@ -881,10 +909,15 @@
         .lightbox-close:hover { color: #fff; }
 
         @media (max-width: 1024px) {
-            .video-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+            .video-grid { gap: 0.75rem; }
+            .video-card { width: 170px; }
         }
         @media (max-width: 600px) {
-            .video-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .video-grid { gap: 0.75rem; }
+            .video-card { width: 42vw; }
+            .video-next-btn, .video-prev-btn { width: 38px; height: 38px; }
+            .video-next-btn { right: 0.5rem; }
+            .video-prev-btn { left: 0.5rem; }
             .video-lightbox-inner video { height: 80vh; max-width: 95vw; }
         }
     </style>
@@ -1211,7 +1244,8 @@
         <div class="video-section-header">
             <div class="section-eyebrow" style="font-size: 1.4rem;">Videós visszajelzések</div>
         </div>
-        <div class="video-grid">
+        <div class="video-carousel">
+        <div class="video-grid" id="video-grid">
             <div class="video-card" onclick="openVideo('video/anna_allapotfelmeres_compressed.mp4')">
                 <div class="video-thumb">
                     <img src="video/anna_allapotfelmeres.png" alt="">
@@ -1254,6 +1288,13 @@
                     <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
                 </div>
             </div>
+        </div>
+        <button class="video-prev-btn is-hidden" id="video-prev-btn" onclick="scrollVideos(-1)" aria-label="Előző videó">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="video-next-btn" id="video-next-btn" onclick="scrollVideos(1)" aria-label="Következő videó">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
         </div>
     </div>
 </section>
@@ -1448,6 +1489,31 @@
 </div>
 
 <script>
+    // Video carousel
+    function scrollVideos(direction) {
+        const grid = document.getElementById('video-grid');
+        const card = grid.querySelector('.video-card');
+        if (!card) return;
+        const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+        const step = (card.offsetWidth + gap) * 5;
+        grid.scrollBy({ left: step * direction, behavior: 'smooth' });
+    }
+    (function () {
+        const grid = document.getElementById('video-grid');
+        const nextBtn = document.getElementById('video-next-btn');
+        const prevBtn = document.getElementById('video-prev-btn');
+        if (!grid || !nextBtn || !prevBtn) return;
+        function updateNavBtns() {
+            const atStart = grid.scrollLeft <= 4;
+            const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4;
+            prevBtn.classList.toggle('is-hidden', atStart);
+            nextBtn.classList.toggle('is-hidden', atEnd);
+        }
+        grid.addEventListener('scroll', updateNavBtns);
+        window.addEventListener('resize', updateNavBtns);
+        updateNavBtns();
+    })();
+
     // Video lightbox
     function openVideo(src) {
         const lightbox = document.getElementById('video-lightbox');
