@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELLE Giveaway — Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #F8F5F0; --white: #FFFFFF; --surface: #EDE5D8; --border: #E2D8CC;
+    --text: #1C1410; --muted: #8C7B6E; --accent: #2E2319; --gold: #C4956A; --green: #4A7C59;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    background: var(--bg); color: var(--text); padding: 2rem 1.5rem; max-width: 960px; margin: 0 auto;
+  }
+  h1 { font-size: 1.3rem; margin-bottom: 1.5rem; }
+  .login-box {
+    max-width: 360px; margin: 4rem auto; background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+  }
+  .login-box input {
+    width: 100%; padding: 0.7rem 0.9rem; margin-bottom: 0.75rem; border: 1px solid var(--border);
+    border-radius: 6px; font-size: 0.9rem;
+  }
+  .login-box button, .toolbar button {
+    background: var(--accent); color: var(--bg); border: none; padding: 0.7rem 1.1rem;
+    border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  }
+  .login-box button:hover, .toolbar button:hover { background: #3d3020; }
+  .login-error { color: #B0453D; font-size: 0.8rem; margin-top: 0.5rem; display: none; }
+
+  #dashboard { display: none; }
+  .stats-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .stat-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1rem 1.25rem; min-width: 140px;
+  }
+  .stat-card .num { font-size: 1.6rem; font-weight: 700; }
+  .stat-card .label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .toolbar { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .toolbar input[type="number"] {
+    width: 70px; padding: 0.55rem 0.6rem; border: 1px solid var(--border); border-radius: 6px;
+  }
+  .toolbar label { font-size: 0.82rem; color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  th, td { text-align: left; padding: 0.6rem 0.8rem; font-size: 0.82rem; border-bottom: 1px solid var(--border); }
+  th { background: var(--surface); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+  tr.winner { background: #FBF0DD; font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+
+  .winners-box {
+    background: var(--white); border: 1px solid var(--gold); border-radius: 10px;
+    padding: 1.25rem; margin-bottom: 1.5rem; display: none;
+  }
+  .winners-box h2 { font-size: 1rem; margin-bottom: 0.75rem; }
+  .winners-box ol { padding-left: 1.25rem; font-size: 0.9rem; }
+  .winners-box li { margin-bottom: 0.3rem; }
+
+  .muted-note { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+
+<div id="login-view" class="login-box">
+  <h1>Admin belépés</h1>
+  <input type="email" id="login-email" placeholder="Email">
+  <input type="password" id="login-password" placeholder="Jelszó">
+  <button id="login-btn" style="width:100%">Belépés</button>
+  <p class="login-error" id="login-error"></p>
+</div>
+
+<div id="dashboard">
+  <h1>ELLE Yoga Weekend — Giveaway admin</h1>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="num" id="stat-entries">–</div><div class="label">Regisztráció</div></div>
+    <div class="stat-card"><div class="num" id="stat-tickets">–</div><div class="label">Összes jegy</div></div>
+    <div class="stat-card"><div class="num" id="stat-referred">–</div><div class="label">Ajánlásból jött</div></div>
+  </div>
+
+  <div class="toolbar">
+    <button id="refresh-btn">Frissítés</button>
+    <button id="export-btn">CSV export</button>
+    <label>Nyertesek száma: <input type="number" id="winner-count" value="10" min="1"></label>
+    <button id="draw-btn">Sorsolás</button>
+  </div>
+
+  <div class="winners-box" id="winners-box">
+    <h2>Nyertesek</h2>
+    <ol id="winners-list"></ol>
+    <p class="muted-note">Súlyozott véletlen választás (Efraimidis–Spirakis, A-ES), visszatevés nélkül — minden jegy egyenlő eséllyel számít, akárhány jeggyel is rendelkezik valaki.</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Név</th><th>Email</th><th>Kód</th><th>Ajánlotta</th><th>Jegyek</th><th>Regisztrált</th></tr>
+    </thead>
+    <tbody id="entries-body"></tbody>
+  </table>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://phjznopktwgvowlwistt.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBoanpub3BrdHdndm93bHdpc3R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjI2NjgsImV4cCI6MjEwNDUzODY2OH0.57qMoQ2fVUQZCPQptde9KjDQwjo-eeGew5VD5Wzznzg';
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let currentEntries = [];
+
+  const loginView = document.getElementById('login-view');
+  const dashboard = document.getElementById('dashboard');
+  const loginError = document.getElementById('login-error');
+
+  document.getElementById('login-btn').addEventListener('click', async function () {
+    loginError.style.display = 'none';
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) {
+      loginError.textContent = 'Hibás belépés.';
+      loginError.style.display = 'block';
+      return;
+    }
+    await enterDashboard();
+  });
+
+  async function enterDashboard() {
+    loginView.style.display = 'none';
+    dashboard.style.display = 'block';
+    await loadEntries();
+  }
+
+  async function loadEntries() {
+    const { data, error } = await sb.rpc('admin_list_entries');
+    if (error) {
+      alert('Nem sikerült betölteni a listát: ' + error.message);
+      return;
+    }
+    currentEntries = data;
+    renderTable(data);
+    renderStats(data);
+  }
+
+  function renderStats(data) {
+    const totalTickets = data.reduce(function (sum, e) { return sum + e.ticket_count; }, 0);
+    const referred = data.filter(function (e) { return e.referred_by; }).length;
+    document.getElementById('stat-entries').textContent = data.length;
+    document.getElementById('stat-tickets').textContent = totalTickets;
+    document.getElementById('stat-referred').textContent = referred;
+  }
+
+  function renderTable(data, winnerEmails) {
+    winnerEmails = winnerEmails || [];
+    const body = document.getElementById('entries-body');
+    body.innerHTML = '';
+    data.forEach(function (e) {
+      const tr = document.createElement('tr');
+      if (winnerEmails.includes(e.email)) tr.classList.add('winner');
+      tr.innerHTML =
+        '<td>' + escapeHtml(e.name) + '</td>' +
+        '<td>' + escapeHtml(e.email) + '</td>' +
+        '<td>' + escapeHtml(e.referral_code) + '</td>' +
+        '<td>' + (e.referred_by ? escapeHtml(e.referred_by) : '—') + '</td>' +
+        '<td>' + e.ticket_count + '</td>' +
+        '<td>' + new Date(e.created_at).toLocaleDateString('hu-HU') + '</td>';
+      body.appendChild(tr);
+    });
+  }
+
+  function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  // Súlyozott mintavétel visszatevés nélkül (Efraimidis–Spirakis / A-ES).
+  // Minden bejegyzéshez kulcs: rand()^(1/súly); a legnagyobb N kulcsú nyer.
+  function weightedSampleWithoutReplacement(items, weightFn, n) {
+    const keyed = items.map(function (item) {
+      const w = Math.max(weightFn(item), 0.0001);
+      const key = Math.pow(Math.random(), 1 / w);
+      return { item: item, key: key };
+    });
+    keyed.sort(function (a, b) { return b.key - a.key; });
+    return keyed.slice(0, n).map(function (k) { return k.item; });
+  }
+
+  document.getElementById('draw-btn').addEventListener('click', function () {
+    const n = parseInt(document.getElementById('winner-count').value, 10) || 10;
+    if (currentEntries.length === 0) {
+      alert('Nincs betöltött adat.');
+      return;
+    }
+    const winners = weightedSampleWithoutReplacement(currentEntries, function (e) { return e.ticket_count; }, n);
+    const winnersBox = document.getElementById('winners-box');
+    const list = document.getElementById('winners-list');
+    list.innerHTML = '';
+    winners.forEach(function (w) {
+      const li = document.createElement('li');
+      li.textContent = w.name + ' (' + w.email + ') — ' + w.ticket_count + ' jegy';
+      list.appendChild(li);
+    });
+    winnersBox.style.display = 'block';
+    renderTable(currentEntries, winners.map(function (w) { return w.email; }));
+  });
+
+  document.getElementById('refresh-btn').addEventListener('click', loadEntries);
+
+  document.getElementById('export-btn').addEventListener('click', function () {
+    const rows = [['name', 'email', 'referral_code', 'referred_by', 'ticket_count', 'created_at']];
+    currentEntries.forEach(function (e) {
+      rows.push([e.name, e.email, e.referral_code, e.referred_by || '', e.ticket_count, e.created_at]);
+    });
+    const csv = rows.map(function (r) {
+      return r.map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+    }).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'elle_giveaway_entries.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Ha már be van jelentkezve (session megmaradt), lépjünk be automatikusan
+  (async function () {
+    const { data } = await sb.auth.getSession();
+    if (data && data.session) await enterDashboard();
+  })();
+</script>
+
+</body>
+</html>
