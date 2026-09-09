@@ -1486,6 +1486,20 @@
         <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mire használjuk?</strong><br>Kizárólag a konzultáció megszervezésére és lebonyolítására.</p>
         <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Ki kezeli az adatokat?</strong><br>A foglalási folyamatot a Calendly (calendly.com) kezeli saját adatkezelési szabályzata szerint. A konzultáció a Google Meet platformon zajlik.</p>
         <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mennyi ideig tároljuk?</strong><br>Az adatokat a konzultáció lezárultát követő 1 évig tároljuk, majd töröljük.</p>
+
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; margin:1.75rem 0 1rem;">ELLE Yoga Weekend — jegysorsolás</h3>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Milyen adatokat gyűjtünk?</strong><br>A sorsolós landing oldalon (elle_giveaway.html) megadott név és email cím, valamint az, hogy kinek az ajánlásán keresztül regisztráltál (ha volt ilyen).</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mire használjuk?</strong><br>A jegysorsolás lebonyolítására (a nyertesek kiválasztására és értesítésére), valamint — a feliratkozáskor elfogadott jelölőnégyzet alapján — a TestKözéppont hírlevelének küldésére. Nincs vásárlási vagy egyéb kötelezettség a részvételhez.</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Ki kezeli az adatokat?</strong><br>Az adatok egy Supabase adatbázisban tárolódnak, amihez csak az adatkezelő (Farkas Levente) fér hozzá.</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mennyi ideig tároljuk?</strong><br>A sorsolás lezárása után a jegysorsoláshoz kötött adatokat töröljük; a hírlevélre feliratkozott adatokat a leiratkozásig, vagy a hírlevél-küldés megszűnéséig őrizzük meg.</p>
+
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; margin:1.75rem 0 1rem;">ELLE Yoga Weekend — ingyenes gyakorlatanyag</h3>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Milyen adatokat gyűjtünk?</strong><br>Az elle.html oldalon megadott név és email cím.</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mire használjuk?</strong><br>Az ingyenes gyakorlatanyag (PDF) kiküldésére, valamint a TestKözéppont hírlevelének küldésére.</p>
+        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Ki kezeli az adatokat?</strong><br>Az adatok egy Google Sheets táblázatban tárolódnak, a Google Apps Script szolgáltatásán keresztül.</p>
+
+        <p style="font-size:0.8rem; line-height:1.7; color:#777; margin-bottom:1rem; font-style:italic;">Bármikor kérheted adataid törlését vagy a hírlevélről való leiratkozást a lenti elérhetőségen. Ez a tájékoztató nem minősül jogi tanácsadásnak.</p>
+
         <p style="font-size:0.85rem; line-height:1.8; color:#555;"><strong>Kapcsolat:</strong> a konzultáció foglaláson keresztül, vagy Instagram DM-ben: <a href="https://www.instagram.com/testkozeppont/" target="_blank" rel="noopener" style="color:inherit;">@testkozeppont</a></p>
     </div>
 </div>
@@ -1586,6 +1600,9 @@
     document.getElementById('gdpr-modal').addEventListener('click', function(e) {
         if (e.target === this) this.style.display = 'none';
     });
+    if (location.hash === '#adatkezeles') {
+        document.getElementById('gdpr-modal').style.display = 'block';
+    }
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
