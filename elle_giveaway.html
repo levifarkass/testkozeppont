@@ -296,7 +296,7 @@
   <!-- ŰRLAP -->
   <div id="form-view">
     <h1>Nyerj belépőt a <em>Yoga Weekendre</em></h1>
-    <p class="sub">10 db belépőt osztunk szét az ELLE Yoga Weekendre. Iratkozz fel — minden ajánlott ismerősöd, aki csatlakozik, növeli az esélyedet.</p>
+    <p class="sub">10 db belépőt sorsolok ki az ELLE Yoga Weekendre. Iratkozz fel — minden ajánlott ismerősöd, aki csatlakozik, növeli az esélyedet.</p>
 
     <form id="entry-form">
       <div>
@@ -309,7 +309,7 @@
       </div>
       <div class="checkbox-row">
         <input type="checkbox" id="gdpr" required>
-        <label for="gdpr">Elfogadom, hogy az emailcímemet a játék lebonyolítása és a TestKözéppont hírlevele céljából felhasználjátok. <a href="index.html#" id="gdpr-link">Adatkezelési tájékoztató</a></label>
+        <label for="gdpr">Elfogadom, hogy az emailcímemet a játék lebonyolítása és a TestKözéppont hírlevele céljából felhasználja. <a href="index.html#" id="gdpr-link">Adatkezelési tájékoztató</a></label>
       </div>
       <button type="submit" id="submit-btn">Beszállok a jegyekért</button>
       <p class="error" id="error-msg"></p>
@@ -365,7 +365,7 @@
 
   document.getElementById('gdpr-link').addEventListener('click', function (e) {
     e.preventDefault();
-    window.open('index.html#adatkezeles', '_blank');
+    window.open('index.html#adatkezeles-sorsolas', '_blank');
   });
 
   function showSuccess(code, ticketCount) {

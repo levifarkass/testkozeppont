@@ -224,7 +224,7 @@
     </div>
     <div class="checkbox-row">
       <input type="checkbox" id="gdpr" required>
-      <label for="gdpr">Elfogadom, hogy az emailcímemet a gyakorlatok kiküldése és a TestKözéppont hírlevele céljából felhasználja. <a href="index.html#adatkezeles" id="gdpr-link">Adatkezelési tájékoztató</a></label>
+      <label for="gdpr">Elfogadom, hogy az emailcímemet a gyakorlatok kiküldése és a TestKözéppont hírlevele céljából felhasználja. <a href="index.html#adatkezeles-gyakorlat" id="gdpr-link">Adatkezelési tájékoztató</a></label>
     </div>
     <button type="submit" id="submit-btn">Küldd el a gyakorlatokat</button>
   </form>
@@ -246,7 +246,7 @@
   document.getElementById('gdpr-link').addEventListener('click', function (e) {
     e.preventDefault();
     e.stopPropagation();
-    window.open('index.html#adatkezeles', '_blank');
+    window.open('index.html#adatkezeles-gyakorlat', '_blank');
   });
 
   document.getElementById('signup-form').addEventListener('submit', function (e) {
