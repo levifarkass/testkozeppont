@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Leiratkozás — TestKözéppont</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #F8F5F0;
+    --white: #FFFFFF;
+    --surface: #EDE5D8;
+    --border: #E2D8CC;
+    --text: #1C1410;
+    --muted: #8C7B6E;
+    --accent: #2E2319;
+    --gold: #C4956A;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .logo span { color: var(--gold); }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    margin-bottom: 0.9rem;
+  }
+
+  .sub {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+  }
+
+  form { display: flex; flex-direction: column; gap: 0.85rem; }
+  label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  input[type="email"] {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--bg);
+  }
+  input:focus { outline: none; border-color: var(--gold); }
+
+  button[type="submit"] {
+    margin-top: 0.5rem;
+    background: var(--bg);
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    padding: 0.95rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button[type="submit"]:hover { background: var(--surface); }
+  button[type="submit"]:disabled { opacity: 0.6; cursor: default; }
+
+  #done { display: none; text-align: center; }
+  #done p { font-size: 0.95rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">TestKözép<span>pont</span></div>
+
+  <div id="unsub">
+    <h1>Leiratkozás a hírlevélről</h1>
+    <p class="sub">Add meg az email címed, és többet nem írok neked.</p>
+
+    <form id="unsub-form">
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <button type="submit" id="submit-btn">Leiratkozom</button>
+    </form>
+  </div>
+
+  <div id="done">
+    <h1>Kész.</h1>
+    <p>A címedet törlöm a listáról, többet nem kapsz tőlem levelet.<br>Ha később mégis szeretnél, bármikor feliratkozhatsz újra.</p>
+  </div>
+</div>
+
+<script>
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMn0s2MdAy1plsqOpkhxwx5LIgxnxEF9T5LXuMmpfISTQb1JHNb1eb-YvwLqewo2c-/exec';
+
+  // ?e=cim@pelda.hu esetén előtölti a mezőt (levélcserés küldéshez)
+  try {
+    var e = new URLSearchParams(location.search).get('e');
+    if (e) document.getElementById('email').value = e;
+  } catch (err) {}
+
+  function showDone() {
+    document.getElementById('unsub').style.display = 'none';
+    document.getElementById('done').style.display = 'block';
+  }
+
+  document.getElementById('unsub-form').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Küldés...';
+
+    var formData = new FormData(ev.target);
+    formData.append('action', 'unsubscribe');
+
+    fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: formData })
+      .then(showDone)
+      .catch(showDone);
+  });
+</script>
+
+</body>
+</html>
