@@ -15,6 +15,7 @@
     <meta name="twitter:title" content="TestKözéppont — 90 napos derékfájás megoldás | Budapest">
     <meta name="twitter:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente, a TestKözéppont módszer megalkotójának medence-centrikus programja, Budapesten.">
     <meta name="twitter:image" content="https://testkozeppont.hu/og-image.png">
+    <meta name="theme-color" content="#F8F5F0">
     <link rel="canonical" href="https://testkozeppont.hu">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
@@ -29,1612 +30,1201 @@
         "logo": "https://testkozeppont.hu/logo-square.png"
     }
     </script>
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="preload" href="fonts/inter-regular.woff" as="font" type="font/woff" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
     <style>
+        /* Inter saját tárhelyről — teljes magyar karakterkészlettel (ő, ű), nincs fallback-font */
+        @font-face { font-family: 'TK Sans'; src: url('fonts/inter-regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+        @font-face { font-family: 'TK Sans'; src: url('fonts/inter-medium.woff') format('woff'); font-weight: 500; font-style: normal; font-display: swap; }
+        @font-face { font-family: 'TK Sans'; src: url('fonts/inter-semibold.woff') format('woff'); font-weight: 600 700; font-style: normal; font-display: swap; }
+
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg: #F8F5F0;
-            --white: #FFFFFF;
-            --surface: #EDE5D8;
-            --border: #E2D8CC;
+            --paper: #FFFFFF;
+            --surface: #EFE8DD;
+            --border: #E4DACD;
+            --border-soft: #EEE7DD;
             --text: #1C1410;
+            --text-2: #5E5047;
             --text-muted: #8C7B6E;
             --accent: #2E2319;
-            --accent-light: #C4956A;
+            --accent-hover: #43331f;
+            --gold: #B8875B;
+            --gold-soft: #C4956A;
             --green: #4A7C59;
+            --on-dark: #F8F5F0;
+            --on-dark-2: rgba(248,245,240,0.72);
+            --on-dark-3: rgba(248,245,240,0.5);
+
+            --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --sans: 'TK Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+
+            --gutter: clamp(1.25rem, 4vw, 2.5rem);
+            --max: 1180px;
+            --section-y: clamp(4.5rem, 10vw, 8.5rem);
+            --radius: 14px;
+            --ease: cubic-bezier(.22,.61,.36,1);
         }
 
-        html { scroll-behavior: smooth; }
-
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        html, body { overflow-x: clip; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: var(--sans);
+            font-size: 1rem;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
+        .icon { width: 1em; height: 1em; display: inline-block; flex-shrink: 0; vertical-align: -0.125em; }
+
+        .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+        .section { padding-top: var(--section-y); padding-bottom: var(--section-y); }
+
+        /* TYPO */
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            font-size: 0.74rem; font-weight: 600;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.25rem;
+        }
+        .eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; opacity: .7; }
+        .eyebrow.center { justify-content: center; }
+        .h2 {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4.2vw, 3.25rem);
+            font-weight: 600; line-height: 1.12;
+            letter-spacing: -0.01em; margin-bottom: 1.25rem;
+            text-wrap: balance;
+        }
+        .h2 em { font-style: italic; color: var(--gold); font-weight: 500; }
+        .lead {
+            color: var(--text-2); font-size: clamp(1.02rem, 1.3vw, 1.12rem);
+            max-width: 60ch; line-height: 1.75;
+            text-wrap: pretty;
+        }
+        .section-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); max-width: 760px; }
+        .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+        .section-head.center .lead { margin: 0 auto; }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.65rem;
+            padding: 1rem 1.9rem; border-radius: 999px;
+            font-size: 0.8rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; white-space: nowrap;
+            transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
+        }
+        .btn .icon { transition: transform .3s var(--ease); }
+        .btn:hover .icon { transform: translateX(3px); }
+        .btn-primary { background: var(--accent); color: var(--on-dark); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 10px 24px -12px rgba(46,35,25,.55); }
+        .btn-ghost { color: var(--text); border: 1px solid var(--border); background: transparent; }
+        .btn-ghost:hover { border-color: var(--text-muted); background: var(--paper); }
+        .btn-light { background: var(--on-dark); color: var(--accent); }
+        .btn-light:hover { background: #fff; transform: translateY(-2px); }
+        .text-link {
+            display: inline-flex; align-items: center; gap: .5rem;
+            font-size: .85rem; font-weight: 600; color: var(--text);
+            text-decoration: none; border-bottom: 1px solid var(--gold-soft); padding-bottom: 2px;
         }
 
         /* NAV */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            z-index: 100;
-            background: rgba(248, 245, 240, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+        .nav {
+            position: fixed; inset: 0 0 auto 0; z-index: 100;
+            transition: background .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
+            border-bottom: 1px solid transparent;
+        }
+        .nav.scrolled {
+            background: rgba(248,245,240,.88);
+            backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2);
+            border-color: var(--border-soft);
         }
         .nav-inner {
-            max-width: 1200px; margin: 0 auto;
-            padding: 1.25rem 2rem;
-            display: flex; justify-content: space-between; align-items: center;
+            max-width: var(--max); margin: 0 auto;
+            padding: 1.1rem var(--gutter);
+            display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
         }
         .logo {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.6rem; font-weight: 700; color: var(--text);
+            font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
+            color: var(--text); text-decoration: none; white-space: nowrap; letter-spacing: -.01em;
         }
-        .logo span { color: var(--accent-light); }
-        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
-        nav a {
-            color: var(--text-muted); text-decoration: none;
-            font-size: 0.8rem; font-weight: 500;
-            letter-spacing: 1px; text-transform: uppercase;
-            transition: color 0.2s;
+        .logo span { color: var(--gold-soft); }
+        .nav-links { display: flex; gap: 2.25rem; align-items: center; }
+        .nav-links a:not(.btn) {
+            color: var(--text-2); text-decoration: none; white-space: nowrap;
+            font-size: .78rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+            position: relative; padding: .25rem 0;
         }
-        nav a:hover { color: var(--text); }
-        .nav-cta {
-            background: var(--accent) !important; color: var(--bg) !important;
-            padding: 0.6rem 1.4rem; border-radius: 4px;
+        .nav-links a:not(.btn)::after {
+            content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px;
+            background: var(--gold); transform: scaleX(0); transform-origin: left;
+            transition: transform .35s var(--ease);
         }
-        .nav-cta:hover { background: #3d3020 !important; }
+        .nav-links a:not(.btn):hover::after { transform: scaleX(1); }
+        .nav-links .btn { padding: .75rem 1.3rem; font-size: .72rem; }
 
-        /* SHARED */
-        .section { max-width: 1200px; margin: 0 auto; padding: 7rem 2rem; }
-        .section-eyebrow {
-            font-size: 0.9rem; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase;
-            color: var(--accent-light); margin-bottom: 1.25rem;
-        }
-        .section-heading {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(1.9rem, 3.5vw, 3rem);
-            font-weight: 700; line-height: 1.2;
-            letter-spacing: -0.3px; margin-bottom: 1rem;
-        }
-        .section-sub {
-            color: var(--text-muted); font-size: 1rem;
-            max-width: 560px; line-height: 1.8; font-weight: 300;
-        }
-        .section-header { margin-bottom: 4rem; }
-        .section-divider { max-width: 1200px; margin: 0 auto; height: 1px; background: var(--border); }
-
-        .btn-primary {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            background: var(--accent); color: var(--bg);
-            padding: 0.9rem 2.25rem; border-radius: 4px;
-            font-size: 0.82rem; font-weight: 600;
-            letter-spacing: 1px; text-transform: uppercase;
-            text-decoration: none; transition: background 0.2s, transform 0.2s;
-        }
-        .btn-primary:hover { background: #3d3020; transform: translateY(-1px); }
-        .btn-ghost {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            color: var(--text-muted); font-size: 0.82rem; font-weight: 500;
-            text-decoration: none; border-bottom: 1px solid var(--border);
-            padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
-        }
-        .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
-        .btn-secondary {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            background: transparent; color: var(--text);
-            padding: 0.9rem 2.25rem; border-radius: 4px;
-            font-size: 0.82rem; font-weight: 600;
-            letter-spacing: 1px; text-transform: uppercase;
-            text-decoration: none; border: 1px solid var(--border);
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .btn-secondary:hover { background: var(--surface); border-color: var(--text-muted); }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: flex; align-items: center;
-            padding: 7rem 2rem 4rem;
-        }
-        .hero-inner {
-            max-width: 1200px; width: 100%; margin: 0 auto;
-            display: grid; grid-template-columns: 55fr 45fr;
-            gap: 3rem 5rem; align-items: stretch;
-        }
-        .hero-left, .hero-right {
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .hero-eyebrow {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            font-size: 0.72rem; font-weight: 500;
-            letter-spacing: 2px; text-transform: uppercase;
-            color: var(--text-muted); margin-bottom: 2rem;
-        }
-        .hero-eyebrow .dot {
-            width: 6px; height: 6px; background: var(--green);
-            border-radius: 50%; animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        .hero h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(2.8rem, 6vw, 5rem);
-            font-weight: 700; line-height: 1.1;
-            margin-bottom: 1.75rem; color: var(--text);
-        }
-        .hero h1 em { font-style: italic; color: var(--accent-light); }
-        .hero-sub {
-            font-size: 1.1rem; color: var(--text-muted);
-            line-height: 1.8; max-width: 560px;
-            margin: 0 auto 3rem; font-weight: 300;
-        }
-        .hero-actions {
-            display: flex; align-items: center;
-            justify-content: center; gap: 1.25rem; flex-wrap: wrap;
-        }
-        .hero-stats {
-            display: flex; gap: 2.5rem;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-        }
-        .hero-card {
-            background: rgba(255,255,255,0.5);
-            border: 1px solid rgba(226,216,204,0.7);
-            border-radius: 16px;
-            padding: 2.75rem;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.04);
-        }
-        .hero-card-label {
-            font-size: 0.65rem; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase;
-            color: var(--accent-light); margin-bottom: 1.5rem;
-        }
-        .hero-card-p1 {
-            font-size: 1.1rem; line-height: 1.85;
-            color: var(--text); font-weight: 300;
-            margin-bottom: 1.5rem;
-        }
-        .hero-card-divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
-        .hero-card-p2 { font-size: 1.1rem; line-height: 1.8; color: var(--text); font-weight: 300; margin-bottom: 1.5rem; }
-        .hero-card-p2 em {
-            font-style: italic; font-size: 1.1rem;
-            color: var(--text); font-weight: 400;
-        }
-        .hero-card-p3 {
-            font-size: 1.35rem; line-height: 1.5;
-            color: var(--accent); font-weight: 700;
-            padding-top: 1.25rem;
-            border-top: 1px solid var(--border);
-        }
-        .stat-num {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2.2rem; font-weight: 700; color: var(--accent-light);
-        }
-        .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
-
-        /* HERO RIGHT COLUMNS */
-        .hero-right-photo { display: none; }
-        .hero-right-texts { display: flex; flex-direction: column; }
-        .hero-right-footer { border-top: 1px solid var(--border); padding-top: 1.25rem; }
-        .hero-right-footer .hero-card-p3 { border-top: none; padding-top: 0; margin-bottom: 0; }
-
-        /* PAIN GRID */
-        .pain-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 1fr; gap: 1.25rem;
-        }
-        .pain-card {
-            background: var(--white); padding: 2.25rem 2rem;
-            border: 1px solid var(--border); border-radius: 12px;
-            border-top: 3px solid var(--accent-light);
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
-        .pain-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
-        .pain-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.6rem; }
-        .pain-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; font-weight: 300; }
-
-        /* WHY SECTION */
-        .why-section { background: var(--white); }
-        .why-inner { max-width: 780px; margin: 0 auto; padding: 7rem 2rem; }
-        .why-core {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2.2rem; font-weight: 700; line-height: 1.4;
-            color: var(--text); text-align: center;
-            margin: 2.5rem 0 3.5rem;
-        }
-        .why-body { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1rem; }
-        .why-body p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.95; font-weight: 300; }
-        .why-callout {
-            border-left: 3px solid var(--accent-light);
-            padding: 1.5rem 2rem; margin: 0 0 1rem;
-        }
-        .why-callout p { font-size: 1.1rem; color: var(--text); line-height: 1.9; font-weight: 400; }
-        .why-callout strong { color: var(--accent-light); }
-        .why-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
-        }
-        .why-list { list-style: none; margin-top: 2.5rem; }
-        .why-item {
-            display: flex; gap: 1rem; padding: 1.75rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .why-item:first-child { border-top: 1px solid var(--border); }
-        .why-icon { color: var(--text-muted); font-size: 0.75rem; margin-top: 4px; flex-shrink: 0; width: 16px; }
-        .why-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
-        .why-item strong { color: var(--text); font-weight: 600; }
-        .why-right { padding-top: 1rem; }
-        .why-insight {
-            background: var(--bg); border: 1px solid var(--border);
-            border-radius: 12px; padding: 2.5rem; margin-bottom: 2rem;
-        }
-        .why-insight p {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.25rem; line-height: 1.6; font-weight: 400;
-            font-style: italic; color: var(--text);
-        }
-        .why-insight cite {
-            display: block; margin-top: 1rem;
-            font-size: 0.8rem; color: var(--text-muted);
-            font-style: normal; letter-spacing: 0.5px;
-        }
-
-        /* QUOTE STRIP */
-        .quote-strip { background: var(--accent); padding: 4rem 2rem; }
-        .quote-strip-inner {
-            max-width: 1200px; margin: 0 auto;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-        }
-        .strip-quote blockquote {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.15rem; line-height: 1.7;
-            color: rgba(248,245,240,0.85); font-style: italic;
-            margin-bottom: 1rem;
-        }
-        .strip-quote cite {
-            font-size: 0.78rem; color: var(--accent-light);
-            font-style: normal; letter-spacing: 1px; text-transform: uppercase;
-        }
-
-        /* METHOD */
-        .method-rows { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
-        .method-row { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: center; }
-        .method-row:nth-child(even) { grid-template-columns: 1fr 280px; }
-        .method-row:nth-child(even) .method-row-image { order: 2; }
-        .method-row:nth-child(even) .method-row-content { order: 1; }
-        .method-row-image { border-radius: 12px; overflow: hidden; aspect-ratio: 2/3; }
-        .method-row-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .method-row-num {
-            width: 44px; height: 44px; border-radius: 50%;
-            background: var(--accent); border: 1px solid var(--accent);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.72rem; font-weight: 600; letter-spacing: 1px;
-            color: var(--bg); margin-bottom: 1.5rem;
-        }
-        .method-row h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
-        .method-row p { font-size: 1rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
-
-        /* LEVI STORY */
-        .story-section { background: var(--surface); }
-        .story-inner {
-            max-width: 1200px; margin: 0 auto; padding: 7rem 2rem;
-            display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start;
-        }
-        .story-left { position: sticky; top: 8rem; }
-        .story-avatar {
-            width: 320px; border-radius: 12px;
-            background: var(--border); border: 2px solid var(--border);
-            overflow: hidden; font-size: 2rem; color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-        .story-avatar img { width: 100%; height: auto; display: block; }
-        .story-left h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
-        .story-left p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
-        .story-right p {
-            font-size: 1.05rem; line-height: 1.9; color: var(--text);
-            margin-bottom: 1.5rem; font-weight: 300;
-        }
-        .story-right p:first-child {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.4rem; font-weight: 400; line-height: 1.7;
-        }
-        .story-right strong { font-weight: 600; color: var(--text); }
-        .story-highlight {
-            border-left: 4px solid var(--accent-light);
-            padding: 1.5rem 1.75rem; margin: 2.25rem 0;
-            background: rgba(196, 149, 106, 0.09);
-        }
-        .story-highlight p {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.35rem !important; font-weight: 600; font-style: italic;
-            line-height: 1.5 !important;
-            margin-bottom: 0 !important; color: var(--text) !important;
-        }
-
-        /* TESTIMONIALS */
-        .testimonials-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-        }
-        .testimonial-card {
-            background: var(--white); border: 1px solid var(--border); padding: 2.5rem;
-            display: flex; flex-direction: column;
-        }
-        .testimonial-tag {
-            display: inline-block;
-            background: var(--surface); border: 1px solid var(--border);
-            padding: 0.25rem 0.75rem; font-size: 0.7rem;
-            font-weight: 500; color: var(--text-muted);
-            letter-spacing: 0.5px; margin-bottom: 1.5rem;
-        }
-        .testimonial-stars { display: flex; gap: 3px; margin-bottom: 1.25rem; }
-        .testimonial-stars i { font-size: 0.7rem; color: var(--accent-light); }
-        .testimonial-card blockquote {
-            font-size: 0.92rem; color: var(--text); line-height: 1.8;
-            font-style: italic; margin-bottom: 1.75rem; font-weight: 300;
-            flex: 1;
-        }
-        .testimonial-result {
-            background: var(--bg); border: 1px solid var(--border);
-            padding: 1rem 1.25rem; margin-bottom: 1.5rem;
-        }
-        .testimonial-result-label {
-            font-size: 0.65rem; font-weight: 600;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            color: var(--accent-light); margin-bottom: 0.4rem;
-        }
-        .testimonial-result p {
-            font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; font-weight: 400;
-        }
-        .testimonial-author {
-            display: flex; align-items: center; gap: 0.75rem;
-            padding-top: 1.25rem; border-top: 1px solid var(--border);
-        }
-        .testimonial-avatar {
-            width: 36px; height: 36px; border-radius: 50%;
-            background: var(--surface); border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 600; font-size: 0.7rem; color: var(--text-muted); flex-shrink: 0;
-            overflow: hidden;
-        }
-        .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .testimonial-name { font-size: 0.82rem; font-weight: 600; }
-        .testimonial-role { font-size: 0.72rem; color: var(--text-muted); }
-
-        .method-list {
-            list-style: none; padding: 0; margin: 0;
-            display: flex; flex-direction: column; gap: 0.6rem;
-        }
-        .method-list li {
-            font-size: 1rem; color: var(--text-muted); line-height: 1.8; font-weight: 300;
-            padding-left: 1rem; position: relative;
-        }
-        .method-list li::before {
-            content: "—"; position: absolute; left: 0; color: var(--accent-light);
-        }
-
-        /* PROGRAM STEPS */
-        .program-section { background: var(--white); }
-        .program-inner { max-width: 1200px; margin: 0 auto; padding: 7rem 2rem; }
-        .program-phases {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1px; background: var(--border); border: 1px solid var(--border);
-            margin-top: 3rem;
-        }
-        .program-phase { background: var(--white); padding: 2.5rem 2rem; }
-        .program-phase-label {
-            font-size: 0.65rem; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase;
-            color: var(--accent-light); margin-bottom: 0.75rem;
-        }
-        .program-phase h3 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.2rem; font-weight: 700;
-            margin-bottom: 1.25rem; line-height: 1.3;
-        }
-        .program-feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-        .program-feature-list li {
-            display: flex; align-items: flex-start; gap: 0.75rem;
-            font-size: 0.85rem; color: var(--text-muted); font-weight: 300; line-height: 1.5;
-        }
-        .program-feature-list li::before {
-            content: ''; width: 5px; height: 5px; border-radius: 50%;
-            background: var(--accent-light); flex-shrink: 0; margin-top: 7px;
-        }
-        .program-note {
-            margin-top: 3rem; padding: 1.5rem 2rem;
-            background: var(--bg); border: 1px solid var(--border);
-            display: flex; align-items: center; gap: 1rem;
-        }
-        .program-note i { color: var(--accent-light); flex-shrink: 0; }
-        .program-note p { font-size: 0.875rem; color: var(--text-muted); font-weight: 300; line-height: 1.6; }
-
-        /* PACKAGES */
-        .pricing-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 1rem; margin-top: 3rem;
-        }
-        .pricing-card {
-            border: 1px solid var(--border); padding: 1.75rem 1.25rem;
-            background: var(--white); position: relative;
-            display: flex; flex-direction: column;
-        }
-        .pricing-card.featured {
-            border-color: var(--accent); background: var(--white);
-        }
-        .featured-badge {
-            position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-            background: var(--accent); color: var(--bg);
-            font-size: 0.65rem; font-weight: 600;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            padding: 0.3rem 1rem;
-        }
-        .pricing-name {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem;
-        }
-        .pricing-tagline { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.25rem; font-weight: 300; line-height: 1.5; min-height: 4.5em; }
-        .pricing-price {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.75rem; font-weight: 700; color: var(--text);
-            margin-bottom: 0.35rem; line-height: 1;
-        }
-        .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
-        .pricing-sessions {
-            font-size: 0.74rem; color: var(--accent-light);
-            font-weight: 600; letter-spacing: 0.3px; margin-bottom: 0.4rem; min-height: 2.6em;
-        }
-        .pricing-installment {
-            font-size: 0.78rem; color: var(--text-muted);
-            font-weight: 400; margin: 0 0 1.25rem; min-height: 1.3em;
-        }
-        .pricing-divider { height: 1px; background: var(--border); margin-bottom: 1.25rem; }
-        .pricing-features { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
-        .pricing-features li {
-            display: flex; align-items: flex-start; gap: 0.6rem;
-            font-size: 0.8rem; color: var(--text-muted); font-weight: 300; line-height: 1.5;
-        }
-        .pricing-features li i { color: var(--green); font-size: 0.7rem; margin-top: 4px; flex-shrink: 0; }
-        .pricing-cta {
-            display: block; text-align: center;
-            background: var(--bg); border: 1px solid var(--border);
-            color: var(--text); padding: 0.85rem;
-            font-size: 0.78rem; font-weight: 600;
-            letter-spacing: 1px; text-transform: uppercase;
-            text-decoration: none; transition: all 0.2s;
-        }
-        .pricing-cta:hover { background: var(--surface); }
-        .pricing-card.featured .pricing-cta {
-            background: var(--accent); color: var(--bg); border-color: var(--accent);
-        }
-        .pricing-card.featured .pricing-cta:hover { background: #3d3020; }
-
-        /* FIT SECTION */
-        .fit-section { background: var(--white); }
-        .fit-inner { max-width: 1200px; margin: 0 auto; padding: 7rem 2rem; }
-        .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
-        .fit-col h3 {
-            font-size: 0.78rem; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase;
-            margin-bottom: 1.5rem; padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .fit-col.yes h3 { color: var(--green); }
-        .fit-col.no h3 { color: var(--text-muted); }
-        .fit-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-        .fit-list li {
-            display: flex; align-items: flex-start; gap: 0.75rem;
-            font-size: 0.88rem; line-height: 1.6; font-weight: 300;
-        }
-        .fit-col.yes .fit-list li i { color: var(--green); font-size: 0.7rem; margin-top: 4px; flex-shrink: 0; }
-        .fit-col.no .fit-list li i { color: var(--text-muted); font-size: 0.7rem; margin-top: 4px; flex-shrink: 0; }
-
-        /* CTA FORM */
-        .cta-section { background: var(--accent); padding: 7rem 2rem; }
-        .cta-inner {
-            max-width: 1100px; margin: 0 auto;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
-        }
-        .cta-left .section-eyebrow { color: var(--accent-light); }
-        .cta-left .section-heading { color: var(--bg); margin-bottom: 1rem; }
-        .cta-left .section-sub { color: rgba(248,245,240,0.6); margin-bottom: 2.5rem; }
-        .cta-guarantees { display: flex; flex-direction: column; gap: 0.75rem; }
-        .cta-guarantee {
-            display: flex; align-items: flex-start; gap: 0.75rem;
-            font-size: 0.85rem; color: rgba(248,245,240,0.7); font-weight: 300;
-        }
-        .cta-guarantee i { color: var(--accent-light); font-size: 0.75rem; margin-top: 3px; flex-shrink: 0; }
-        .form-card { background: var(--bg); padding: 3rem 2.5rem; }
-        .form-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.3rem; font-weight: 700; margin-bottom: 0.4rem;
-        }
-        .form-subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; }
-        .form-group { margin-bottom: 1rem; }
-        .form-group label {
-            display: block; font-size: 0.7rem; font-weight: 600;
-            letter-spacing: 1px; text-transform: uppercase;
-            color: var(--text-muted); margin-bottom: 0.4rem;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%; background: var(--white);
-            border: 1px solid var(--border); padding: 0.8rem 1rem;
-            color: var(--text); font-size: 0.9rem; font-family: inherit;
-            transition: border-color 0.2s; outline: none; border-radius: 3px;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus { border-color: var(--accent-light); }
-        .form-group textarea { resize: vertical; min-height: 70px; }
-        .form-group select {
-            appearance: none; cursor: pointer;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat; background-position: right 1rem center;
-        }
-        .form-submit {
-            width: 100%; background: var(--accent); color: var(--bg); border: none;
-            padding: 0.9rem; font-size: 0.78rem; font-weight: 600;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            font-family: inherit; cursor: pointer;
-            transition: background 0.2s; margin-top: 0.5rem; border-radius: 3px;
-        }
-        .form-submit:hover { background: #3d3020; }
-        .form-note { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.75rem; text-align: center; }
-        .form-success { display: none; text-align: center; padding: 3rem 1rem; }
-        .form-success.show { display: block; }
-        .success-icon {
-            width: 56px; height: 56px; border-radius: 50%;
-            background: rgba(74,124,89,0.1); border: 1px solid var(--green);
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 1.25rem; color: var(--green); font-size: 1.1rem;
-        }
-        .form-success h3 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;
-        }
-        .form-success p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
-
-        /* FAQ */
-        .faq-list { margin-top: 3rem; }
-        .faq-item { border-bottom: 1px solid var(--border); }
-        .faq-item:first-child { border-top: 1px solid var(--border); }
-        .faq-question {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 0; cursor: pointer; gap: 2rem;
-        }
-        .faq-question h3 { font-size: 0.95rem; font-weight: 600; line-height: 1.4; }
-        .faq-icon { color: var(--accent-light); flex-shrink: 0; font-size: 0.75rem; transition: transform 0.2s; }
-        .faq-item.open .faq-icon { transform: rotate(45deg); }
-        .faq-answer { display: none; padding-bottom: 1.5rem; }
-        .faq-item.open .faq-answer { display: block; }
-        .faq-answer p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
-
-        /* FOOTER */
-        .about-strip {
-            max-width: 1200px; margin: 0 auto;
-            padding: 5rem 2rem;
-            display: flex; align-items: center; gap: 3rem;
-            border-top: 1px solid var(--border);
-        }
-        .about-avatar {
-            width: 72px; height: 72px; border-radius: 50%;
-            background: var(--surface); border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; overflow: hidden; font-size: 1.5rem; color: var(--text-muted);
-        }
-        .about-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
-        .about-text h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; }
-        .about-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; max-width: 600px; }
-        .footer-bottom {
-            border-top: 1px solid var(--border); text-align: center;
-            padding: 1.75rem 2rem; font-size: 0.75rem; color: var(--text-muted);
-        }
-        .footer-bottom a { color: var(--text-muted); text-decoration: none; }
-        .footer-bottom a:hover { color: var(--text); }
-        .footer-links { margin-top: 0.6rem; display: flex; justify-content: center; align-items: center; gap: 0.75rem; font-size: 0.75rem; color: var(--text-muted); }
-
-        /* SECTION BACKGROUNDS */
-        .hero { background: #FFFFFF; }
-        /* #fajdalom inherits --bg (eggshell) */
-        /* .why-section already background: var(--white) */
-        /* #modszer inherits --bg (eggshell) */
-        .story-section { background: var(--accent); }
-        .story-section .story-right p { color: rgba(248,245,240,0.8); }
-        .story-section .story-right p:first-child { color: rgba(248,245,240,0.88); }
-        .story-section .story-right strong { color: rgba(248,245,240,0.97); }
-        .story-section .story-left h3 { color: rgba(248,245,240,0.92); }
-        .story-section .story-left p { color: rgba(248,245,240,0.5); }
-        .story-section .story-avatar { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.08); }
-        .story-section .story-highlight { background: rgba(255,255,255,0.06); border-left-color: var(--accent-light); }
-        .story-section .story-highlight p { color: rgba(248,245,240,0.88) !important; }
-        #eredmenyek { background: #FFFFFF; }
-        /* #csomagok inherits --bg (eggshell) */
-        /* .cta-section already dark brown */
-
-        /* RESPONSIVE */
-        html, body { overflow-x: hidden; }
-        .mobile-br { display: none; }
-        @media (max-width: 640px) { .mobile-br { display: block; } }
-
-        @media (max-width: 1024px) {
-            .method-row { gap: 3rem; }
-            .hero-left { gap: 2.5rem; }
-            .hero-actions { justify-content: flex-start; }
-        }
-        @media (max-width: 900px) {
-            .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-            .pain-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-            .why-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .quote-strip-inner { grid-template-columns: 1fr; gap: 2rem; }
-            .story-inner { grid-template-columns: 1fr; gap: 3rem; }
-            .story-left { position: static; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .program-phases { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; }
-            .fit-grid { grid-template-columns: 1fr; }
-            .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
-        }
-        @media (max-width: 640px) {
-            /* NAV */
-            .nav-inner { padding: 1rem 1.25rem; }
-            .nav-links { gap: 1rem; }
-            .nav-links a:not(.nav-cta) { display: none; }
-            .nav-cta { display: none; }
-
-            /* HERO — teljes képernyő, letisztult */
-            .hero { padding: 8rem 1.25rem 2.5rem; min-height: 100svh; align-items: flex-start; }
-            .hero-inner { gap: 3rem; }
-            .hero-left { display: flex; flex-direction: column; align-items: flex-start; text-align: left; justify-content: flex-start; width: 100%; }
-            .hero h1 { font-size: 3.2rem; line-height: 1.2; margin-bottom: 1.75rem; letter-spacing: -0.5px; }
-            .hero-tagline { font-size: 1.5rem !important; margin-top: 0 !important; margin-bottom: 0 !important; }
-            .hero-actions { margin-top: 4rem; flex-direction: column; align-items: stretch; width: 100%; gap: 0; }
-            .hero-actions a { text-align: center; justify-content: center; }
-            .hero-actions .btn-secondary { display: none; }
-
-            /* HERO RIGHT — fotó + szöveg 2 oszlop */
-            .hero-right { display: grid; grid-template-columns: 42% 1fr; grid-template-rows: auto auto; column-gap: 1.5rem; row-gap: 1rem; align-items: start; overflow: hidden; }
-            .hero-right-photo { display: block; grid-column: 1; grid-row: 1; aspect-ratio: 1900 / 3300; border-radius: 8px; overflow: hidden; }
-            .hero-right-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-            .hero-right-texts { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; min-width: 0; }
-            .hero-right-footer { grid-column: 1 / -1; grid-row: 2; padding-top: 0.75rem; }
-            .hero-right .hero-card-p1 { font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; }
-            .hero-right-footer .hero-card-p3 { font-size: 1.15rem; line-height: 1.5; border-top: none; padding-top: 0; }
-            .hero-right .hero-card-p1 br { display: none; }
-            .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
-            .hero-stats .stat-num { font-size: 1.5rem; }
-            .hero-stats .stat-label { font-size: 0.7rem; line-height: 1.45; margin-top: 0.2rem; }
-
-            /* SECTIONS */
-            .section { padding: 4rem 1.25rem; }
-            .why-inner { padding: 4rem 1.25rem; }
-            .story-inner, .program-inner, .fit-inner { padding: 4rem 1.25rem; }
-            .cta-section { padding: 4rem 1.25rem; }
-            .section-heading { font-size: 1.75rem; }
-            .why-core { font-size: 1.5rem; }
-
-            /* PAIN ACCORDION */
-            .pain-grid { grid-template-columns: 1fr; grid-auto-rows: auto; gap: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-            .pain-card { border-radius: 0; border: none; border-bottom: 1px solid var(--border); border-top: none; padding: 1.1rem 1.25rem; cursor: pointer; }
-            .pain-card:last-child { border-bottom: none; }
-            .pain-card h3 { display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; margin-bottom: 0; }
-            .pain-card h3::after { content: '+'; font-size: 1.1rem; font-weight: 300; color: var(--accent-light); flex-shrink: 0; margin-left: 0.75rem; }
-            .pain-card.active h3::after { content: '−'; }
-            .pain-card p { display: none; margin-top: 0.75rem; margin-bottom: 0; }
-            .pain-card.active p { display: block; }
-
-            /* STORY */
-            .story-left { display: flex; flex-direction: row; align-items: flex-end; gap: 1rem; }
-            .story-avatar { width: 48%; height: 220px; overflow: hidden; flex-shrink: 0; border-radius: 8px; }
-            .story-left-info { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
-            .story-info-spacer { flex: 1; }
-            .story-left-info p { line-height: 1.3 !important; }
-            .story-info-name { font-size: 0.9rem; }
-            .story-info-title { font-size: 0.75rem; }
-            .story-info-bold { font-size: 0.85rem; }
-            .story-inner { gap: 1.5rem; }
-            .story-right { margin-top: 0; }
-
-            /* METHOD */
-            .method-row { grid-template-columns: 45% 1fr; gap: 1rem; }
-            .method-row:nth-child(even) { grid-template-columns: 1fr 45%; }
-            .method-row:nth-child(even) .method-row-image { order: 2; }
-            .method-row:nth-child(even) .method-row-content { order: 1; }
-            .method-row-image { height: 200px; overflow: hidden; }
-            .method-rows { gap: 2rem; }
-            .method-row h3 { font-size: 1rem; }
-            .method-row p, .method-list li { font-size: 0.88rem; }
-            .method-row-num { width: 34px; height: 34px; font-size: 0.65rem; margin-bottom: 0.75rem; }
-
-            /* CALENDLY */
-            .calendly-inline-widget { height: 630px !important; }
-
-            /* TESTIMONIALS */
-            .testimonials-grid { grid-template-columns: 1fr; }
-
-            /* SECTION HEADER */
-            .section-header { margin-bottom: 2.5rem; }
-
-            /* PRICING */
-            .pricing-card { padding: 2rem 1.5rem; }
-            .pricing-price { font-size: 1.9rem; }
-
-            .testimonial-card { padding: 2rem 1.5rem; }
-
-            /* FAQ */
-            .faq-question { padding: 1.25rem 0; }
-
-            /* WHY CALLOUT */
-            .why-callout { padding: 1.25rem 1.5rem; }
-
-            /* FOOTER */
-            .about-strip { flex-direction: column; gap: 1.5rem; text-align: center; padding: 3rem 1.25rem; }
-            .footer-links { flex-wrap: wrap; gap: 0.5rem; }
-            .form-card { padding: 2rem 1.5rem; }
-        }
-
-        /* HAMBURGER */
-        .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.25s; }
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger { display: none; width: 44px; height: 44px; margin-right: -10px; background: none; border: 0; cursor: pointer; position: relative; }
+        .hamburger span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--text); transition: transform .3s var(--ease), opacity .2s; }
+        .hamburger span:nth-child(1) { top: 16px; }
+        .hamburger span:nth-child(2) { top: 21.5px; }
+        .hamburger span:nth-child(3) { top: 27px; }
+        .hamburger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
         .mobile-menu {
-            display: none;
-            background: rgba(248, 245, 240, 0.98); backdrop-filter: blur(20px);
-            position: fixed; left: 0; right: 0;
-            z-index: 99; border-bottom: 1px solid var(--border);
+            position: fixed; inset: 0; z-index: 99;
+            background: var(--bg);
+            padding: 6.5rem var(--gutter) 2rem;
+            display: flex; flex-direction: column; gap: .25rem;
+            opacity: 0; visibility: hidden; transform: translateY(-8px);
+            transition: opacity .35s var(--ease), transform .35s var(--ease), visibility 0s .35s;
         }
-        .mobile-menu.open { display: block; }
-        .mobile-menu a {
-            display: block !important;
-            height: 64px !important; line-height: 64px !important;
-            padding: 0 1.5rem !important; margin: 0 !important;
-            box-sizing: border-box !important;
-            font-size: 1rem !important; font-weight: 500 !important;
-            color: var(--text) !important; text-decoration: none !important;
-            border-bottom: 1px solid var(--border) !important;
-            white-space: nowrap; overflow: hidden;
+        .mobile-menu.open { opacity: 1; visibility: visible; transform: none; transition: opacity .35s var(--ease), transform .35s var(--ease); }
+        .mobile-menu a:not(.btn) {
+            font-family: var(--serif); font-size: 1.9rem; color: var(--text);
+            text-decoration: none; padding: .6rem 0; border-bottom: 1px solid var(--border-soft);
         }
-        .mobile-menu a:last-child { border-bottom: none !important; }
+        .mobile-menu .btn { margin-top: 2rem; }
+        body.menu-open { overflow: hidden; }
+        body.menu-open .nav { background: var(--bg); }
 
-        @media (max-width: 640px) {
-            .hamburger { display: flex; }
+        /* HERO */
+        .hero { padding-top: clamp(7rem, 14vh, 9.5rem); padding-bottom: clamp(3.5rem, 8vw, 6rem); background: var(--paper); }
+        .hero-grid {
+            display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+            gap: clamp(2.5rem, 6vw, 6rem); align-items: center;
         }
-
-        /* VIDEO TESTIMONIALS */
-        .video-section-header { text-align: center; margin-bottom: 3rem; }
-        .video-carousel { position: relative; }
-        .video-grid {
-            display: flex;
-            overflow-x: auto;
-            gap: 1.25rem;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.6rem, 6.2vw, 5.4rem);
+            font-weight: 700; line-height: 1.04; letter-spacing: -0.02em;
+            margin-bottom: 1.75rem;
         }
-        .video-grid::-webkit-scrollbar { display: none; }
-        .video-next-btn, .video-prev-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 44px; height: 44px;
-            border: none; border-radius: 50%;
-            background: rgba(46, 35, 25, 0.45);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.2s, opacity 0.2s;
-            z-index: 2;
+        .hero h1 em { display: block; font-style: italic; font-weight: 500; color: var(--gold); }
+        .hero-sub { font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--text-2); line-height: 1.75; max-width: 34em; margin-bottom: 2.5rem; }
+        .hero-sub strong { color: var(--text); font-weight: 500; }
+        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+        .hero-meta {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2.5rem);
+            margin-top: clamp(2.5rem, 5vw, 3.5rem); padding-top: 1.75rem;
+            border-top: 1px solid var(--border-soft);
         }
-        .video-next-btn { right: 0.75rem; }
-        .video-prev-btn { left: 0.75rem; }
-        .video-next-btn:hover, .video-prev-btn:hover { background: rgba(46, 35, 25, 0.7); }
-        .video-next-btn.is-hidden, .video-prev-btn.is-hidden { opacity: 0; pointer-events: none; }
-        .video-card {
-            cursor: pointer;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-            aspect-ratio: 9/16;
-            background: var(--surface);
-            flex: 0 0 auto;
-            width: 220px;
-            scroll-snap-align: start;
+        .hero-meta div { min-width: 0; }
+        .hero-meta b { display: block; font-family: var(--serif); font-size: 1.9rem; font-weight: 600; color: var(--gold); line-height: 1.1; }
+        .hero-meta span { font-size: .82rem; color: var(--text-muted); line-height: 1.45; display: block; margin-top: .3rem; }
+        .hero-photo { position: relative; }
+        .hero-photo .frame {
+            border-radius: 200px 200px var(--radius) var(--radius);
+            overflow: hidden; aspect-ratio: 4 / 5.4; background: var(--surface);
         }
-        .video-thumb { width: 100%; height: 100%; position: relative; }
-        .video-thumb img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform 0.4s ease;
-        }
-        .video-card:hover .video-thumb img { transform: scale(1.04); }
-        .video-play-btn {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 52px; height: 52px;
-            background: rgba(46, 35, 25, 0.82);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--bg);
-            font-size: 1rem;
-            padding-left: 3px;
-            transition: background 0.2s, transform 0.2s;
-        }
-        .video-card:hover .video-play-btn {
-            background: var(--accent-light);
-            transform: translate(-50%, -50%) scale(1.08);
+        .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transform: scale(1.06); transition: transform 1.6s var(--ease); }
+        .loaded .hero-photo img { transform: scale(1); }
+        .hero-photo figcaption {
+            position: absolute; left: -1.5rem; bottom: 2rem;
+            background: var(--paper); border: 1px solid var(--border-soft);
+            border-radius: 12px; padding: 1rem 1.25rem; max-width: 250px;
+            box-shadow: 0 18px 40px -24px rgba(28,20,16,.35);
+            font-family: var(--serif); font-style: italic; font-size: 1rem; line-height: 1.45; color: var(--text);
         }
 
-        /* LIGHTBOX */
-        .video-lightbox {
-            display: none;
-            position: fixed; inset: 0;
-            background: rgba(0, 0, 0, 0.94);
-            z-index: 999;
-            align-items: center; justify-content: center;
-        }
-        .video-lightbox.active { display: flex; }
-        .video-lightbox-inner {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 90vh;
-            max-width: 90vw;
-        }
-        .video-lightbox-inner video {
-            height: 90vh;
-            width: auto;
-            max-width: 90vw;
-            border-radius: 4px;
-            background: #000;
-            display: block;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: -2.75rem; right: 0;
-            background: none; border: none;
-            color: rgba(255,255,255,0.7);
-            font-size: 1.6rem; cursor: pointer;
-            line-height: 1; padding: 0.25rem;
-            transition: color 0.15s;
-        }
-        .lightbox-close:hover { color: #fff; }
+        /* ESSENCE — "röviden" */
+        .essence { background: var(--bg); }
+        .essence-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .essence-item { background: var(--bg); padding: clamp(1.75rem, 3vw, 2.5rem); }
+        .essence-item .num { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--gold); margin-bottom: 1.25rem; display: block; }
+        .essence-item h3 { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; line-height: 1.25; margin-bottom: .85rem; }
+        .essence-item p { color: var(--text-2); font-size: .98rem; line-height: 1.75; }
+        .essence-foot { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+        .essence-foot p { color: var(--text-muted); font-size: .95rem; }
 
-        @media (max-width: 1024px) {
-            .video-grid { gap: 0.75rem; }
-            .video-card { width: 170px; }
+        /* PAIN */
+        .pain { background: var(--paper); }
+        .pain-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.25rem; }
+        .pain-card {
+            border: 1px solid var(--border-soft); border-radius: var(--radius);
+            background: var(--bg);
+            transition: border-color .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
+        }
+        .pain-card summary { list-style: none; cursor: default; padding: 1.75rem 1.75rem 0; }
+        .pain-card summary::-webkit-details-marker { display: none; }
+        .pain-card h3 { font-size: 1.05rem; font-weight: 600; display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+        .pain-card h3 .plus { display: none; color: var(--gold); font-weight: 400; }
+        .pain-card p { color: var(--text-2); font-size: .93rem; line-height: 1.7; padding: .65rem 1.75rem 1.75rem; }
+        @media (hover:hover) { .pain-card:hover { border-color: var(--border); transform: translateY(-3px); box-shadow: 0 16px 36px -26px rgba(28,20,16,.4); } }
+        .pain-note { margin-top: 2rem; color: var(--text-2); font-size: .98rem; max-width: 64ch; }
+        .pain-note strong { color: var(--text); font-weight: 600; }
+
+        /* WHY */
+        .why { background: var(--bg); }
+        .why-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+        .why-core {
+            font-family: var(--serif); font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+            font-weight: 500; line-height: 1.3; letter-spacing: -.01em;
+            margin: .5rem 0 2.5rem; text-wrap: balance;
+        }
+        .why-core em { color: var(--gold); }
+        .why-chain {
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .6rem .5rem;
+            margin: 0 auto 2.75rem;
+        }
+        .why-chain span {
+            font-size: .85rem; font-weight: 500; color: var(--text);
+            background: var(--paper); border: 1px solid var(--border-soft);
+            padding: .55rem 1rem; border-radius: 999px;
+        }
+        .why-chain i { font-style: normal; color: var(--gold); font-size: .9rem; }
+        .why-body { color: var(--text-2); font-size: 1.05rem; line-height: 1.85; max-width: 60ch; margin: 0 auto; }
+        .why-body p + p { margin-top: .6rem; }
+        .why-callout {
+            margin: 2.5rem auto 0; max-width: 560px;
+            padding: 1.75rem 2rem; border-radius: var(--radius);
+            background: var(--paper); border: 1px solid var(--border-soft);
+        }
+        .why-callout p { font-family: var(--serif); font-size: 1.25rem; line-height: 1.5; }
+        .why-callout p:first-child { color: var(--text-muted); font-style: italic; }
+        .why-callout strong { font-weight: 600; color: var(--text); }
+
+        /* METHOD */
+        .method { background: var(--paper); }
+        .steps { display: flex; flex-direction: column; gap: clamp(3rem, 7vw, 6rem); }
+        .step { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 5.5rem); align-items: center; }
+        .step:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+        .step:nth-child(even) .step-img { order: 2; }
+        .step-img { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; background: var(--surface); max-height: 560px; }
+        .step-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+        .step:hover .step-img img { transform: scale(1.03); }
+        .step-num { font-family: var(--serif); font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 400; font-style: italic; color: var(--gold-soft); line-height: 1; margin-bottom: .75rem; opacity: .85; }
+        .step h3 { font-family: var(--serif); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
+        .step p { color: var(--text-2); font-size: 1.02rem; line-height: 1.8; }
+        .step p + p { margin-top: .75rem; }
+        .step strong { color: var(--text); font-weight: 600; }
+        .dash-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin-top: .25rem; }
+        .dash-list li { position: relative; padding-left: 1.4rem; color: var(--text-2); font-size: 1rem; line-height: 1.7; }
+        .dash-list li::before { content: ''; position: absolute; left: 0; top: .82em; width: .75rem; height: 1px; background: var(--gold); }
+
+        /* EXPANDABLE (details) */
+        .more { margin-top: 1.25rem; }
+        .more > summary {
+            list-style: none; cursor: pointer; user-select: none;
+            display: inline-flex; align-items: center; gap: .55rem;
+            font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+            color: var(--text); padding: .35rem 0;
+            border-bottom: 1px solid var(--gold-soft);
+        }
+        .more > summary::-webkit-details-marker { display: none; }
+        .more > summary .icon { transition: transform .35s var(--ease); color: var(--gold); }
+        .more[open] > summary .icon { transform: rotate(45deg); }
+        .more .more-body { padding-top: 1.25rem; }
+        .more .when-open { display: none; }
+        .more[open] .when-open { display: inline; }
+        .more[open] .when-closed { display: none; }
+
+        /* STORY */
+        .story { background: var(--accent); color: var(--on-dark); }
+        .story-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(2.5rem, 7vw, 6.5rem); align-items: start; }
+        .story-side { position: sticky; top: 7rem; }
+        .story-photo { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; background: rgba(255,255,255,.06); }
+        .story-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+        .story-id { margin-top: 1.25rem; display: flex; flex-direction: column; gap: .2rem; font-size: .85rem; color: var(--on-dark-3); }
+        .story-id b { color: var(--on-dark); font-weight: 600; }
+        .story .eyebrow { color: var(--gold-soft); }
+        .story .h2 { color: var(--on-dark); }
+        .story-text p { color: var(--on-dark-2); font-size: 1.06rem; line-height: 1.9; }
+        .story-text p + p { margin-top: 1.1rem; }
+        .story-text strong { color: var(--on-dark); font-weight: 600; }
+        .story-text .intro { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.6; color: var(--on-dark); }
+        .story-quote {
+            margin: 2.25rem 0; padding: 1.5rem 0 1.5rem 1.75rem;
+            border-left: 2px solid var(--gold-soft);
+            font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, 2vw, 1.45rem); line-height: 1.55; color: var(--on-dark);
+        }
+        .story .more > summary { color: var(--on-dark); }
+        .story .more .more-body p:first-child { margin-top: 0; }
+
+        /* RESULTS */
+        .results { background: var(--bg); }
+        .t-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.25rem; }
+        .t-card {
+            background: var(--paper); border: 1px solid var(--border-soft); border-radius: var(--radius);
+            padding: clamp(1.75rem, 3vw, 2.5rem);
+            display: flex; flex-direction: column;
+        }
+        .t-tags { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+        .t-result { font-family: var(--serif); font-size: clamp(1.2rem, 1.8vw, 1.4rem); line-height: 1.45; font-weight: 500; margin-bottom: 1rem; text-wrap: pretty; }
+        .t-result-more { color: var(--text-2); font-size: .93rem; line-height: 1.7; margin-bottom: 1.25rem; }
+        .t-card blockquote { color: var(--text-2); font-size: .95rem; line-height: 1.8; font-style: italic; }
+        .t-card .more { margin-top: 0; margin-bottom: 1.5rem; }
+        .t-card .more > summary { font-size: .72rem; }
+        .t-note { color: var(--text-muted); font-size: .9rem; margin-top: .75rem; }
+        .qa { margin: .25rem 0 0; }
+        .qa dt { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-top: 1rem; }
+        .qa dt:first-child { margin-top: 0; }
+        .qa dd { margin: .3rem 0 0; color: var(--text-2); font-size: .95rem; line-height: 1.75; font-style: italic; }
+        .t-author { margin-top: auto; display: flex; align-items: center; gap: .85rem; padding-top: 1.25rem; border-top: 1px solid var(--border-soft); }
+        .t-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; font-size: .7rem; font-weight: 600; color: var(--text-muted); overflow: hidden; flex-shrink: 0; }
+        .t-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .t-name { font-size: .9rem; font-weight: 600; line-height: 1.3; }
+        .t-role { font-size: .8rem; color: var(--text-muted); }
+
+        /* VIDEOS */
+        .videos { padding-top: 0; }
+        .videos-head { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 1.75rem; }
+        .videos-head h3 { font-family: var(--serif); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 600; }
+        .v-nav { display: flex; gap: .5rem; }
+        .v-btn { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--border); background: var(--paper); color: var(--text); display: grid; place-items: center; cursor: pointer; transition: background .25s, border-color .25s, opacity .25s; }
+        .v-btn:hover { border-color: var(--text-muted); }
+        .v-btn:disabled { opacity: .35; cursor: default; }
+        .v-track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: .25rem; }
+        .v-track::-webkit-scrollbar { display: none; }
+        .v-card { flex: 0 0 auto; width: clamp(160px, 22vw, 230px); aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden; position: relative; scroll-snap-align: start; background: var(--surface); cursor: pointer; border: 0; padding: 0; }
+        .v-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+        .v-card:hover img { transform: scale(1.05); }
+        .v-card .play { position: absolute; inset: auto auto 1rem 1rem; width: 46px; height: 46px; border-radius: 50%; background: rgba(248,245,240,.92); color: var(--accent); display: grid; place-items: center; transition: transform .3s var(--ease); }
+        .v-card:hover .play { transform: scale(1.08); }
+
+        .lightbox { position: fixed; inset: 0; z-index: 999; background: rgba(12,9,7,.94); display: none; align-items: center; justify-content: center; padding: 1rem; }
+        .lightbox.active { display: flex; }
+        .lightbox video { max-height: 88vh; max-width: 100%; border-radius: 8px; background: #000; }
+        .lightbox-close { position: absolute; top: 1rem; right: 1rem; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); background: transparent; color: #fff; font-size: 1.1rem; cursor: pointer; }
+
+        /* PRICING */
+        .pricing { background: var(--paper); }
+        .p-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1rem; align-items: stretch; }
+        .p-card {
+            border: 1px solid var(--border-soft); border-radius: var(--radius);
+            padding: 2rem 1.6rem; background: var(--bg);
+            display: flex; flex-direction: column; position: relative;
+            transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+        }
+        @media (hover:hover) { .p-card:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -30px rgba(28,20,16,.45); } }
+        .p-card.featured { background: var(--accent); color: var(--on-dark); border-color: var(--accent); }
+        .p-badge { position: absolute; top: 1.25rem; right: 1.25rem; font-size: .64rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; background: var(--gold-soft); color: var(--accent); padding: .3rem .7rem; border-radius: 999px; }
+        .p-name { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; margin-bottom: .4rem; }
+        .p-tag { font-size: .88rem; color: var(--text-2); line-height: 1.55; min-height: 4.65em; margin-bottom: 1.5rem; }
+        .featured .p-tag { color: var(--on-dark-2); }
+        .p-price { font-family: var(--serif); font-size: 2rem; font-weight: 600; line-height: 1; white-space: nowrap; }
+        .p-price small { font-family: var(--sans); font-size: .9rem; font-weight: 400; color: var(--text-muted); margin-left: .15rem; }
+        .featured .p-price small { color: var(--on-dark-3); }
+        .p-sessions { font-size: .8rem; font-weight: 600; color: var(--gold); margin-top: .75rem; }
+        .featured .p-sessions { color: var(--gold-soft); }
+        .p-inst { font-size: .8rem; color: var(--text-muted); min-height: 1.4em; margin-top: .2rem; }
+        .featured .p-inst { color: var(--on-dark-3); }
+        .p-feat { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin: 1.5rem 0 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); flex: 1; }
+        .featured .p-feat { border-color: rgba(255,255,255,.14); }
+        .p-feat li { display: flex; gap: .6rem; font-size: .88rem; line-height: 1.5; color: var(--text-2); }
+        .featured .p-feat li { color: var(--on-dark-2); }
+        .p-feat .icon { color: var(--green); margin-top: .22em; font-size: .85rem; }
+        .featured .p-feat .icon { color: var(--gold-soft); }
+        .p-cta { width: 100%; }
+        .p-card:not(.featured) .p-cta { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .p-card:not(.featured) .p-cta:hover { background: var(--paper); border-color: var(--text-muted); transform: none; box-shadow: none; }
+
+        /* CONSULT */
+        .consult { background: var(--accent); color: var(--on-dark); }
+        .consult-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
+        .consult .eyebrow { color: var(--gold-soft); }
+        .consult .h2 { color: var(--on-dark); }
+        .consult .lead { color: var(--on-dark-2); }
+        .consult-side { position: sticky; top: 7rem; }
+        .check-group { margin-top: 2.25rem; }
+        .check-group h4 { font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: .9rem; }
+        .check-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+        .check-list li { display: flex; gap: .75rem; font-size: .95rem; line-height: 1.55; color: var(--on-dark-2); }
+        .check-list .icon { color: var(--gold-soft); margin-top: .25em; font-size: .85rem; }
+        .cal-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 30px 60px -40px rgba(0,0,0,.6); }
+        .calendly-inline-widget { min-width: 280px; width: 100%; height: 720px; transition: height .3s var(--ease); }
+        .cal-fallback { padding: 1rem 1.25rem; font-size: .85rem; color: var(--text-muted); text-align: center; border-top: 1px solid var(--border-soft); }
+        .cal-fallback a { color: var(--text); font-weight: 600; }
+
+        /* FAQ */
+        .faq { background: var(--bg); }
+        .faq-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 5rem); }
+        .faq-list { border-top: 1px solid var(--border); }
+        .faq-item { border-bottom: 1px solid var(--border); }
+        .faq-item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.5rem 0; }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary h3 { font-size: 1.02rem; font-weight: 600; line-height: 1.45; }
+        .faq-item summary .icon { color: var(--gold); transition: transform .35s var(--ease); }
+        .faq-item[open] summary .icon { transform: rotate(45deg); }
+        .faq-item p { color: var(--text-2); font-size: .98rem; line-height: 1.8; padding-bottom: 1.5rem; max-width: 62ch; }
+
+        /* FOOTER */
+        .footer { background: var(--paper); border-top: 1px solid var(--border-soft); }
+        .footer-top { display: flex; align-items: center; gap: 1.5rem; padding-top: 3.5rem; padding-bottom: 3rem; }
+        .footer-avatar { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--surface); }
+        .footer-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
+        .footer-top h3 { font-size: 1rem; font-weight: 600; margin-bottom: .25rem; }
+        .footer-top p { font-size: .9rem; color: var(--text-2); max-width: 60ch; line-height: 1.6; }
+        .footer-bottom { border-top: 1px solid var(--border-soft); padding-top: 1.5rem; padding-bottom: 1.75rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
+        .footer-bottom nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        .footer-bottom a { color: var(--text-muted); text-decoration: none; display: inline-flex; gap: .4rem; align-items: center; }
+        .footer-bottom a:hover { color: var(--text); }
+
+        /* GDPR */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(12,9,7,.55); z-index: 9999; overflow-y: auto; padding: 1rem; }
+        .modal.open { display: block; }
+        .modal-box { background: #fff; max-width: 620px; margin: 3rem auto; padding: clamp(1.75rem, 5vw, 3rem); border-radius: var(--radius); position: relative; }
+        .modal-box h2 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .modal-box h3 { font-family: var(--serif); font-size: 1.15rem; margin: 1.75rem 0 1rem; }
+        .modal-box p { font-size: .88rem; line-height: 1.8; color: #555; margin-bottom: 1rem; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; width: 40px; height: 40px; background: none; border: 0; font-size: 1.5rem; cursor: pointer; color: #999; }
+
+        /* REVEAL ANIMATIONS */
+        .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+        .js .reveal.in { opacity: 1; transform: none; }
+        .js .hero .rise { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: var(--d, 0s); }
+        .js.loaded .hero .rise { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .js .reveal, .js .hero .rise { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .hero-photo img { transform: none !important; }
+        }
+
+        /* ───── RESPONSIVE ───── */
+        @media (max-width: 1100px) {
+            .p-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+            .p-tag { min-height: 0; }
+        }
+        @media (max-width: 960px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 2.5rem; }
+            .hero-photo figcaption { display: none; }
+            .pain-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+            .consult-grid { grid-template-columns: minmax(0,1fr); }
+            .consult-side { position: static; }
+            .check-groups { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 2rem; }
+            .faq-grid { grid-template-columns: minmax(0,1fr); gap: 0; }
+        }
+        @media (max-width: 820px) {
+            .hero-grid { grid-template-columns: minmax(0,1fr); }
+            .hero-photo { display: none; }
+            .hero-sub { max-width: 40em; }
+            .essence-grid { grid-template-columns: minmax(0,1fr); }
+            .step, .step:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+            .step:nth-child(even) .step-img { order: 0; }
+            .step-img { aspect-ratio: 16 / 10; max-height: none; }
+            .story-grid { grid-template-columns: minmax(0,1fr); }
+            .story-side { position: static; display: grid; grid-template-columns: 140px minmax(0,1fr); gap: 1.25rem; align-items: end; }
+            .story-photo { aspect-ratio: 1; }
+            .story-id { flex-direction: column; gap: .2rem; margin-top: 0; }
+            .t-grid { grid-template-columns: minmax(0,1fr); }
         }
         @media (max-width: 600px) {
-            .video-grid { gap: 0.75rem; }
-            .video-card { width: 42vw; }
-            .video-next-btn, .video-prev-btn { width: 38px; height: 38px; }
-            .video-next-btn { right: 0.5rem; }
-            .video-prev-btn { left: 0.5rem; }
-            .video-lightbox-inner video { height: 80vh; max-width: 95vw; }
+            .hero { padding-top: 6.25rem; }
+            .hero-actions .btn { width: 100%; }
+            .hero .eyebrow { letter-spacing: .12em; font-size: .68rem; }
+            .hero .eyebrow::before { width: 18px; }
+            .hero-meta b { font-size: 1.5rem; }
+            .hero-meta span { font-size: .76rem; }
+            .pain-grid { grid-template-columns: minmax(0,1fr); gap: 0; border: 1px solid var(--border-soft); border-radius: var(--radius); overflow: hidden; }
+            .pain-card { border: 0; border-radius: 0; border-bottom: 1px solid var(--border-soft); }
+            .pain-card:last-child { border-bottom: 0; }
+            .pain-card summary { cursor: pointer; padding: 1.15rem 1.25rem; }
+            .pain-card h3 { font-size: 1rem; }
+            .pain-card h3 .plus { display: inline; transition: transform .3s var(--ease); }
+            .pain-card[open] h3 .plus { transform: rotate(45deg); }
+            .pain-card p { padding: 0 1.25rem 1.25rem; }
+            .why-callout { padding: 1.5rem; }
+            .why-chain span { font-size: .8rem; padding: .45rem .8rem; }
+            .p-grid { grid-template-columns: minmax(0,1fr); }
+            .check-groups { grid-template-columns: minmax(0,1fr); }
+            .cal-card { margin: 0 calc(var(--gutter) * -1); border-radius: 0; }
+            .videos-head .v-nav { display: none; }
+            .v-card { width: 44vw; }
+            .story-side { grid-template-columns: 110px minmax(0,1fr); }
+            .footer-top { flex-direction: column; align-items: flex-start; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 16 16"><path d="M5 3.5v9l7.5-4.5z" fill="currentColor"/></symbol>
+    <symbol id="i-left" viewBox="0 0 16 16"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-right" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="11.6" cy="4.4" r=".8" fill="currentColor"/></symbol>
+</svg>
+
 <!-- NAV -->
-<nav>
+<header class="nav" id="nav">
     <div class="nav-inner">
-        <div class="logo">TestKözép<span>pont</span></div>
-        <div class="nav-links">
-            <a href="#modszer">A Módszer</a>
+        <a href="#top" class="logo">TestKözép<span>pont</span></a>
+        <nav class="nav-links" aria-label="Fő menü">
+            <a href="#modszer">A módszer</a>
+            <a href="#eredmenyek">Eredmények</a>
             <a href="#csomagok">Csomagok</a>
-            <a href="#konzultacio" class="nav-cta">Ingyenes Konzultáció</a>
-        </div>
-        <button class="hamburger" id="hamburger" aria-label="Menü">
+            <a href="#konzultacio" class="btn btn-primary">Ingyenes konzultáció</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="Menü" aria-expanded="false" aria-controls="mobile-menu">
             <span></span><span></span><span></span>
         </button>
     </div>
-</nav>
+</header>
 <div class="mobile-menu" id="mobile-menu">
-    <a href="#modszer">A Módszer</a>
+    <a href="#modszer">A módszer</a>
+    <a href="#eredmenyek">Eredmények</a>
+    <a href="#rolam">Rólam</a>
     <a href="#csomagok">Csomagok</a>
-    <a href="#konzultacio">Ingyenes Konzultáció</a>
+    <a href="#gyik">Kérdések</a>
+    <a href="#konzultacio" class="btn btn-primary">Ingyenes konzultáció <svg class="icon"><use href="#i-arrow"/></svg></a>
 </div>
+
+<main id="top">
 
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-inner">
-        <div class="hero-left">
-            <div>
-                <h1>Fáj a hátad.<br><em>Próbáltál már mindent.</em></h1>
-                <p class="hero-tagline" style="font-family:'Playfair Display',Georgia,serif; font-size:1.7rem; font-weight:700; color:var(--text); margin-bottom:0;">Ezzel nem vagy egyedül.</p>
+    <div class="wrap hero-grid">
+        <div>
+            <div class="eyebrow rise" style="--d:.05s">TestKözéppont Módszer · Budapest</div>
+            <h1 class="rise" style="--d:.15s">Fáj a hátad.<em>Próbáltál már mindent.</em></h1>
+            <p class="hero-sub rise" style="--d:.3s">Gyógytorna, masszázs, talán csontkovács is. Mindegyik segített egy kicsit — aztán visszajött. <strong>Mert a fájdalom helyét kezelték, nem az okát.</strong></p>
+            <div class="hero-actions rise" style="--d:.42s">
+                <a href="#konzultacio" class="btn btn-primary">Ingyenes konzultáció <svg class="icon"><use href="#i-arrow"/></svg></a>
+                <a href="#roviden" class="btn btn-ghost">Hogyan működik</a>
             </div>
-            <div class="hero-actions">
-                <a href="#konzultacio" class="btn-primary">
-                    Ingyenes Konzultáció
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                <a href="#modszer" class="btn-secondary">A módszerről <i class="fa-solid fa-arrow-right"></i></a>
+            <div class="hero-meta rise" style="--d:.55s">
+                <div><b>90</b><span>napos, személyre szabott folyamat</span></div>
+                <div><b>1:1</b><span>személyes munka, nincs csoport</span></div>
+                <div><b>Bp.</b><span>rugalmas időpontok</span></div>
             </div>
         </div>
-        <div class="hero-right">
-            <div class="hero-right-photo">
-                <img src="milenaris.JPG" alt="Levi">
-            </div>
-            <div class="hero-right-texts">
-                <p class="hero-card-p1">
-                    Voltál már gyógytornásznál. Masszőrnél.<br>Talán csontkovácsnál is.<br>
-                    Mindenki segített egy kicsit — aztán visszajött a fájdalom.<br>
-                    Mindig visszajön.
-                </p>
-                <p class="hero-card-p1">A fájdalom helyét kezelték. Nem az okát.</p>
-            </div>
-            <div class="hero-right-footer">
-                <p class="hero-card-p3">Nem az a kérdés, hol fáj — hanem hogy honnan ered.</p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-num">90</div>
-                        <div class="stat-label">napos személyre szabott program</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-num">1:1</div>
-                        <div class="stat-label">személyes foglalkozás,<br>nincs csoport</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-num">Bp.</div>
-                        <div class="stat-label">Budapest, rugalmas időpontok</div>
-                    </div>
-                </div>
-            </div>
+        <figure class="hero-photo rise" style="--d:.2s">
+            <div class="frame"><img src="milenaris.JPG" alt="Farkas Levente" fetchpriority="high"></div>
+            <figcaption>„Nem az a kérdés, hol fáj — hanem hogy honnan ered.”</figcaption>
+        </figure>
+    </div>
+</section>
+
+<!-- RÖVIDEN -->
+<section class="section essence" id="roviden">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <div class="eyebrow">Röviden</div>
+            <h2 class="h2">A lényeg, <em>egy percben.</em></h2>
+        </div>
+        <div class="essence-grid">
+            <article class="essence-item reveal">
+                <span class="num">01 — Az ok</span>
+                <h3>A medence a test alapja.</h3>
+                <p>Ha nem optimális helyzetben áll, felborul az izomegyensúly. A test kompenzál, és a kompenzációk lánca egy ponton fájdalomhoz vezet — derékban, nyakban, vállban, csípőben vagy térdben.</p>
+            </article>
+            <article class="essence-item reveal" style="--d:.1s">
+                <span class="num">02 — A megközelítés</span>
+                <h3>Nem ott keresem a hibát, ahol fáj.</h3>
+                <p>Rendszerszintű felmérés és ok-alapú elemzés helyi kezelés helyett. Megérted, miért ott fáj, ahol fáj — és mi tartja fenn.</p>
+            </article>
+            <article class="essence-item reveal" style="--d:.2s">
+                <span class="num">03 — A változás</span>
+                <h3>Újraírjuk a mozgásmintáidat.</h3>
+                <p>Mélyizomtornával helyreállítjuk az egyensúlyt, a mozdulatokat pedig addig ismételjük, amíg tudat alatt is jól működnek. Ez 90 napos folyamat, nem egy-egy alkalom.</p>
+            </article>
+        </div>
+        <div class="essence-foot reveal">
+            <p>Ennyi a lényeg. A részletekért görgess tovább — vagy beszéljük át a te helyzeted.</p>
+            <a href="#konzultacio" class="text-link">Időpontot foglalok <svg class="icon"><use href="#i-arrow"/></svg></a>
         </div>
     </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- PAIN GRID -->
-<section class="section" id="fajdalom">
-    <div class="section-header">
-        <div class="section-eyebrow">A Probléma</div>
-        <h2 class="section-heading">Ismerős valamelyik?</h2>
-
-    </div>
-    <div class="pain-grid">
-        <div class="pain-card">
-            <h3>Krónikus derékfájás</h3>
-            <p>Az a tompa, állandó fájdalom, ami sosem múlik el teljesen. Hosszú meetingek után fellángol, éjszaka felébreszt, hosszabb sétán kínoz.</p>
+<!-- PROBLÉMA -->
+<section class="section pain" id="fajdalom">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <div class="eyebrow">A probléma</div>
+            <h2 class="h2">Ismerős valamelyik?</h2>
         </div>
-        <div class="pain-card">
-            <h3>Merev nyak és vállak</h3>
-            <p>Tenziós fejfájás, előrenyúló fejtartás, zsibbadás-érzet a karban — és nulla vállmobilitás. Egy rossz mozdulat, és napokra kiesel.</p>
+        <div class="pain-grid">
+            <details class="pain-card reveal" open>
+                <summary><h3>Krónikus derékfájás <span class="plus">+</span></h3></summary>
+                <p>Az a tompa, állandó fájdalom, ami sosem múlik el teljesen. Hosszú meetingek után fellángol, éjszaka felébreszt, hosszabb sétán kínoz.</p>
+            </details>
+            <details class="pain-card reveal" style="--d:.06s" open>
+                <summary><h3>Merev nyak és vállak <span class="plus">+</span></h3></summary>
+                <p>Tenziós fejfájás, előrenyúló fejtartás, zsibbadásérzet a karban — és nulla vállmobilitás. Egy rossz mozdulat, és napokra kiesel.</p>
+            </details>
+            <details class="pain-card reveal" style="--d:.12s" open>
+                <summary><h3>Térdfájás, merev csípő <span class="plus">+</span></h3></summary>
+                <p>A nem optimális medencehelyzet nemcsak a derekadban hagy nyomot. Csípőmerevség, térdfájás, zsibbadás a lábban — ugyanannak a rendszerproblémának a tünetei.</p>
+            </details>
+            <details class="pain-card reveal" open>
+                <summary><h3>Fájdalomcsillapítókon élsz <span class="plus">+</span></h3></summary>
+                <p>Ibuprofen reggel, gyulladáscsökkentő este — csak hogy kibírd a napot. Működik, amíg tart. De eltakarja a problémát, miközben az ok tovább dolgozik.</p>
+            </details>
+            <details class="pain-card reveal" style="--d:.06s" open>
+                <summary><h3>Mindent kipróbáltál már <span class="plus">+</span></h3></summary>
+                <p>Gyógytorna, masszázs, csontkovács, YouTube-nyújtások. Mindegyik segít egy kicsit — aztán visszajön. Mert mindegyik a tünetet kezeli.</p>
+            </details>
+            <details class="pain-card reveal" style="--d:.12s" open>
+                <summary><h3>Évről évre rosszabb <span class="plus">+</span></h3></summary>
+                <p>Tudod, hogy az ignorálás nem megoldás. Minden évben egy kicsit nehezebb visszarázódni — és egyre jobban aggaszt, mi lesz 10 év múlva.</p>
+            </details>
         </div>
-        <div class="pain-card">
-            <h3>Térdfájás, merev csípő</h3>
-            <p>Az elmozdult medence nemcsak a derekadban hagy nyomot. A csípő merevsége, a térdfájás, a lábban fellépő zsibbadás — mind ugyanannak a rendszerproblémának a tünetei.</p>
-        </div>
-        <div class="pain-card">
-            <h3>Fájdalomcsillapítókon élsz</h3>
-            <p>Ibuprofen reggel, gyulladáscsökkentő este — csak hogy kibírd a napot. Működik, amíg tart. De ez nem megoldás: eltakarja a problémát, miközben az ok tovább rombol.</p>
-        </div>
-        <div class="pain-card">
-            <h3>Mindent kipróbáltál már</h3>
-            <p>Gyógytorna, masszázs, csontkovács, YouTube nyújtások. Mindegyik segít egy kicsit — aztán visszajön. Mert mindegyik a tünetet kezeli.</p>
-        </div>
-        <div class="pain-card">
-            <h3>Évről évre rosszabb</h3>
-            <p>Tudod, hogy az ignorálás nem megoldás. Minden évben egy kicsit nehezebb visszarázódni — és egyre jobban félsz attól, mi lesz 10 év múlva.</p>
-        </div>
+        <p class="pain-note reveal">Nem csak irodai munkáról van szó. <strong>Bárkit érinthet, aki sokat ül vagy áll, statikus testhelyzetben dolgozik, vagy egyoldalúan mozog</strong> — a fogorvostól az informatikusig.</p>
     </div>
 </section>
 
-<!-- WHY IT DOESN'T HEAL -->
-<div class="why-section">
-    <div class="why-inner">
-        <div class="section-eyebrow" style="text-align:center;">Miért nem múlt el eddig?</div>
-        <p class="why-core">A fájdalom szinte soha nem ott van,<br>ahol a probléma forrása.</p>
-        <div class="why-body">
-            <p>A test mindig a legkisebb ellenállás felé törekszik.</p>
-            <p>Alkalmazkodik, kompenzál, megkerüli a hibát&nbsp;— és elvégzi a mindennapi feladatokat.</p>
-            <p>Egy bizonyos pont után azonban ezek az alkalmazkodások elváltozásokhoz vezetnek.</p>
-            <p>A fájdalom ezeknek a jele.</p>
+<!-- MIÉRT -->
+<section class="section why">
+    <div class="wrap why-inner">
+        <div class="eyebrow center reveal">Miért nem múlt el eddig?</div>
+        <p class="why-core reveal">A fájdalom szinte soha nincs ott, <em>ahol a probléma forrása.</em></p>
+        <div class="why-chain reveal" aria-label="A fájdalom kialakulásának lánca">
+            <span>Nem optimális medencehelyzet</span><i>→</i>
+            <span>Izomegyensúly-zavar</span><i>→</i>
+            <span>Kompenzációk lánca</span><i>→</i>
+            <span>Fájdalom</span>
         </div>
-        <div class="why-callout">
+        <div class="why-body reveal">
+            <p>A test mindig a legkisebb ellenállás felé törekszik. Alkalmazkodik, kompenzál, megkerüli a hibát — és elvégzi a mindennapi feladatokat.</p>
+            <p>Egy bizonyos pont után azonban ezek az alkalmazkodások elváltozásokhoz vezetnek. A fájdalom ezeknek a jele.</p>
+        </div>
+        <div class="why-callout reveal">
             <p>Nem elnyomni kell.</p>
-            <p><strong>Helyreállítani a rendszer optimális működését.</strong></p>
-        </div>
-        <div class="why-body">
-            <p>A TestKözéppont Módszer pontosan ezt végzi el&nbsp;— rendszerszintű újrakalibrálással,<br>a problémák forrásának megszüntetésével.</p>
+            <p><strong>Hanem helyreállítani a rendszer optimális működését.</strong></p>
         </div>
     </div>
+</section>
+
+<!-- MÓDSZER -->
+<section class="section method" id="modszer">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <div class="eyebrow">A megoldás</div>
+            <h2 class="h2">A TestKözép<span style="color:var(--gold-soft)">pont</span> Módszer <em>négy lépésben.</em></h2>
+            <p class="lead">A test statikai rendszer. Ha az alap — a medence — nem optimális helyzetben áll, az egész szerkezet kompenzál. A módszer ezért nem a tünetet kezeli, hanem a rendszert állítja helyre.</p>
+        </div>
+        <div class="steps">
+            <article class="step">
+                <div class="step-img reveal"><img src="images/felmeres/IMG_6014.jpg" alt="Biomechanikai felmérés" loading="lazy" style="object-position:center top"></div>
+                <div class="reveal" style="--d:.1s">
+                    <div class="step-num">01</div>
+                    <h3>Hol tartasz most</h3>
+                    <p>Részletes biomechanikai felmérés: medencehelyzet, tartás, aszimmetria, izomegyensúly.</p>
+                    <details class="more">
+                        <summary><span class="when-closed">Részletek</span><span class="when-open">Kevesebb</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                        <div class="more-body">
+                            <ul class="dash-list">
+                                <li>Megvizsgáljuk a medencéd elmozdulásait.</li>
+                                <li>Elemezzük a tartásod és az aszimmetriát.</li>
+                                <li>Felmérjük az izomegyensúlyt.</li>
+                                <li>Rendszerszintű diagnózist állítunk fel.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </article>
+            <article class="step">
+                <div class="step-img reveal"><img src="images/felmeres/IMG_6017.jpg" alt="A probléma okának feltárása" loading="lazy"></div>
+                <div class="reveal" style="--d:.1s">
+                    <div class="step-num">02</div>
+                    <h3>Miért alakult így</h3>
+                    <p>Ha a medence — a testközéppont — nem optimális helyzetben áll, felborul az egész izomlánc.</p>
+                    <details class="more">
+                        <summary><span class="when-closed">Részletek</span><span class="when-open">Kevesebb</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                        <div class="more-body"><p>Ebből logikusan következik, hogy miért ott fáj, ahol fáj, és mi áll a jelenlegi problémák mögött. Nem kell vakon csinálnod a gyakorlatokat: érteni fogod, mit miért csinálsz.</p></div>
+                    </details>
+                </div>
+            </article>
+            <article class="step">
+                <div class="step-img reveal"><img src="images/felmeres/IMG_6019.jpg" alt="Mélyizomtorna" loading="lazy"></div>
+                <div class="reveal" style="--d:.1s">
+                    <div class="step-num">03</div>
+                    <h3>Hogyan állítjuk helyre</h3>
+                    <p>Mélyizomtornával helyreállítjuk az izomegyensúlyt, optimalizáljuk a medence helyzetét, és stabilizáljuk a törzset.</p>
+                    <details class="more">
+                        <summary><span class="when-closed">Részletek</span><span class="when-open">Kevesebb</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                        <div class="more-body">
+                            <ul class="dash-list">
+                                <li>Levesszük a terhelést a túlműködő oldalról.</li>
+                                <li>Újraírjuk a mozgásmintákat.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </article>
+            <article class="step">
+                <div class="step-img reveal"><img src="images/felmeres/IMG_6023.jpg" alt="Mozgásminta újraírás" loading="lazy" style="object-position:center 30%"></div>
+                <div class="reveal" style="--d:.1s">
+                    <div class="step-num">04</div>
+                    <h3>Hogyan tartod meg</h3>
+                    <p>Minden fázishoz videós anyag készül rólad — otthon, önállóan, bármikor elvégezhető. Ahogy ismétled a mozdulatokat, <strong>újraírod a régi mozgásmintákat.</strong></p>
+                    <details class="more">
+                        <summary><span class="when-closed">Részletek</span><span class="when-open">Kevesebb</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                        <div class="more-body"><p>Az ismétléstől a helyes minta idővel tudat alatt is működik. Ezáltal sokkal tudatosabban fogsz kivitelezni minden mozdulatot — a hétköznapokban is.</p></div>
+                    </details>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- TÖRTÉNET -->
+<section class="section story" id="rolam">
+    <div class="wrap story-grid">
+        <aside class="story-side reveal">
+            <div class="story-photo"><img src="specialist.JPG" alt="Farkas Levente" loading="lazy"></div>
+            <div class="story-id"><b>Farkas Levente</b><span>A TestKözéppont Módszer megalkotója</span></div>
+        </aside>
+        <div class="story-text">
+            <div class="eyebrow reveal">Rólam</div>
+            <h2 class="h2 reveal">Nyolc évig én is <em>ott voltam,</em> ahol most te.</h2>
+            <p class="intro reveal">2–3 hetente becsípődött a nyakam, olyan erősen, hogy napokra kiestem. Szakembertől szakemberig jártam, és mindent megcsináltam, amit mondtak.</p>
+            <p class="reveal">A mentorom volt az első, aki nem ott kereste a hibát, ahol fájt. Pár hónappal később a fájdalom eltűnt. <strong>Azóta egyszer sem csípődött be a nyakam.</strong></p>
+            <p class="reveal">Építészként tanultam meg, hogy egy épület stabilitását az alapjai határozzák meg. A testnél ez az alap a medence. Ebből született a TestKözéppont Módszer.</p>
+            <details class="more reveal">
+                <summary><span class="when-closed">A teljes történet</span><span class="when-open">Bezárás</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                <div class="more-body">
+                    <p>Mozgás az identitásom. Ez ad energiát, tiszta fejet, egyensúlyt.</p>
+                    <p>Mégis ott volt mindig a fájdalom. Hittem a szakembereknek — és évekkel később jöttem rá, hogy amit csináltam, az súlyosbította a problémát.</p>
+                    <blockquote class="story-quote">„Hiába voltam szálkás, hiába tudtam bármit megcsinálni a testemmel — ami ez alatt volt, az végtelenül gyenge és diszfunkcionális volt. A felszín rendben volt. A rendszer összeomlott.”</blockquote>
+                    <p>2 éve találtam meg a mentoromat. Mellette értettem meg először, hogy nem a fájdalmat kell kezelni, hanem azt kell megtalálni, ami miatt a test folyamatosan kompenzál.</p>
+                    <p>A gyakorlatokat ma is minden nap elvégzem. Nem azért, mert muszáj, hanem mert tudom, hogy ezek tartják hosszú távon egyensúlyban a testemet. Amit másoknak tanítok, azt én magam is élem.</p>
+                    <p>Ma már tudom, hogy nem volt velem semmi baj. Egyszerűen senki sem vizsgálta a teljes képet.</p>
+                    <p>Sokáig azt hittem, egyedül vagyok ezzel. Ma már látom, hogy rengetegen élnek együtt visszatérő fájdalmakkal vagy feszülésekkel anélkül, hogy értenék, mi áll a háttérben. <strong>Ezért végzem ezt a munkát:</strong> nem gyors megoldásokat adok, hanem segítek megérteni a tested működését, megtalálni a probléma valódi okát, és olyan változást elérni, ami hosszú távon is megmarad.</p>
+                </div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- EREDMÉNYEK -->
+<section class="section results" id="eredmenyek">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <div class="eyebrow">Valódi eredmények</div>
+            <h2 class="h2">Olyanok, mint te. <em>Valódi változással.</em></h2>
+            <p class="t-note">Az ügyfeleim saját szavai, ahogy a visszajelző kérdőívben leírták.</p>
+        </div>
+        <div class="t-grid">
+            <article class="t-card reveal">
+                <div class="t-tags">Gerincsérv · Derékfájás · Online program</div>
+                <p class="t-result">„A fájdalom mára teljesen megszűnt. Egyáltalán nem fáj.”</p>
+                <p class="t-result-more">„Az első változást 1 hét után vettem észre: egyszer sem rogytam térdre napközben.”</p>
+                <details class="more">
+                    <summary><span class="when-closed">Ádám története</span><span class="when-open">Bezárás</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                    <div class="more-body"><dl class="qa"><dt>Mi volt a probléma?</dt><dd>„3 évig küzdöttem derékfájással. Az oka gerincsérv volt, mint egy MR-felvétel alapján kiderült.”</dd><dt>Mit próbált korábban?</dt><dd>„Gyógytornászhoz fordultam segítségért, de nem javult a helyzet, pedig kitartóan csináltam a gyakorlatokat.”</dd><dt>Milyen volt online?</dt><dd>„Mivel Németországban élek, online zajlott az egész. Ez semmilyen gondot nem okozott, sőt: bármikor kérdezhettem, és gyorsan választ is kaptam.”</dd></dl></div>
+                </details>
+                <div class="t-author">
+                    <div class="t-avatar">Á</div>
+                    <div><div class="t-name">Ádám</div><div class="t-role">Autószerelő · Németország</div></div>
+                </div>
+            </article>
+            <article class="t-card reveal" style="--d:.08s">
+                <div class="t-tags">Gerincferdülés · Derékfájás · Térdfájás</div>
+                <p class="t-result">„A derékfájdalom elmúlt, jobb közérzet. A térdfájásom azóta se jött elő crossfit edzéseken.”</p>
+                <p class="t-result-more">„Reményt, hogy a sok éves szenvedésből van kiút.”</p>
+                <details class="more">
+                    <summary><span class="when-closed">Anna válaszai</span><span class="when-open">Bezárás</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                    <div class="more-body"><dl class="qa"><dt>Miért nem működtek a korábbi megoldások?</dt><dd>„Azt éreztem, hogy futószalagon kezelik a pácienseket és csak általánosságban adnak tanácsokat, nem kifejezetten az én gerincemnek, és az én állapotomra való tekintettel.”</dd><dt>Milyen volt az állapotfelmérés?</dt><dd>„Olyan részletes analizálást kaptam a testem elváltozásairól és állapotáról, amilyet azelőtt sehol. Nehéz volt szembesülni azzal, amit a tükörben és a képeken láttam, de mivel mindenhez érthető magyarázatot adtál és biztosítottál afelől, hogy van esély a változásra, összességében jó élmény volt.”</dd></dl></div>
+                </details>
+                <div class="t-author">
+                    <div class="t-avatar"><img src="anna.png" alt="Anna" loading="lazy"></div>
+                    <div><div class="t-name">Anna</div><div class="t-role">Pénzügyi adminisztrátor</div></div>
+                </div>
+            </article>
+            <article class="t-card reveal">
+                <div class="t-tags">Derékfájás · Álló munka · Tartás</div>
+                <p class="t-result">„Súlyzós guggolásnál nem érzek fájdalmat a deréktájon.”</p>
+                <p class="t-result-more">„Sokkal szebb tartásom van.”</p>
+                <details class="more">
+                    <summary><span class="when-closed">B. Zs. válaszai</span><span class="when-open">Bezárás</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                    <div class="more-body"><dl class="qa"><dt>Mit próbált korábban?</dt><dd>„Súlyzós edzést, nyújtást. Csak tünetileg ideiglenesen lett jobb.”</dd><dt>Milyen volt az állapotfelmérés?</dt><dd>„Nagyon pontos, nagyon részletes.”</dd><dt>Egy mondatban, mit kapott?</dt><dd>„Egy pontos átláthatóságot, honnan is erednek a különböző ízületi/izom fájdalmak.”</dd></dl></div>
+                </details>
+                <div class="t-author">
+                    <div class="t-avatar">BZs</div>
+                    <div><div class="t-name">B. Zs.</div><div class="t-role">Fogorvos</div></div>
+                </div>
+            </article>
+            <article class="t-card reveal" style="--d:.08s">
+                <div class="t-tags">Rossz tartás · Testtudat</div>
+                <p class="t-result">„Erősödött a bal oldalam. Testérzet is párosult a felemássághoz, nem csak vizuálisan érzékeltem.”</p>
+                <p class="t-result-more">„Egy fókuszált edzés program valódi változást tud hozni nagyon rövid idő alatt. (Ez számomra előtte hihetetlen volt.)”</p>
+                <details class="more">
+                    <summary><span class="when-closed">Barbara válaszai</span><span class="when-open">Bezárás</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                    <div class="more-body"><dl class="qa"><dt>Mit próbált korábban?</dt><dd>„Csontkovács, masszőr. Nem hoztak hosszú távú megoldást.”</dd><dt>Milyen volt az állapotfelmérés?</dt><dd>„Nagyon komfortos. Egyszerű és mégis látványos. Könnyen megértettem mi a probléma.”</dd><dt>Mi volt a legnagyobb különbség?</dt><dd>„Az, hogy ezt teljesen személyre szabottnak éreztem.”</dd></dl></div>
+                </details>
+                <div class="t-author">
+                    <div class="t-avatar">Ba</div>
+                    <div><div class="t-name">Barbara</div></div>
+                </div>
+            </article>
+            <article class="t-card reveal">
+                <div class="t-tags">Gerincferdülés · Sérves tünetek</div>
+                <p class="t-result">„Erősebb hátizmok, kevesebbszer jönnek elő a tünetek.”</p>
+                <p class="t-result-more">„Felfogtam melyik oldalamat kell erősíteni, pont az ellentéteset gondoltam magamtól.”</p>
+                <details class="more">
+                    <summary><span class="when-closed">K.A.R. válaszai</span><span class="when-open">Bezárás</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                    <div class="more-body"><dl class="qa"><dt>Mi okozta a fájdalmat?</dt><dd>„Nem figyeltem hogyan emeltem rakodás közben, utána egész nap nyomásváltozásra erősödő fájdalmam lépett fel.”</dd><dt>Miben változott a mindennapja?</dt><dd>„Rendszert rakott a mindennapjaimba, könnyebben kezdek bele az izomépítő edzésbe ha előtte végigcsinálom a tornát.”</dd></dl></div>
+                </details>
+                <div class="t-author">
+                    <div class="t-avatar">KAR</div>
+                    <div><div class="t-name">K.A.R.</div><div class="t-role">Gyógymasszőr</div></div>
+                </div>
+            </article>
+            <article class="t-card reveal" style="--d:.08s">
+                <div class="t-tags">Vállmobilitás · Sport</div>
+                <p class="t-result">„Stabilitás a vállízületben.”</p>
+                <p class="t-result-more">Ami könnyebb lett: „Kar fej felé emelés, húzódzkodás.”</p>
+                <details class="more">
+                    <summary><span class="when-closed">Miklós válaszai</span><span class="when-open">Bezárás</span> <svg class="icon"><use href="#i-plus"/></svg></summary>
+                    <div class="more-body"><dl class="qa"><dt>Mikor érezte az első javulást?</dt><dd>„1 hét.”</dd><dt>Mit adott a magyarázat?</dt><dd>„A probléma forrásának megértése.”</dd><dt>Mit mondana annak, aki bizonytalan?</dt><dd>„Csak azon múlik mennyire vagy következetes.”</dd></dl></div>
+                </details>
+                <div class="t-author">
+                    <div class="t-avatar">Mi</div>
+                    <div><div class="t-name">Miklós</div><div class="t-role">Operations Lead</div></div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- VIDEÓK -->
+<section class="section results videos" id="video-visszajelzesek">
+    <div class="wrap">
+        <div class="videos-head reveal">
+            <h3>Videós visszajelzések</h3>
+            <div class="v-nav">
+                <button class="v-btn" id="v-prev" aria-label="Előző videók"><svg class="icon"><use href="#i-left"/></svg></button>
+                <button class="v-btn" id="v-next" aria-label="Következő videók"><svg class="icon"><use href="#i-right"/></svg></button>
+            </div>
+        </div>
+        <div class="v-track reveal" id="v-track">
+            <button class="v-card" data-video="video/anna_allapotfelmeres_compressed.mp4" aria-label="Videó lejátszása"><img src="video/anna_allapotfelmeres.png" alt="" loading="lazy"><span class="play"><svg class="icon"><use href="#i-play"/></svg></span></button>
+            <button class="v-card" data-video="video/adi_allapotfelmeres_compressed.mp4" aria-label="Videó lejátszása"><img src="video/adi_allapotfelmeres.png" alt="" loading="lazy"><span class="play"><svg class="icon"><use href="#i-play"/></svg></span></button>
+            <button class="v-card" data-video="video/allapotfelmeres_compressed.mp4" aria-label="Videó lejátszása"><img src="video/allapotfelmeres.png" alt="" loading="lazy"><span class="play"><svg class="icon"><use href="#i-play"/></svg></span></button>
+            <button class="v-card" data-video="video/alegfontosabb_compressed.mp4" aria-label="Videó lejátszása"><img src="video/alegfontosabb.png" alt="" loading="lazy"><span class="play"><svg class="icon"><use href="#i-play"/></svg></span></button>
+            <button class="v-card" data-video="video/nehezmegnyilni_compressed.mp4" aria-label="Videó lejátszása"><img src="video/nehezmegnyilni.png" alt="" loading="lazy"><span class="play"><svg class="icon"><use href="#i-play"/></svg></span></button>
+            <button class="v-card" data-video="video/gorcsok_compressed.mp4" aria-label="Videó lejátszása"><img src="video/gorcsok.png" alt="" loading="lazy"><span class="play"><svg class="icon"><use href="#i-play"/></svg></span></button>
+            <button class="v-card" data-video="video/csontkovacs_compressed.mp4" aria-label="Videó lejátszása"><img src="video/csontkovacs.png" alt="" loading="lazy"><span class="play"><svg class="icon"><use href="#i-play"/></svg></span></button>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Bezárás">✕</button>
+    <video id="lightbox-video" controls playsinline></video>
 </div>
 
-<!-- METHOD -->
-<section class="section" id="modszer">
-    <div class="section-header">
-        <div class="section-eyebrow">A Megoldás</div>
-        <h2 class="section-heading">A TestKözép<span style="color:var(--accent-light);">pont</span> Módszer</h2>
-        <p class="section-sub">A test statikai rendszer. Ha az alap — a medence — elmozdul, az egész szerkezet kompenzál. A módszer nem a tünetet kezeli, hanem rendszerszintű megoldást ad.</p>
-    </div>
-    <div class="method-rows">
-        <div class="method-row">
-            <div class="method-row-image">
-                <img src="images/felmeres/IMG_6014.jpg" alt="Biomechanikai felmérés" style="object-position: center top;">
-            </div>
-            <div class="method-row-content">
-                <div class="method-row-num">01</div>
-                <h3>Hol tartasz most</h3>
-                <p>Részletes biomechanikai felmérés:</p>
-                <ul class="method-list">
-                    <li>Megvizsgáljuk a medencéd elmozdulásait.</li>
-                    <li>Elemezzük a tartásod és az aszimmetriát.</li>
-                    <li>Felmérjük az izomegyensúlyt.</li>
-                    <li>Rendszerszintű diagnózist állítunk fel.</li>
+<!-- CSOMAGOK -->
+<section class="section pricing" id="csomagok">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <div class="eyebrow">A programok</div>
+            <h2 class="h2">Egy módszer. <em>Négy út.</em></h2>
+            <p class="lead">Mind a négy csomag ugyanarra a módszerre épül — a különbség az, mennyi személyes kísérést kapsz a 90 nap alatt. A legtöbbeknek a heti kísérést ajánlom: a korai javulás után ugyanis könnyű elengedni a gyakorlást.</p>
+        </div>
+        <div class="p-grid">
+            <article class="p-card reveal">
+                <div class="p-name">Solo Reset</div>
+                <p class="p-tag">Önállóknak, akikben megvan a kellő motiváltság.</p>
+                <div class="p-price">150 000<small>Ft</small></div>
+                <div class="p-sessions">3 személyes alkalom · 90 nap</div>
+                <div class="p-inst"></div>
+                <ul class="p-feat">
+                    <li><svg class="icon"><use href="#i-check"/></svg>Teljes biomechanikai állapotfelmérés</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Személyre szabott 90 napos program</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Videós anyag minden fázishoz</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Specifikus nyújtások és mobilizáció</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Elérhetőség kérdések esetén</li>
                 </ul>
-            </div>
-        </div>
-        <div class="method-row">
-            <div class="method-row-image">
-                <img src="images/felmeres/IMG_6017.jpg" alt="Miért alakult így">
-            </div>
-            <div class="method-row-content">
-                <div class="method-row-num">02</div>
-                <h3>Miért alakult így</h3>
-                <p>A medence, mint testközéppont — ha nem optimális helyzetben áll, felborul az egész izomlánc.</p>
-                <p>Ebből logikusan következik, hogy miért ott fáj, ahol fáj, és mi áll a jelenlegi problémák mögött.</p>
-            </div>
-        </div>
-        <div class="method-row">
-            <div class="method-row-image">
-                <img src="images/felmeres/IMG_6019.jpg" alt="Helyreállítás">
-            </div>
-            <div class="method-row-content">
-                <div class="method-row-num">03</div>
-                <h3>Hogyan állítjuk helyre</h3>
-                <ul class="method-list">
-                    <li>Levesszük a terhelést a túlműködő oldalról.</li>
-                    <li>Mélyizomtornával helyreállítjuk az izomegyensúlyt,<br>optimalizáljuk a medence helyzetét, és stabilizáljuk a törzset.</li>
-                    <li>Újraírjuk a mozgásmintákat.</li>
+                <a href="#konzultacio" class="btn p-cta">Konzultáció</a>
+            </article>
+            <article class="p-card reveal" style="--d:.06s">
+                <div class="p-name">Core Reset</div>
+                <p class="p-tag">Ha magad is végigcsinálod, de kéthetente kell valaki, aki ránéz és korrigál.</p>
+                <div class="p-price">200 000<small>Ft</small></div>
+                <div class="p-sessions">6 személyes alkalom · 90 nap</div>
+                <div class="p-inst">vagy 2 × 100 000 Ft</div>
+                <ul class="p-feat">
+                    <li><svg class="icon"><use href="#i-check"/></svg>Minden, ami a Solo Resetben</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Kétheti személyes korrigálás</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Finomhangolás, ahogy a tested változik</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Motiváció és számonkérés a 90 nap alatt</li>
                 </ul>
-            </div>
-        </div>
-        <div class="method-row">
-            <div class="method-row-image">
-                <img src="images/felmeres/IMG_6023.jpg" alt="Mozgásminta újraírás" style="object-position: center 30%;">
-            </div>
-            <div class="method-row-content">
-                <div class="method-row-num">04</div>
-                <h3>Hogyan tartod meg</h3>
-                <p>Minden fázishoz videós anyag készül rólad — otthon, önállóan, bármikor elvégezhető.</p>
-                <p style="margin-top:1.25rem;">Ahogy ismétled a mozdulatokat, <strong>újraírod</strong> a régi <strong>mozgásmintákat</strong>.</p>
-                <p><strong>Ezáltal sokkal tudatosabban fogsz kivitelezni minden mozdulatot.</strong></p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- LEVI STORY -->
-<div class="story-section">
-    <div class="story-inner">
-        <div class="story-left" style="display:flex; flex-direction:column; align-items:center; gap:1rem;">
-            <div class="story-avatar" style="width:100%; height:auto; margin-bottom:0;">
-                <img src="specialist.JPG" alt="Levi">
-            </div>
-            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:0.3rem;">
-                <p style="font-weight:700; font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.92);">Farkas Levente</p>
-                <div style="width:24px; height:1px; background:rgba(248,245,240,0.3); margin:0.15rem 0;"></div>
-                <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">TestKözéppont módszer</p>
-                <p style="font-size:0.85rem; line-height:1.3; color:rgba(248,245,240,0.5);">Budapest</p>
-            </div>
-        </div>
-        <div class="story-right">
-            <p>Mozgás az identitásom.</p>
-            <p>Ez ad energiát, tiszta fejet, egyensúlyt. Ehhez nincs szükségem senki jóváhagyására.</p>
-            <p>Mégis ott volt mindig a fájdalom. <strong>Nyolc éven át</strong> — 2-3 hetente becsípődött a nyakam, olyan erősen, hogy napokra kiestem. Szakembertől szakemberig jártam. Csináltam mindent, amit mondtak.<br class="mobile-br"> Hittem nekik.</p>
-            <p>Évekkel később jöttem rá, hogy amit csináltam,<br class="mobile-br"> az súlyosbította a problémát.</p>
-            <div class="story-highlight">
-                <p>"Hiába voltam szálkás, hiába tudtam bármit megcsinálni a testemmel — ami ez alatt volt, az végtelenül gyenge és diszfunkcionális volt. A felszín rendben volt. A rendszer összeomlott."</p>
-            </div>
-            <p>2 éve találtam meg a mentoromat. Az első embert, aki nem ott kereste a hibát, ahol fájt. Mellette értettem meg először, hogy nem a fájdalmat kell kezelni,<br class="mobile-br"> hanem azt kell megtalálni, ami miatt a test folyamatosan kompenzál.</p>
-            <p>Pár hónappal később a fájdalom eltűnt.<br class="mobile-br"> <strong>Azóta egyszer sem csípődött be a nyakam.</strong></p>
-            <p>A gyakorlatokat ma is minden nap elvégzem. Nem azért, mert muszáj, hanem mert tudom, hogy ezek tartják hosszú távon egyensúlyban a testemet. Amit másoknak tanítok, azt én magam is élem.</p>
-            <p>Ma már tudom, hogy nem volt velem semmi baj.<br class="mobile-br"> Egyszerűen senki sem vizsgálta a teljes képet.</p>
-            <p>Azért meséltem el ezt a történetet, mert sokáig azt hittem, egyedül vagyok ezzel. Ma már látom, hogy rengetegen élnek együtt visszatérő fájdalmakkal vagy feszülésekkel anélkül, hogy értenék, mi áll a háttérben.</p>
-            <p><strong>Ezért végzem ezt a munkát.</strong></p>
-            <p>Nem azért, hogy gyors megoldásokat adjak, hanem hogy segítsek megérteni a tested működését, megtalálni a probléma valódi okát, és olyan változást elérni, ami hosszú távon is megmarad.</p>
-        </div>
-    </div>
-</div>
-
-<!-- TESTIMONIALS -->
-<section class="section" id="eredmenyek">
-    <div class="section-header">
-        <div class="section-eyebrow">Valódi Eredmények</div>
-        <h2 class="section-heading">Olyanok, mint te — fájdalommentesen</h2>
-        <p class="section-sub">Nem általánosságok.<br>Valódi emberek, valódi problémákkal,<br class="mobile-br"> valódi változással.</p>
-    </div>
-    <div class="testimonials-grid">
-
-        <div class="testimonial-card">
-            <div class="testimonial-tag">Gerincferdülés · Derékfájás · Térdfájás</div>
-            <div class="testimonial-stars">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <blockquote>"Kicsi korom óta gerincferdüléssel küzdök. Voltam gyógytornán, masszőrnél — futószalagon kezeltek, általánosságokat mondtak. Levitől olyat kaptam, amit azelőtt sehol: részletes elemzést arról, mi történik pontosan az én testemben, és miért. Nehéz volt szembesülni azzal, amit a tükörben láttam — de mivel mindenhez érthető magyarázatot kaptam, összességében felszabadító élmény volt."</blockquote>
-            <div class="testimonial-result">
-                <div class="testimonial-result-label">Eredmény</div>
-                <p><strong>A derékfájdalom elmúlt. A térdfájás crossfit edzéseken azóta sem jött elő.</strong> Sokkal tudatosabban odafigyelek a hétköznapokban a testtartásomra — ami a program előtt egyáltalán nem volt jellemző.</p>
-            </div>
-            <div class="testimonial-author">
-                <div class="testimonial-avatar"><img src="anna.png" alt="Asztalos Anna"></div>
-                <div>
-                    <div class="testimonial-name">Asztalos Anna</div>
-                    <div class="testimonial-role">Pénzügyi adminisztrátor</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="testimonial-card">
-            <div class="testimonial-tag">Gerincferdülés · Sérves tünetek</div>
-            <div class="testimonial-stars">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <blockquote>"Nem figyeltem, hogyan emeltem nehéz dolgokat — utána egész nap nyomásváltozásra erősödő fájdalmam volt. Levi megmutatta, melyik oldalamat kell erősíteni — pont az ellentéteset gondoltam volna magamtól. Rendszert rakott a mindennapjaimba. Könnyebben kezdek bele az edzésbe, ha előtte végigcsinálom a tornát."</blockquote>
-            <div class="testimonial-result">
-                <div class="testimonial-result-label">Eredmény</div>
-                <p>Erősebb hátizmok, kevesebbszer jönnek elő a sérves tünetek. <strong>Kerülöm a rossz tartású nehéz emeléseket — és tudom miért.</strong> Súlyemelkedés látható változás nélkül — teszem fel a mélyizmok épülése miatt.</p>
-            </div>
-            <div class="testimonial-author">
-                <div class="testimonial-avatar">KAR</div>
-                <div>
-                    <div class="testimonial-name">K.A.R.</div>
-                    <div class="testimonial-role">Gyógymasszőr</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="testimonial-card">
-            <div class="testimonial-tag">Vállmobilitás · Sport · Ülőmunka</div>
-            <div class="testimonial-stars">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <blockquote>"Több mint egy éve volt már vállproblémám. Nyújtottam, tornáztam — de hosszabb távon sosem csináltam következetesen végig. Levinél, az első héten éreztem, hogy ez valami más. Gyors, látványos fejlődés, és végre értem, hogy mi miért történik. Aztán bevallom — megint elvesztettem a ritmust. De ami megmaradt: tudom, mi a forrása, és tudom, mi a megoldás, ha tényleg végigcsinálom."</blockquote>
-            <div class="testimonial-result">
-                <div class="testimonial-result-label">Eredmény</div>
-                <p><strong>Húzódzkodás visszatért. Kar fej fölé emelhető fájdalom nélkül.</strong> A korai fejlődés gyors volt — a folytatás rajtam múlt.</p>
-            </div>
-            <div class="testimonial-author">
-                <div class="testimonial-avatar">Mi</div>
-                <div>
-                    <div class="testimonial-name">Miklós</div>
-                    <div class="testimonial-role">Operations Lead</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="testimonial-card">
-            <div class="testimonial-tag">Derékfájás · Álló munka · Tartásproblémák</div>
-            <div class="testimonial-stars">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <blockquote>"Fogorvosként egész nap állva dolgozom — több mint egy éve fájt a derekam. Próbáltam súlyzós edzéssel, nyújtással megoldani a problémáimat, de nem hoztak tartós megoldást. Levivel az első perctől pontosan érthettem, mi történik az én testemben. Nem általánosságokat mondott — megmutatta, honnan erednek a fájdalmak, miért alakultak ki, és mi tartja fenn őket. 3–4 hétre a kezdéstől már éreztem az első valódi változásokat."</blockquote>
-            <div class="testimonial-result">
-                <div class="testimonial-result-label">Eredmény</div>
-                <p><strong>Súlyzós guggolásnál nincs derékfájdalom. Napközben kevésbé görnyedek be.</strong> A legnagyobb nyereség: sokkal szebb tartásom van, és tudom, hogyan tartsam meg.</p>
-            </div>
-            <div class="testimonial-author">
-                <div class="testimonial-avatar">BZs</div>
-                <div>
-                    <div class="testimonial-name">B. Zs.</div>
-                    <div class="testimonial-role">Fogorvos</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- VIDEO TESTIMONIALS -->
-<section style="background: var(--bg);" id="video-visszajelzesek">
-    <div class="section" style="padding-top: 5rem; padding-bottom: 5rem;">
-        <div class="video-section-header">
-            <div class="section-eyebrow" style="font-size: 1.4rem;">Videós visszajelzések</div>
-        </div>
-        <div class="video-carousel">
-        <div class="video-grid" id="video-grid">
-            <div class="video-card" onclick="openVideo('video/anna_allapotfelmeres_compressed.mp4')">
-                <div class="video-thumb">
-                    <img src="video/anna_allapotfelmeres.png" alt="">
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                </div>
-            </div>
-            <div class="video-card" onclick="openVideo('video/adi_allapotfelmeres_compressed.mp4')">
-                <div class="video-thumb">
-                    <img src="video/adi_allapotfelmeres.png" alt="">
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                </div>
-            </div>
-            <div class="video-card" onclick="openVideo('video/allapotfelmeres_compressed.mp4')">
-                <div class="video-thumb">
-                    <img src="video/allapotfelmeres.png" alt="">
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                </div>
-            </div>
-            <div class="video-card" onclick="openVideo('video/alegfontosabb_compressed.mp4')">
-                <div class="video-thumb">
-                    <img src="video/alegfontosabb.png" alt="">
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                </div>
-            </div>
-            <div class="video-card" onclick="openVideo('video/nehezmegnyilni_compressed.mp4')">
-                <div class="video-thumb">
-                    <img src="video/nehezmegnyilni.png" alt="">
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                </div>
-            </div>
-            <div class="video-card" onclick="openVideo('video/gorcsok_compressed.mp4')">
-                <div class="video-thumb">
-                    <img src="video/gorcsok.png" alt="">
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                </div>
-            </div>
-            <div class="video-card" onclick="openVideo('video/csontkovacs_compressed.mp4')">
-                <div class="video-thumb">
-                    <img src="video/csontkovacs.png" alt="">
-                    <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
-                </div>
-            </div>
-        </div>
-        <button class="video-prev-btn is-hidden" id="video-prev-btn" onclick="scrollVideos(-1)" aria-label="Előző videó">
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <button class="video-next-btn" id="video-next-btn" onclick="scrollVideos(1)" aria-label="Következő videó">
-            <i class="fa-solid fa-chevron-right"></i>
-        </button>
+                <a href="#konzultacio" class="btn p-cta">Konzultáció</a>
+            </article>
+            <article class="p-card featured reveal" style="--d:.12s">
+                <span class="p-badge">Ajánlott</span>
+                <div class="p-name">Guided Reset</div>
+                <p class="p-tag">Heti kísérés, folyamatos haladás.</p>
+                <div class="p-price">300 000<small>Ft</small></div>
+                <div class="p-sessions">12 személyes alkalom · 90 nap</div>
+                <div class="p-inst">vagy 3 × 100 000 Ft</div>
+                <ul class="p-feat">
+                    <li><svg class="icon"><use href="#i-check"/></svg>Minden, ami a Solo Resetben</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Heti 1 személyes alkalom</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Folyamatos technikai korrekció</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Azonnali reagálás, ha elakadsz</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Külső motiváció és rendszeres visszajelzés</li>
+                </ul>
+                <a href="#konzultacio" class="btn btn-light p-cta">Konzultáció <svg class="icon"><use href="#i-arrow"/></svg></a>
+            </article>
+            <article class="p-card reveal" style="--d:.18s">
+                <div class="p-name">Private Reset</div>
+                <p class="p-tag">Teljes kiszolgálás, maximális kényelem.</p>
+                <div class="p-price">450 000<small>Ft</small></div>
+                <div class="p-sessions">12 alkalom · házhoz megyek · 90 nap</div>
+                <div class="p-inst"></div>
+                <ul class="p-feat">
+                    <li><svg class="icon"><use href="#i-check"/></svg>Minden, ami a Guided Resetben</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Én megyek hozzád — otthon vagy irodában</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Nulla logisztika, nulla utazás</li>
+                    <li><svg class="icon"><use href="#i-check"/></svg>Maximális rugalmasság az időpontokban</li>
+                </ul>
+                <a href="#konzultacio" class="btn p-cta">Konzultáció</a>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- LIGHTBOX -->
-<div id="video-lightbox" class="video-lightbox" onclick="closeLightbox(event)">
-    <div class="video-lightbox-inner">
-        <button class="lightbox-close" onclick="closeVideo()">✕</button>
-        <video id="lightbox-video" controls playsinline></video>
-    </div>
-</div>
-
-<!-- PACKAGES -->
-<section class="section" id="csomagok">
-    <div class="section-header">
-        <div class="section-eyebrow">A Programok</div>
-        <h2 class="section-heading">Válaszd ki a hozzád illő utat</h2>
-        <p class="section-sub">Mind a négy csomag ugyanarra a módszerre épül.<br>A különbség az, mennyi személyes kísérést szeretnél a 90 nap alatt.<br>Sajnos a tapasztalat az, hogy a legtöbben elvesztik a motivációjukat a korai tüneti enyhülések következtében — ezért a legtöbb esetben a heti kísérést (Guided Reset) ajánlom.</p>
-    </div>
-    <div class="pricing-grid">
-
-        <div class="pricing-card">
-            <div class="pricing-name">Solo Reset</div>
-            <div class="pricing-tagline">Önállóknak, akikben megvan a kellő motiváltság</div>
-            <div class="pricing-price">150 000 <span>Ft</span></div>
-            <div class="pricing-sessions">3 személyes alkalom · 90 nap</div>
-            <div class="pricing-installment"></div>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-                <li><i class="fa-solid fa-check"></i> Teljes biomechanikai állapotfelmérés</li>
-                <li><i class="fa-solid fa-check"></i> Személyre szabott 90 napos program</li>
-                <li><i class="fa-solid fa-check"></i> Videós anyag minden fázishoz</li>
-                <li><i class="fa-solid fa-check"></i> Specifikus nyújtások és mobilizáció</li>
-                <li><i class="fa-solid fa-check"></i> Elérhetőség kérdések esetén</li>
-            </ul>
-            <a href="#konzultacio" class="pricing-cta">Konzultáció foglalása</a>
-        </div>
-
-        <div class="pricing-card">
-            <div class="pricing-name">Core Reset</div>
-            <div class="pricing-tagline">Neked, ha a gyakorlatokat magad is végigcsinálod, de kéthetente kell valaki, aki ránéz és korrigál</div>
-            <div class="pricing-price">200 000 <span>Ft</span></div>
-            <div class="pricing-sessions">6 személyes alkalom · 90 nap</div>
-            <div class="pricing-installment">vagy 2 × 100 000 Ft részletben</div>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-                <li><i class="fa-solid fa-check"></i> Minden, ami a Solo Resetben</li>
-                <li><i class="fa-solid fa-check"></i> Kétheti személyes korrigálás</li>
-                <li><i class="fa-solid fa-check"></i> Finomhangolás, ahogy a tested változik</li>
-                <li><i class="fa-solid fa-check"></i> Motiváció és számonkérés a 90 nap alatt</li>
-            </ul>
-            <a href="#konzultacio" class="pricing-cta">Konzultáció foglalása</a>
-        </div>
-
-        <div class="pricing-card featured">
-            <div class="featured-badge">Ajánlott</div>
-            <div class="pricing-name">Guided Reset</div>
-            <div class="pricing-tagline">Heti kísérés, folyamatos haladás</div>
-            <div class="pricing-price">300 000 <span>Ft</span></div>
-            <div class="pricing-sessions">12 személyes alkalom · 90 nap</div>
-            <div class="pricing-installment">vagy 3 × 100 000 Ft részletben</div>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-                <li><i class="fa-solid fa-check"></i> Minden, ami a Solo Resetben</li>
-                <li><i class="fa-solid fa-check"></i> Heti 1 személyes alkalom</li>
-                <li><i class="fa-solid fa-check"></i> Folyamatos technikai korrekció</li>
-                <li><i class="fa-solid fa-check"></i> Azonnali reagálás, ha elakadsz</li>
-                <li><i class="fa-solid fa-check"></i> Külső motiváció és rendszeres visszajelzés</li>
-            </ul>
-            <a href="#konzultacio" class="pricing-cta">Konzultáció foglalása</a>
-        </div>
-
-        <div class="pricing-card">
-            <div class="pricing-name">Private Reset</div>
-            <div class="pricing-tagline">Teljes kiszolgálás, maximális kényelem</div>
-            <div class="pricing-price">450 000 <span>Ft</span></div>
-            <div class="pricing-sessions">12 alkalom · házhoz jövök · 90 nap</div>
-            <div class="pricing-installment"></div>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-                <li><i class="fa-solid fa-check"></i> Minden, ami a Guided Resetben</li>
-                <li><i class="fa-solid fa-check"></i> Én jövök hozzád — otthon vagy irodában</li>
-                <li><i class="fa-solid fa-check"></i> Nulla logisztika, nulla utazás</li>
-                <li><i class="fa-solid fa-check"></i> Maximális rugalmasság az időpontokban</li>
-                <li><i class="fa-solid fa-check"></i> A legkényelmesebb út a változáshoz</li>
-            </ul>
-            <a href="#konzultacio" class="pricing-cta">Konzultáció foglalása</a>
-        </div>
-
-    </div>
-</section>
-
-<!-- CTA / FORM -->
-<section class="cta-section" id="konzultacio">
-    <div class="cta-inner">
-        <div class="cta-left">
-            <div class="section-eyebrow">Ingyenes Konzultáció</div>
-            <h2 class="section-heading">Kezdjük el együtt.</h2>
-            <p class="section-sub">Egy ingyenes 30 perces konzultáció — megismerjük egymást, felmérjük a helyzeted, és kiderül, tud-e segíteni a módszer.</p>
-            <div style="margin-bottom:2rem;">
-                <p style="font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--accent-light); margin-bottom:0.75rem;">Ez neked való, ha</p>
-                <div style="display:flex; flex-direction:column; gap:0.5rem;">
-                    <div style="display:flex; gap:0.75rem; align-items:flex-start; font-size:0.85rem; color:rgba(248,245,240,0.7); font-weight:300; line-height:1.5;"><i class="fa-solid fa-check" style="color:var(--accent-light); font-size:0.7rem; margin-top:4px; flex-shrink:0;"></i>Évek óta fáj, és tüneti megoldások már nem segítenek</div>
-                    <div style="display:flex; gap:0.75rem; align-items:flex-start; font-size:0.85rem; color:rgba(248,245,240,0.7); font-weight:300; line-height:1.5;"><i class="fa-solid fa-check" style="color:var(--accent-light); font-size:0.7rem; margin-top:4px; flex-shrink:0;"></i>Hajlandó vagy rendszeresen dolgozni a saját tested helyreállításán</div>
-                    <div style="display:flex; gap:0.75rem; align-items:flex-start; font-size:0.85rem; color:rgba(248,245,240,0.7); font-weight:300; line-height:1.5;"><i class="fa-solid fa-check" style="color:var(--accent-light); font-size:0.7rem; margin-top:4px; flex-shrink:0;"></i>Az egészségedet befektetésnek látod, nem kiadásnak</div>
+<!-- KONZULTÁCIÓ -->
+<section class="section consult" id="konzultacio">
+    <div class="wrap consult-grid">
+        <div class="consult-side reveal">
+            <div class="eyebrow">Ingyenes konzultáció</div>
+            <h2 class="h2">Kezdjük el együtt.</h2>
+            <p class="lead">30 perc online: megismerjük egymást, átbeszéljük a helyzeted, és kiderül, tud-e segíteni a módszer.</p>
+            <div class="check-groups">
+                <div class="check-group">
+                    <h4>Neked való, ha</h4>
+                    <ul class="check-list">
+                        <li><svg class="icon"><use href="#i-check"/></svg>Évek óta fáj, és a tüneti megoldások már nem segítenek</li>
+                        <li><svg class="icon"><use href="#i-check"/></svg>Hajlandó vagy rendszeresen dolgozni a saját tested helyreállításán</li>
+                        <li><svg class="icon"><use href="#i-check"/></svg>Az egészségedet befektetésnek látod, nem kiadásnak</li>
+                    </ul>
+                </div>
+                <div class="check-group">
+                    <h4>A konzultáció</h4>
+                    <ul class="check-list">
+                        <li><svg class="icon"><use href="#i-check"/></svg>Teljesen ingyenes, elköteleződés nélkül</li>
+                        <li><svg class="icon"><use href="#i-check"/></svg>Online, Google Meet-en — bárhonnan</li>
+                        <li><svg class="icon"><use href="#i-check"/></svg>Azonnali visszaigazolás e-mailben</li>
+                        <li><svg class="icon"><use href="#i-check"/></svg>Ha nem én vagyok a megfelelő ember, megmondom</li>
+                    </ul>
                 </div>
             </div>
-            <p style="font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--accent-light); margin-bottom:0.75rem;">Konzultáció részletei</p>
-            <div class="cta-guarantees">
-                <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Teljesen ingyenes, elköteleződés nélkül</div>
-                <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Azonnali visszaigazolás emailben</div>
-                <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Online, Google Meet-en — bárhonnan elérhető</div>
-                <div class="cta-guarantee"><i class="fa-solid fa-check"></i>Ha nem vagyok a megfelelő ember, megmondom</div>
-            </div>
         </div>
-        <div class="form-card" style="padding:0; overflow:hidden;">
-            <div class="calendly-inline-widget" data-url="https://calendly.com/testkozeppont/konzultacio?hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>
-            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <div class="cal-card reveal" style="--d:.1s">
+            <div class="calendly-inline-widget" id="calendly" data-resize="true"
+                 data-url="https://calendly.com/testkozeppont/konzultacio?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&primary_color=2e2319"></div>
+            <div class="cal-fallback">Nem töltődik be a naptár? <a href="https://calendly.com/testkozeppont/konzultacio" target="_blank" rel="noopener">Foglalj itt</a></div>
         </div>
     </div>
 </section>
 
-<!-- FAQ -->
-<section class="section">
-    <div class="section-header" style="max-width:700px;">
-        <div class="section-eyebrow">Gyakori Kérdések</div>
-        <h2 class="section-heading">Amire sokan kíváncsiak</h2>
-    </div>
-    <div class="faq-list" style="max-width:700px;">
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>Mikor fogok eredményt érezni?</h3>
-                <i class="fa-solid fa-plus faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Az első változásokat — könnyebb légzés, jobb testtartás-tudat, kisebb feszülés — legtöbben 2-3 héten belül érzik. Komolyabb, tartós fájdalomcsökkentés általában 4-6 héten belül jelentkezik. Mindez attól függ, mennyire következetesen végzed a gyakorlatokat otthon.</p>
-            </div>
+<!-- GYIK -->
+<section class="section faq" id="gyik">
+    <div class="wrap faq-grid">
+        <div class="section-head reveal">
+            <div class="eyebrow">Gyakori kérdések</div>
+            <h2 class="h2">Amire sokan <em>kíváncsiak.</em></h2>
         </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>Ez különbözik a hagyományos gyógytornától?</h3>
-                <i class="fa-solid fa-plus faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Igen. A hagyományos gyógytorna legtöbbször protokoll-alapú: adott diagnózishoz adott gyakorlatok. A TestKözéppont Módszer az egyéni biomechanikai elváltozásokból indul ki — megvizsgáljuk a medence elmozdulásait, az aszimmetriát, és arra szabott programot készítünk. Ráadásul a cél az, hogy megértsd a saját tested működését, ne csak csináld, amit mondanak.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>Van-e ellenjavallat? Gerincsérvvel / porckorong problémával is jöhetek?</h3>
-                <i class="fa-solid fa-plus faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Gerincsérvvel és porckorong problémával is dolgoztam már sikeresen. Aktív, akut gyulladásos szakaszban vagy friss műtét után nem tudok segíteni — ott orvosi ellátás szükséges. Kétség esetén a konzultáción kiderül, megfelelő-e ez a program neked.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>Hogyan zajlik az első alkalom?</h3>
-                <i class="fa-solid fa-plus faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Kb. 90-120 percet vesz igénybe. Először részletesen megbeszéljük a panaszaidat és az előzményeket. Ezután következik a biomechanikai felmérés — megnézzük a medence elmozdulásait, az aszimmetriát, a mozgásmintákat. Megérted, mi a gond és miért. Majd betanítjuk az első 4 hétre szóló gyakorlatokat, és felvesszük a videóanyagot.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>Miért bízz meg bennem?</h3>
-                <i class="fa-solid fa-plus faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Nyolc éven át küzdöttem krónikus derékfájással és visszatérő nyaki becsípődésekkel. A megoldást nem egy újabb kezelés hozta, hanem annak megértése, hogyan működik a test egészként. Építészként tanultam meg, hogy egy épület stabilitását az alapjai határozzák meg — rájöttem, hogy a test ugyanígy működik: ha a központja, a medence kibillen, az egész rendszer megsínyli. Egy gyógytornász mentorálása mellett ebből született meg a TestKözéppont Módszer, ami anatómiai és biomechanikai alapokra épül, és nem a tüneteket fedi el, hanem a működést állítja helyre.</p>
-            </div>
+        <div class="faq-list reveal">
+            <details class="faq-item">
+                <summary><h3>Mikor fogok eredményt érezni?</h3><svg class="icon"><use href="#i-plus"/></svg></summary>
+                <p>Az első változásokat — könnyebb légzés, jobb testtartás-tudat, kisebb feszülés — legtöbben 2–3 héten belül érzik. Komolyabb, tartós fájdalomcsökkenés általában 4–6 héten belül jelentkezik. Mindez attól függ, mennyire következetesen végzed a gyakorlatokat otthon.</p>
+            </details>
+            <details class="faq-item">
+                <summary><h3>Miben más, mint a hagyományos gyógytorna?</h3><svg class="icon"><use href="#i-plus"/></svg></summary>
+                <p>A hagyományos gyógytorna legtöbbször protokollalapú: adott diagnózishoz adott gyakorlatok. A TestKözéppont Módszer az egyéni biomechanikai elváltozásokból indul ki — megvizsgáljuk a medence elmozdulásait, az aszimmetriát, és arra szabott programot készítünk. A cél az, hogy megértsd a saját tested működését, ne csak csináld, amit mondanak.</p>
+            </details>
+            <details class="faq-item">
+                <summary><h3>Gerincsérvvel, porckorongproblémával is jöhetek?</h3><svg class="icon"><use href="#i-plus"/></svg></summary>
+                <p>Gerincsérvvel és porckorongproblémával is dolgoztam már sikeresen. Aktív, akut gyulladásos szakaszban vagy friss műtét után nem tudok segíteni — ott orvosi ellátás szükséges. Kétség esetén a konzultáción kiderül, megfelelő-e neked a program.</p>
+            </details>
+            <details class="faq-item">
+                <summary><h3>Hogyan zajlik az első alkalom?</h3><svg class="icon"><use href="#i-plus"/></svg></summary>
+                <p>Kb. 90–120 perc. Először részletesen megbeszéljük a panaszaidat és az előzményeket. Ezután jön a biomechanikai felmérés — megnézzük a medence elmozdulásait, az aszimmetriát, a mozgásmintákat. Megérted, mi a gond és miért. Végül betanítjuk az első 4 hétre szóló gyakorlatokat, és felvesszük a videóanyagot.</p>
+            </details>
+            <details class="faq-item">
+                <summary><h3>Miért bízz meg bennem?</h3><svg class="icon"><use href="#i-plus"/></svg></summary>
+                <p>Nyolc éven át küzdöttem krónikus derékfájással és visszatérő nyaki becsípődésekkel. A megoldást nem egy újabb kezelés hozta, hanem annak megértése, hogyan működik a test egészként. Építészként tanultam meg, hogy egy épület stabilitását az alapjai határozzák meg — a test ugyanígy működik: ha a központja, a medence kibillen, az egész rendszer megsínyli. Egy gyógytornász mentorálása mellett ebből született meg a TestKözéppont Módszer, ami anatómiai és biomechanikai alapokra épül, és nem a tüneteket fedi el, hanem a működést állítja helyre.</p>
+            </details>
         </div>
     </div>
 </section>
 
-<div class="section-divider"></div>
+</main>
 
 <!-- FOOTER -->
-<div class="about-strip">
-    <div class="about-avatar">
-        <img src="profilkep.JPG" alt="Levi">
+<footer class="footer">
+    <div class="wrap footer-top">
+        <div class="footer-avatar"><img src="profilkep.JPG" alt="Farkas Levente" loading="lazy"></div>
+        <div>
+            <h3>Farkas Levente — TestKözéppont, Budapest</h3>
+            <p>A TestKözéppont Módszer megalkotója. Azoknak segítek, akik sokat ülnek vagy állnak, és tartósan meg akarnak szabadulni a visszatérő fájdalomtól. Nem tüneteket kezelek — rendszert állítok helyre.</p>
+        </div>
     </div>
-    <div class="about-text">
-        <h3>Levi — TestKözéppont, Budapest</h3>
-        <p>A TestKözéppont módszer megalkotója — segíti az ülőmunkát végzőket tartósan megszabadítani a krónikus fájdalomtól. Nem tüneteket kezel, rendszert állít helyre.</p>
-    </div>
-</div>
-<footer class="footer-bottom">
-    <p>&copy; 2026 TestKözéppont — Budapest, Magyarország</p>
-    <div class="footer-links">
-        <a href="https://www.instagram.com/testkozeppont/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>
-        <span>·</span>
-        <a href="#" id="gdpr-open">Adatkezelési tájékoztató</a>
+    <div class="wrap footer-bottom">
+        <p>&copy; 2026 TestKözéppont — Budapest</p>
+        <nav aria-label="Lábléc">
+            <a href="https://www.instagram.com/testkozeppont/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-ig"/></svg>Instagram</a>
+            <a href="#adatkezeles" id="gdpr-open">Adatkezelési tájékoztató</a>
+        </nav>
     </div>
 </footer>
 
 <!-- GDPR MODAL -->
-<div id="gdpr-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9999; overflow-y:auto;">
-    <div style="background:#fff; max-width:600px; margin:4rem auto; padding:3rem 2.5rem; border-radius:8px; position:relative;">
-        <button id="gdpr-close" style="position:absolute; top:1.25rem; right:1.5rem; background:none; border:none; font-size:1.4rem; cursor:pointer; color:#999;">&times;</button>
-        <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1.4rem; margin-bottom:1.75rem;">Adatkezelési tájékoztató</h2>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Adatkezelő:</strong> Farkas Levente (TestKözéppont), Budapest</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Milyen adatokat gyűjtök?</strong><br>Az ingyenes konzultáció foglalása során a Calendly platformon keresztül a következő adatokat adod meg: név, email cím, valamint a foglalási kérdésekre adott válaszok.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mire használom?</strong><br>Kizárólag a konzultáció megszervezésére és lebonyolítására.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Ki kezeli az adatokat?</strong><br>A foglalási folyamatot a Calendly (calendly.com) kezeli saját adatkezelési szabályzata szerint. A konzultáció a Google Meet platformon zajlik.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mennyi ideig tárolom?</strong><br>Az adatokat a konzultáció lezárultát követő 1 évig tárolom, majd törlöm.</p>
+<div id="gdpr-modal" class="modal" role="dialog" aria-modal="true" aria-label="Adatkezelési tájékoztató">
+    <div class="modal-box">
+        <button id="gdpr-close" class="modal-close" aria-label="Bezárás">&times;</button>
+        <h2>Adatkezelési tájékoztató</h2>
+        <p><strong>Adatkezelő:</strong> Farkas Levente (TestKözéppont), Budapest</p>
+        <p><strong>Milyen adatokat gyűjtök?</strong><br>Az ingyenes konzultáció foglalása során a Calendly platformon keresztül a következő adatokat adod meg: név, email cím, valamint a foglalási kérdésekre adott válaszok.</p>
+        <p><strong>Mire használom?</strong><br>Kizárólag a konzultáció megszervezésére és lebonyolítására.</p>
+        <p><strong>Ki kezeli az adatokat?</strong><br>A foglalási folyamatot a Calendly (calendly.com) kezeli saját adatkezelési szabályzata szerint. A konzultáció a Google Meet platformon zajlik.</p>
+        <p><strong>Mennyi ideig tárolom?</strong><br>Az adatokat a konzultáció lezárultát követő 1 évig tárolom, majd törlöm.</p>
 
         <div id="gdpr-hirlevel">
-        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; margin:1.75rem 0 1rem;">Hírlevél</h3>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Milyen adatokat kezelek?</strong><br>A feliratkozáskor megadott nevedet és email címedet. Ha válaszolsz egy hírlevélre, a válaszod tartalmát is.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mire használom?</strong><br>Kizárólag a TestKözéppont hírlevelének küldésére: kérdésekre, tartalmakra és a programjaimról szóló tájékoztatásra. Az adataidat nem adom át harmadik félnek, és nem használom másra.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mi a jogalap?</strong><br>A hozzájárulásod (GDPR 6. cikk (1) a) pont), amit a feliratkozáskor a jelölőnégyzet elfogadásával adtál meg. Ezt bármikor, indoklás nélkül visszavonhatod.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Hol tárolom?</strong><br>Az adataid egy Supabase adatbázisban tárolódnak, amihez csak én (Farkas Levente) férek hozzá.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Meddig tárolom?</strong><br>A leiratkozásodig vagy a hozzájárulásod visszavonásáig. Utána az adataidat törlöm.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Hogyan iratkozhatsz le?</strong><br>Minden hírlevél alján van egy leiratkozási link: add meg az email címed, és a <a href="leiratkozas.html" style="color:inherit;">leiratkozás oldalon</a> egy gombnyomással kész. Írhatsz Instagram DM-ben is (@testkozeppont). A címedet késedelem nélkül törlöm a listáról, és többet nem írok. A leiratkozási kérésed értesítése Google szolgáltatáson (Apps Script, Gmail) keresztül jut el hozzám.</p>
-        <p style="font-size:0.85rem; line-height:1.8; color:#555; margin-bottom:1rem;"><strong>Mit kérhetsz még?</strong><br>Tájékoztatást arról, milyen adataid vannak nálam, ezek helyesbítését vagy törlését. Ha úgy érzed, hogy az adataidat nem megfelelően kezelem, panaszt tehetsz a Nemzeti Adatvédelmi és Információszabadság Hatóságnál (naih.hu).</p>
+        <h3>Hírlevél</h3>
+        <p><strong>Milyen adatokat kezelek?</strong><br>A feliratkozáskor megadott nevedet és email címedet. Ha válaszolsz egy hírlevélre, a válaszod tartalmát is.</p>
+        <p><strong>Mire használom?</strong><br>Kizárólag a TestKözéppont hírlevelének küldésére: kérdésekre, tartalmakra és a programjaimról szóló tájékoztatásra. Az adataidat nem adom át harmadik félnek, és nem használom másra.</p>
+        <p><strong>Mi a jogalap?</strong><br>A hozzájárulásod (GDPR 6. cikk (1) a) pont), amit a feliratkozáskor a jelölőnégyzet elfogadásával adtál meg. Ezt bármikor, indoklás nélkül visszavonhatod.</p>
+        <p><strong>Hol tárolom?</strong><br>Az adataid egy Supabase adatbázisban tárolódnak, amihez csak én (Farkas Levente) férek hozzá.</p>
+        <p><strong>Meddig tárolom?</strong><br>A leiratkozásodig vagy a hozzájárulásod visszavonásáig. Utána az adataidat törlöm.</p>
+        <p><strong>Hogyan iratkozhatsz le?</strong><br>Minden hírlevél alján van egy leiratkozási link: add meg az email címed, és a <a href="leiratkozas.html" style="color:inherit;">leiratkozás oldalon</a> egy gombnyomással kész. Írhatsz Instagram DM-ben is (@testkozeppont). A címedet késedelem nélkül törlöm a listáról, és többet nem írok. A leiratkozási kérésed értesítése Google szolgáltatáson (Apps Script, Gmail) keresztül jut el hozzám.</p>
+        <p><strong>Mit kérhetsz még?</strong><br>Tájékoztatást arról, milyen adataid vannak nálam, ezek helyesbítését vagy törlését. Ha úgy érzed, hogy az adataidat nem megfelelően kezelem, panaszt tehetsz a Nemzeti Adatvédelmi és Információszabadság Hatóságnál (naih.hu).</p>
         </div>
 
-        <p style="font-size:0.8rem; line-height:1.7; color:#777; margin-bottom:1rem; font-style:italic;">Bármikor kérheted adataid törlését vagy a hírlevélről való leiratkozást a lenti elérhetőségen. Ez a tájékoztató nem minősül jogi tanácsadásnak.</p>
-
-        <p style="font-size:0.85rem; line-height:1.8; color:#555;"><strong>Kapcsolat:</strong> a konzultáció foglaláson keresztül, vagy Instagram DM-ben: <a href="https://www.instagram.com/testkozeppont/" target="_blank" rel="noopener" style="color:inherit;">@testkozeppont</a></p>
+        <p style="font-size:.8rem; color:#777; font-style:italic;">Bármikor kérheted adataid törlését vagy a hírlevélről való leiratkozást a lenti elérhetőségen. Ez a tájékoztató nem minősül jogi tanácsadásnak.</p>
+        <p><strong>Kapcsolat:</strong> a konzultáció foglaláson keresztül, vagy Instagram DM-ben: <a href="https://www.instagram.com/testkozeppont/" target="_blank" rel="noopener" style="color:inherit;">@testkozeppont</a></p>
     </div>
 </div>
 
 <script>
-    // Video carousel
-    function scrollVideos(direction) {
-        const grid = document.getElementById('video-grid');
-        const card = grid.querySelector('.video-card');
-        if (!card) return;
-        const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
-        const step = (card.offsetWidth + gap) * 5;
-        grid.scrollBy({ left: step * direction, behavior: 'smooth' });
-    }
-    (function () {
-        const grid = document.getElementById('video-grid');
-        const nextBtn = document.getElementById('video-next-btn');
-        const prevBtn = document.getElementById('video-prev-btn');
-        if (!grid || !nextBtn || !prevBtn) return;
-        function updateNavBtns() {
-            const atStart = grid.scrollLeft <= 4;
-            const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4;
-            prevBtn.classList.toggle('is-hidden', atStart);
-            nextBtn.classList.toggle('is-hidden', atEnd);
-        }
-        grid.addEventListener('scroll', updateNavBtns);
-        window.addEventListener('resize', updateNavBtns);
-        updateNavBtns();
-    })();
+(function () {
+    // Belépő animáció
+    window.addEventListener('load', function () { document.documentElement.classList.add('loaded'); });
+    setTimeout(function () { document.documentElement.classList.add('loaded'); }, 1200);
 
-    // Video lightbox
-    function openVideo(src) {
-        const lightbox = document.getElementById('video-lightbox');
-        const video = document.getElementById('lightbox-video');
-        video.src = src;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        video.play().catch(() => {});
+    // Scroll-reveal
+    var els = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        els.forEach(function (el) { io.observe(el); });
+    } else {
+        els.forEach(function (el) { el.classList.add('in'); });
     }
-    function closeVideo() {
-        const lightbox = document.getElementById('video-lightbox');
-        const video = document.getElementById('lightbox-video');
-        video.pause();
-        video.src = '';
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    function closeLightbox(e) {
-        if (e.target === document.getElementById('video-lightbox')) closeVideo();
-    }
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeVideo();
-    });
 
-    // Hamburger menu
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    hamburger.addEventListener('click', function() {
-        const navHeight = document.querySelector('nav').offsetHeight;
-        mobileMenu.style.top = navHeight + 'px';
-        this.classList.toggle('open');
-        mobileMenu.classList.toggle('open');
+    // Nav háttér görgetéskor
+    var nav = document.getElementById('nav');
+    function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 12); }
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    // Mobil menü
+    var burger = document.getElementById('hamburger');
+    var menu = document.getElementById('mobile-menu');
+    function setMenu(open) {
+        burger.classList.toggle('open', open);
+        menu.classList.toggle('open', open);
+        document.body.classList.toggle('menu-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    burger.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 960) setMenu(false); });
+
+    // Fájdalom-kártyák: mobilon lenyitható, nagyobb kijelzőn mindig nyitva
+    var painMq = window.matchMedia('(max-width: 600px)');
+    function syncPain() {
+        document.querySelectorAll('.pain-card').forEach(function (d, i) {
+            if (painMq.matches) { if (!d.dataset.touched) d.open = (i === 0); }
+            else d.open = true;
+        });
+    }
+    document.querySelectorAll('.pain-card summary').forEach(function (s) {
+        s.addEventListener('click', function (e) {
+            if (!painMq.matches) { e.preventDefault(); return; }
+            s.parentElement.dataset.touched = '1';
+        });
     });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('open');
-            mobileMenu.classList.remove('open');
+    (painMq.addEventListener ? painMq.addEventListener('change', syncPain) : painMq.addListener(syncPain));
+    syncPain();
+
+    // GYIK: egyszerre egy nyitva
+    document.querySelectorAll('.faq-item').forEach(function (d) {
+        d.addEventListener('toggle', function () {
+            if (d.open) document.querySelectorAll('.faq-item').forEach(function (o) { if (o !== d) o.open = false; });
         });
     });
 
-    // Pain accordion (mobile only)
-    document.querySelectorAll('.pain-card').forEach(card => {
-        card.addEventListener('click', function() {
-            if (window.innerWidth <= 640) {
-                this.classList.toggle('active');
-            }
-        });
-    });
+    // Videó-sáv
+    var track = document.getElementById('v-track');
+    var prev = document.getElementById('v-prev'), next = document.getElementById('v-next');
+    function updV() {
+        prev.disabled = track.scrollLeft <= 4;
+        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    }
+    function step(dir) { track.scrollBy({ left: dir * track.clientWidth * 0.8, behavior: 'smooth' }); }
+    prev.addEventListener('click', function () { step(-1); });
+    next.addEventListener('click', function () { step(1); });
+    track.addEventListener('scroll', updV, { passive: true });
+    window.addEventListener('resize', updV); updV();
 
-    // FAQ accordion
-    document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-            const item = q.parentElement;
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-            if (!isOpen) item.classList.add('open');
-        });
-    });
+    // Lightbox
+    var lb = document.getElementById('lightbox'), vid = document.getElementById('lightbox-video');
+    function openV(src) { vid.src = src; lb.classList.add('active'); document.body.style.overflow = 'hidden'; vid.play().catch(function () {}); }
+    function closeV() { vid.pause(); vid.removeAttribute('src'); vid.load(); lb.classList.remove('active'); document.body.style.overflow = ''; }
+    document.querySelectorAll('.v-card').forEach(function (c) { c.addEventListener('click', function () { openV(c.dataset.video); }); });
+    document.getElementById('lightbox-close').addEventListener('click', closeV);
+    lb.addEventListener('click', function (e) { if (e.target === lb) closeV(); });
 
     // GDPR modal
-    document.getElementById('gdpr-open').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('gdpr-modal').style.display = 'block';
-    });
-    document.getElementById('gdpr-close').addEventListener('click', function() {
-        document.getElementById('gdpr-modal').style.display = 'none';
-    });
-    document.getElementById('gdpr-modal').addEventListener('click', function(e) {
-        if (e.target === this) this.style.display = 'none';
-    });
-    if (location.hash.indexOf('#adatkezeles') === 0) {
-        document.getElementById('gdpr-modal').style.display = 'block';
-    }
+    var modal = document.getElementById('gdpr-modal');
+    function openM(e) { if (e) e.preventDefault(); modal.classList.add('open'); }
+    function closeM() { modal.classList.remove('open'); }
+    document.getElementById('gdpr-open').addEventListener('click', openM);
+    document.getElementById('gdpr-close').addEventListener('click', closeM);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeM(); });
+    if (location.hash.indexOf('#adatkezeles') === 0) openM();
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
-        });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { closeV(); closeM(); setMenu(false); }
     });
+
+    // Calendly: a widget magassága igazodjon a tartalomhoz → nincs belső görgetés
+    var cal = document.getElementById('calendly');
+    window.addEventListener('message', function (e) {
+        if (!e.origin || e.origin.indexOf('calendly.com') === -1 || !e.data || e.data.event !== 'calendly.page_height') return;
+        var h = parseInt(e.data.payload && e.data.payload.height, 10);
+        if (h > 300) {
+            cal.style.height = (h + 4) + 'px';
+            var ifr = cal.querySelector('iframe'); if (ifr) ifr.style.height = '100%';
+        }
+    });
+    // Calendly script betöltése, amikor közel ér a szekció (gyorsabb első betöltés)
+    var calLoaded = false;
+    function loadCal() {
+        if (calLoaded) return; calLoaded = true;
+        var s = document.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true;
+        document.body.appendChild(s);
+    }
+    if ('IntersectionObserver' in window) {
+        var cio = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { loadCal(); cio.disconnect(); } }, { rootMargin: '1200px 0px' });
+        cio.observe(cal);
+    } else loadCal();
+    if (location.hash === '#konzultacio') loadCal();
+})();
 </script>
 
 </body>
