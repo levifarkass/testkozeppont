@@ -16,6 +16,9 @@
     <meta name="twitter:description" content="Krónikus derékfájással küzdesz és már mindent próbáltál? Farkas Levente, a TestKözéppont módszer megalkotójának medence-centrikus programja, Budapesten.">
     <meta name="twitter:image" content="https://testkozeppont.hu/og-image.png">
     <meta name="theme-color" content="#F8F5F0">
+    <link rel="alternate" hreflang="hu" href="https://testkozeppont.hu/">
+    <link rel="alternate" hreflang="en" href="https://testkozeppont.hu/en">
+    <link rel="alternate" hreflang="x-default" href="https://testkozeppont.hu/">
     <link rel="canonical" href="https://testkozeppont.hu">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
@@ -153,7 +156,7 @@
         .nav-inner {
             max-width: var(--max); margin: 0 auto;
             padding: 1.1rem var(--gutter);
-            display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+            display: flex; align-items: center; gap: 1.5rem;
         }
         .logo {
             font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
@@ -558,6 +561,13 @@
             .footer-top { flex-direction: column; align-items: flex-start; }
             .footer-bottom { flex-direction: column; align-items: flex-start; }
         }
+    
+        /* LANGUAGE SWITCH */
+        .logo { margin-right: auto; }
+        .lang-switch { display: inline-flex; align-items: center; padding: 3px; border: 1px solid var(--border); border-radius: 999px; background: rgba(255,255,255,.55); flex-shrink: 0; }
+        .lang-switch a { font-size: .68rem; font-weight: 600; letter-spacing: .12em; line-height: 1; text-decoration: none; color: var(--text-muted); padding: .45rem .7rem; border-radius: 999px; transition: background .3s var(--ease), color .3s var(--ease); }
+        .lang-switch a.on { background: var(--accent); color: var(--on-dark); }
+        .lang-switch a:not(.on):hover { color: var(--text); }
     </style>
 </head>
 <body>
@@ -582,6 +592,7 @@
             <a href="#csomagok">Programok</a>
             <a href="#konzultacio" class="btn btn-primary">Ingyenes konzultáció</a>
         </nav>
+        <div class="lang-switch" role="group" aria-label="Nyelv / Language"><a href="index.html" hreflang="hu" lang="hu" class="on" aria-current="page">HU</a><a href="en.html" hreflang="en" lang="en">EN</a></div>
         <button class="hamburger" id="hamburger" aria-label="Menü" aria-expanded="false" aria-controls="mobile-menu">
             <span></span><span></span><span></span>
         </button>
