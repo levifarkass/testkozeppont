@@ -455,7 +455,7 @@
         .check-list li { display: flex; gap: .75rem; font-size: .95rem; line-height: 1.55; color: var(--on-dark-2); }
         .check-list .icon { color: var(--gold-soft); margin-top: .25em; font-size: .85rem; }
         .cal-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 30px 60px -40px rgba(0,0,0,.6); }
-        .calendly-inline-widget { min-width: 280px; width: 100%; height: 720px; transition: height .3s var(--ease); }
+        .calendly-inline-widget { min-width: 280px; width: 100%; height: 720px; min-height: 720px; transition: height .3s var(--ease); }
         .cal-fallback { padding: 1rem 1.25rem; font-size: .85rem; color: var(--text-muted); text-align: center; border-top: 1px solid var(--border-soft); }
         .cal-fallback a { color: var(--text); font-weight: 600; }
 
@@ -559,6 +559,7 @@
             .p-grid { grid-template-columns: minmax(0,1fr); }
             .check-groups { grid-template-columns: minmax(0,1fr); }
             .cal-card { margin: 0 calc(var(--gutter) * -1); border-radius: 0; }
+            .calendly-inline-widget { height: 900px; min-height: 900px; }
             .videos-head .v-nav { display: none; }
             .v-card { width: 44vw; }
             .story-side { grid-template-columns: 110px minmax(0,1fr); }
@@ -1002,7 +1003,7 @@
 </div>
 </div>
 <div class="cal-card reveal" style="--d:.1s">
-<div class="calendly-inline-widget" data-resize="true" data-url="https://calendly.com/testkozeppont/free-consultation?hide_gdpr_banner=1&amp;hide_event_type_details=1&amp;hide_landing_page_details=1&amp;primary_color=2e2319" id="calendly"></div>
+<div class="calendly-inline-widget" data-url="https://calendly.com/testkozeppont/free-consultation?hide_gdpr_banner=1&amp;hide_event_type_details=1&amp;hide_landing_page_details=1&amp;primary_color=2e2319" id="calendly"></div>
 <div class="cal-fallback">Calendar not loading? <a href="https://calendly.com/testkozeppont/free-consultation" rel="noopener" target="_blank">Book here</a></div>
 </div>
 </div>
